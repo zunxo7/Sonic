@@ -10,6 +10,8 @@ class Levels
 	int CurrentLevel;
 	int MaxWidht;
 
+	Texture levelBackGroundTexture;
+	Sprite levelBackGroundSprite;
 	Texture wallTex1;
 	Sprite wallSprite1;
 	Texture spikeTex;

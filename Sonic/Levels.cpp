@@ -17,6 +17,10 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 	switch (CurrentLevel) {
 	case 1:
+
+		levelBackGroundTexture.loadFromFile("Data/bg1.png");
+		levelBackGroundSprite.setTexture(levelBackGroundTexture);
+
 		MaxWidht = 200;
 		char soniclevel[14][201] = {
 			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
@@ -89,7 +93,7 @@ void Levels::Update() {
 		}
 
 		for (int i = 0; i < CharactersSize;i++) {
-			//Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
+			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
 		}
 
 		for (int i = 0; i < CharactersSize;i++) { // Characters Update
@@ -100,24 +104,36 @@ void Levels::Update() {
 
 void Levels::Draw(RenderWindow* window) {
 
+	float Center = Characters[CurrentPlayer]->getXPosition() - 7 * CellSize;
+
+	if (Center < 0 ) {
+		Center = 0;
+	}
+	else if (Center > (MaxWidht - 19) * CellSize + 15) {
+		Center = (MaxWidht - 19) * CellSize + 15;
+	}
+
+	levelBackGroundSprite.setPosition(0 - Center, 0);
+	window->draw(levelBackGroundSprite);
+
 	for (int i = 0; i < 14; i += 1) // Grid Items
 	{
 		for (int j = 0; j < MaxWidht; j += 1)
 		{
 			if (LvlGrid[i][j] == 'w')
 			{
-				wallSprite1.setPosition(j * CellSize - Characters[CurrentPlayer]->getXPosition(), i * CellSize);
+				wallSprite1.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(wallSprite1);
 			}
 			if (LvlGrid[i][j] == 's') {
-				spikeSprite.setPosition(j * CellSize - Characters[CurrentPlayer]->getXPosition(), i * CellSize);
+				spikeSprite.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(spikeSprite);
 			}
 		}
 	}
 
 	for (int i = 0; i < CharactersSize;i++) { // Characters
-		Characters[i]->DrawMoveable(window, Characters[CurrentPlayer]->getXPosition());
+		Characters[i]->DrawMoveable(window, Center);
 	}
 
 }

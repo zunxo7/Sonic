@@ -5,7 +5,7 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable(){
 	Scale = 2;
 
 	ObjectAnimation.setActions(Actions);
-	XPosition = 100;
+	XPosition = 12000;
 	YPosition = 100;
 	XSpeed = 0;
 	YSpeed = 0;
@@ -97,16 +97,6 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 		}
 	}
 
-	char Right = lvl[(int)(YPosition) / cell_size][(int)(XPosition + 10) / cell_size + 1];
-	char Left = lvl[(int)(YPosition) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-
-	if (XSpeed > 0 && Right != ' ') {
-		XSpeed = 0;
-	}
-	if (XSpeed < 0 && Left != ' ') {
-		XSpeed = 0;
-	}
-
 }
 
 
@@ -159,4 +149,21 @@ void CharacterFactory::Update() {
 
 void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 
+	char Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char Left = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
+
+	if (XSpeed > 0) {
+		switch (Right) {
+		case 'w':
+			XSpeed = 0;
+			break;
+		}
+	}
+	else if (XSpeed < 0) {
+		switch (Left) {
+		case 'w':
+			XSpeed = 0;
+			break;
+		}
+	}
 }
