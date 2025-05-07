@@ -67,7 +67,6 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 }
 
 void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) {
-	float NextX = XPosition + XSpeed;
 
 	if (Keyboard::isKeyPressed(Keyboard::A)) {
 		XSpeed -= Acceleration;
@@ -86,12 +85,26 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 	else {
 		if (XSpeed > 0) {
 			XSpeed -= Acceleration * Friction;
-			if (XSpeed < 0) XSpeed = 0;
+			if (XSpeed < 0) {
+				XSpeed = 0;
+			}
 		}
 		if (XSpeed < 0) {
 			XSpeed += Acceleration * Friction;
-			if (XSpeed > 0) XSpeed = 0;
+			if (XSpeed > 0) {
+				XSpeed = 0;
+			}
 		}
+	}
+
+	char Right = lvl[(int)(YPosition) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char Left = lvl[(int)(YPosition) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
+
+	if (XSpeed > 0 && Right != ' ') {
+		XSpeed = 0;
+	}
+	if (XSpeed < 0 && Left != ' ') {
+		XSpeed = 0;
 	}
 
 }
@@ -142,4 +155,8 @@ void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 void CharacterFactory::Update() {
 	XPosition += XSpeed;
 	YPosition += YSpeed;
+}
+
+void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
+
 }

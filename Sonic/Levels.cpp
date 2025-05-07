@@ -88,6 +88,10 @@ void Levels::Update() {
 			
 		}
 
+		for (int i = 0; i < CharactersSize;i++) {
+			//Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
+		}
+
 		for (int i = 0; i < CharactersSize;i++) { // Characters Update
 			Characters[i]->Update();
 		}

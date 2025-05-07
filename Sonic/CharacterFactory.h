@@ -30,6 +30,8 @@ public:
 	void Jump(char** lvl, const int cell_size);
 	void MoveTo(char** lvl, const int cell_size,int X);
 
+	void CheckCollisionGrid(char** lvl, const int cell_size);
+
 	void Update();
 
 };
