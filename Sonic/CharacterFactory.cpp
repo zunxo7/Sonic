@@ -42,11 +42,11 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 	float offset_y = YPosition + YSpeed;
 
 	char bottom_left_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size];
-	char bottom_mid_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size + 1];
+	char bottom_mid_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX/2.0) / cell_size ];
+	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
 
 
-	if (bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w')
+	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w'))
 	{
 		OnGround = true;
 	}
@@ -60,8 +60,7 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 		YSpeed += Gravity;
 		if (YSpeed >= TerminalVelocity) YSpeed = TerminalVelocity;
 	}
-	else
-	{
+	else if (YSpeed > 0){
 		YSpeed = 0;
 	}
 
@@ -101,8 +100,8 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 void CharacterFactory::Jump(char** lvl, const int cell_size) {
 
 	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size];
-	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size + 1];
+	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX / 2.0) / cell_size];
+	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
 
 
 	if (bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w')
@@ -114,7 +113,7 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 		OnGround = false;
 	}
 
-	if (OnGround) {
+	if (OnGround && YSpeed == 0) {
 		YSpeed += JumpStrength;
 	}
 
