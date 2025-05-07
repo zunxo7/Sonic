@@ -4,6 +4,8 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 	wallTex1.loadFromFile("Data/brick1.png");
 	wallSprite1.setTexture(wallTex1);
+	spikeTex.loadFromFile("Data/spike.png");
+	spikeSprite.setTexture(spikeTex);
 
 	CellSize = 64;
 	CurrentLevel = 1;
@@ -16,31 +18,34 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	switch (CurrentLevel) {
 	case 1:
 		MaxWidht = 200;
-		break;
-	case 2:
-		MaxWidht = 250;
-		break;
-	case 3:
-		MaxWidht = 300;
-		break;
-	case 4:
-		MaxWidht = 19;
-		break;
-	}
-	LvlGrid = new char* [14];
-	for (int i = 0; i < 14; ++i) {
-		LvlGrid[i] = new char[MaxWidht];
-	}
+		char soniclevel[14][201] = {
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"w                                                                                                                                                                                                      w",
+			"w                                                                             ooo                                                                                                                      w",
+			"w                                                                             www                                                                                                                      w",
+			"w                                                                                        b        bb                                                                                                   w",
+			"w                                                                                        b        bb                                                             wwww                                  w",
+			"w                                                                     z                  b ssssooobb                                 s                                                              e  w",
+			"w                     o o                                    o     wwwwww            wwwwwwwwwwwwwwww                             s  www            z           oooooo                          wwwww  w",
+			"w                   oo   oo  s                               w                                                                 s  www            wwww           wwwwww                                 w",
+			"w              wwwww       wwwww                       o                                                   oooooo           s  www                                             wwwww                   w",
+			"w                                                      w                                                   wwwwww        s  www    www      wwww                                                       w",
+			"w       wwww                                     o                                                                       www      wooob                                                                w",
+			"w                                  sssooss       wsssssssssssssssssssssssoooozsssssssssssssssssssssssssssss             sw        wooob ssss          ssssssssss                 sssssssoooozooosssss  w",
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+		};
 
-	for (int i = 0; i < MaxWidht;i++) {
-		for (int j = 0; j < 14;j++) {
-			if (j == 13 || j == 0 || i == 0 || i == MaxWidht -1) {
-				LvlGrid[j][i] = 'w';
-			}
-			else {
-				LvlGrid[j][i] = 's';
+		LvlGrid = new char* [14];
+		for (int i = 0; i < 14; ++i) {
+			LvlGrid[i] = new char[MaxWidht];
+		}
+
+		for (int i = 0; i < 14; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				LvlGrid[i][j] = soniclevel[i][j];
 			}
 		}
+		break;
 	}
 }
 
@@ -99,6 +104,10 @@ void Levels::Draw(RenderWindow* window) {
 			{
 				wallSprite1.setPosition(j * CellSize - Characters[CurrentPlayer]->getXPosition(), i * CellSize);
 				window->draw(wallSprite1);
+			}
+			if (LvlGrid[i][j] == 's') {
+				spikeSprite.setPosition(j * CellSize - Characters[CurrentPlayer]->getXPosition(), i * CellSize);
+				window->draw(spikeSprite);
 			}
 		}
 	}

@@ -12,6 +12,8 @@ class Levels
 
 	Texture wallTex1;
 	Sprite wallSprite1;
+	Texture spikeTex;
+	Sprite spikeSprite;
 
 	int CollectiablesSize;
 	Collectiables** PtrCollectiables;
