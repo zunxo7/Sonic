@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-Animation::Animation(): Direction(0), CurrentFrame(0), PreviousAction(1){
+Animation::Animation(): Direction(0), CurrentFrame(0), PreviousAction(1), NextAction(1), PreviousDirection(0){
 	Action[0] = 7;
 }
 
@@ -11,20 +11,33 @@ void Animation::setActions(int Array[7]) {
 }
 
 
-void Animation::NextFrame(Sprite ObjectSprite, Texture ObjectTexture,float Scale, int Direc,int NextAct) {
-	if (NextAct == PreviousAction && Direction == Direc) {
+void Animation::setAction(int Direc,int NextAct) {
+	if (Direc != 2) {
+		Direction = Direc;
+	}
+		NextAction = NextAct;
+}
+
+void Animation::NextFrame(Sprite& ObjectSprite, Texture& ObjectTexture, int x, int y) {
+
+	if (PreviousAction != NextAction || PreviousDirection != Direction) {
+		CurrentFrame = 0;
+	}
+	else {
 		CurrentFrame++;
-		if (CurrentFrame > Action[PreviousAction]) {
+
+		if (CurrentFrame >= Action[PreviousAction]) {
 			CurrentFrame = 0;
 		}
 	}
-	else {
-		CurrentFrame = 0;
-		Direction = Direc;
-		PreviousAction = NextAct;
-	}
 
-	ObjectSprite.setTexture(ObjectTexture);
-	ObjectSprite.setTextureRect(IntRect(CurrentFrame * 49 + 1, PreviousAction * 49 * 2 + 49 * Direction, 48, 48));
-	ObjectSprite.setScale(Scale, Scale);
+	PreviousDirection = Direction;
+	PreviousAction = NextAction;
+	if (PreviousDirection == 1) {
+		ObjectSprite.setTextureRect(IntRect((Action[PreviousAction] * (x + 1) * PreviousDirection) - (CurrentFrame + 1) * (x + 1) + 1, PreviousAction * (y + 1) * 2 + 49 * PreviousDirection, x, y));
+	}
+	else{
+		ObjectSprite.setTextureRect(IntRect(CurrentFrame * (x + 1) + 1, PreviousAction * (y + 1) * 2 + 49 * PreviousDirection, x, y));
+	}
+	
 }

@@ -1,6 +1,6 @@
 #include "Moveable.h"
 
-Moveable::Moveable(): ObjectAnimation() {}
+Moveable::Moveable(): ObjectAnimation(){}
 
 Moveable::~Moveable() {
 

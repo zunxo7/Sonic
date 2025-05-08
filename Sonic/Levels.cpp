@@ -92,8 +92,16 @@ void Levels::Update() {
 			
 		}
 
+
 		for (int i = 0; i < CharactersSize;i++) {
 			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
+		}
+
+		if (AnimationClock.getElapsedTime().asMilliseconds() >= 100) {
+			AnimationClock.restart();
+			for (int i = 0; i < CharactersSize;i++) {
+				Characters[i]->Animate();
+			}
 		}
 
 		for (int i = 0; i < CharactersSize;i++) { // Characters Update

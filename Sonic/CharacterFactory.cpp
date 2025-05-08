@@ -1,11 +1,11 @@
 #include "CharacterFactory.h"
 
-CharacterFactory::CharacterFactory(int MSpeed): Moveable(){
+CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	int Actions[7] = { 1, 12, 10, 8, 16, 10, 8 };
 	Scale = 2;
 
 	ObjectAnimation.setActions(Actions);
-	XPosition = 12000;
+	XPosition = 100;
 	YPosition = 100;
 	XSpeed = 0;
 	YSpeed = 0;
@@ -46,7 +46,7 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
 
 
-	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w'))
+	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w') && bottom_left_down != 0)
 	{
 		OnGround = true;
 	}
@@ -70,16 +70,20 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 
 	if (Keyboard::isKeyPressed(Keyboard::A)) {
 		XSpeed -= Acceleration;
+		ObjectAnimation.setAction(1, 1);
 
 		if (XSpeed <= -MaxSpeed) {
 			XSpeed = -MaxSpeed;
+			ObjectAnimation.setAction(1, 2);
 		}
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::D)) {
 		XSpeed += Acceleration;
+		ObjectAnimation.setAction(0, 1);
 
 		if (XSpeed >= MaxSpeed) {
 			XSpeed = MaxSpeed;
+			ObjectAnimation.setAction(0, 2);
 		}
 	}
 	else {
@@ -97,17 +101,25 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 		}
 	}
 
+	if (XSpeed == 0) {
+		ObjectAnimation.setAction(2, 0);
+	}
+
+	if (!OnGround && YSpeed != 0) {
+		ObjectAnimation.setAction(2, 4);
+	}
+
 }
 
 
 void CharacterFactory::Jump(char** lvl, const int cell_size) {
 
 	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX / 2.0) / cell_size];
+	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX/2.0) / cell_size];
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
 
 
-	if (bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w')
+	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w') && bottom_left_down != 0)
 	{
 		OnGround = true;
 	}
@@ -140,6 +152,10 @@ void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 	if(X > XPosition - HitBoxX && X < XPosition + HitBoxX) {
 		XSpeed = 0;
 	}
+
+	if (XSpeed == 0) {
+		ObjectAnimation.setAction(2, 0);
+	}
 }
 
 void CharacterFactory::Update() {
@@ -147,7 +163,24 @@ void CharacterFactory::Update() {
 	YPosition += YSpeed;
 }
 
+void CharacterFactory::Animate() {
+	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2, HitBoxY / 2);
+}
+
 void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
+
+	float offset_y = YPosition + YSpeed;
+
+	char bottom_left_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX + 10) / cell_size - 1];
+	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX / 2.0) / cell_size];
+	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+
+	if ((bottom_left_down == 'w' && bottom_mid_down != 'w' && bottom_right_down != 'w') && OnGround) {
+		ObjectAnimation.setAction(0, 6);
+	}
+	else if ((bottom_left_down != 'w' && bottom_mid_down != 'w' && bottom_right_down == 'w') && OnGround) {
+		ObjectAnimation.setAction(1, 6);
+	}
 
 	char Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1];
 	char Left = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
@@ -156,6 +189,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 		switch (Right) {
 		case 'w':
 			XSpeed = 0;
+			ObjectAnimation.setAction(0, 5);
 			break;
 		}
 	}
@@ -163,6 +197,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 		switch (Left) {
 		case 'w':
 			XSpeed = 0;
+			ObjectAnimation.setAction(1, 5);
 			break;
 		}
 	}

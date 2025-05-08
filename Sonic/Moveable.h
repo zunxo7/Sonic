@@ -14,7 +14,6 @@ using namespace std;
 class Moveable
 {
 protected:
-	Animation ObjectAnimation;
 	Texture ObjectTexture;
 	Sprite ObjectSprite;
 	float XPosition;
@@ -27,6 +26,8 @@ protected:
 	float Scale;
 
 public:
+	Animation ObjectAnimation;
+
 	Moveable();
 	virtual ~Moveable();
 

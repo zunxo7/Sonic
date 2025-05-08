@@ -25,6 +25,7 @@ class Levels
 	int CurrentPlayer;
 	Clock PlayerClock;
 	Clock SwitchClock;
+	Clock AnimationClock;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);

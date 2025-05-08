@@ -21,6 +21,7 @@ protected:
 
 public:
 	CharacterFactory(int MSpeed);
+	virtual ~CharacterFactory() {}
 
 	float getXPosition();
 	float getYPosition();
@@ -29,6 +30,7 @@ public:
 	void PlayerMove(char** lvl, const int cell_size, int MaxWidht);
 	void Jump(char** lvl, const int cell_size);
 	void MoveTo(char** lvl, const int cell_size,int X);
+	void Animate();
 
 	void CheckCollisionGrid(char** lvl, const int cell_size);
 

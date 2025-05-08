@@ -5,7 +5,7 @@ Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* k
     ScreenHeight = 900;
     window = new RenderWindow(VideoMode(ScreenWidht, ScreenHeight), "Sonic the Hedgehog-OOP", Style::Close);
     window->setVerticalSyncEnabled(true);
-    window->setFramerateLimit(60);
+    window->setFramerateLimit(120);
 
     if (!font.loadFromFile("fonts/arial.ttf")) {
         std::cout << "ERROR::GAME::INITFONTS::Failed to load font!" << std::endl;
