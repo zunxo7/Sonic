@@ -199,6 +199,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 	}
 
 	char Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char Mid = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size ];
 	char Left = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
 
 	if (XSpeed > 0) {
@@ -206,6 +207,10 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 		case 'w':
 			XSpeed = 0;
 			ObjectAnimation.setAction(0, 5);
+			break;
+		case 'o':
+			Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1] = ' ';
+			Rings++;
 			break;
 		}
 	}
@@ -215,6 +220,17 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 			XSpeed = 0;
 			ObjectAnimation.setAction(1, 5);
 			break;
+		case 'o':
+			lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1] = ' ';
+			Rings++;
+			break;
 		}
+	}
+
+	switch (Mid) {
+	case 'o':
+		lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size] = ' ';
+		Rings++;
+		break;
 	}
 }
