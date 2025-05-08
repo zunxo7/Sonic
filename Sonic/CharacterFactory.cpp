@@ -2,9 +2,9 @@
 
 CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	int Actions[7] = { 1, 12, 10, 8, 16, 10, 8 };
-	Scale = 2;
-
 	ObjectAnimation.setActions(Actions);
+
+	Scale = 2;
 	XPosition = 100;
 	YPosition = 100;
 	XSpeed = 0;
@@ -137,16 +137,20 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 	if (X < XPosition - HitBoxX) {
 		XSpeed -= Acceleration;
+		ObjectAnimation.setAction(1, 1);
 
 		if (XSpeed <= -MaxSpeed) {
 			XSpeed = -MaxSpeed;
+			ObjectAnimation.setAction(1, 2);
 		}
 	}
 	if(X > XPosition + HitBoxX) {
 		XSpeed += Acceleration;
+		ObjectAnimation.setAction(0, 1);
 
 		if (XSpeed >= MaxSpeed) {
 			XSpeed = MaxSpeed;
+			ObjectAnimation.setAction(0, 2);
 		}
 	}
 	if(X > XPosition - HitBoxX && X < XPosition + HitBoxX) {
@@ -155,6 +159,10 @@ void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 
 	if (XSpeed == 0) {
 		ObjectAnimation.setAction(2, 0);
+	}
+
+	if (!OnGround && YSpeed != 0) {
+		ObjectAnimation.setAction(2, 4);
 	}
 }
 
