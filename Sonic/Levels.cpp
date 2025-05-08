@@ -6,6 +6,10 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	wallSprite1.setTexture(wallTex1);
 	spikeTex.loadFromFile("Data/spike.png");
 	spikeSprite.setTexture(spikeTex);
+	ringTex.loadFromFile("Data/ring.png");
+	ringSprite.setTexture(ringTex);
+	ringSprite.setScale(3, 3);
+	CurrentRing = 0;
 
 	CellSize = 64;
 	CurrentLevel = 1;
@@ -97,10 +101,20 @@ void Levels::Update() {
 			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
 		}
 
-		if (AnimationClock.getElapsedTime().asMilliseconds() >= 100) {
-			AnimationClock.restart();
+		if (AnimationClock1.getElapsedTime().asMilliseconds() >= 100) {
+			AnimationClock1.restart();
 			for (int i = 0; i < CharactersSize;i++) {
 				Characters[i]->Animate();
+			}
+		}
+
+		if (AnimationClock2.getElapsedTime().asMilliseconds() >= 150) {
+			AnimationClock2.restart();
+
+			ringSprite.setTextureRect(IntRect(CurrentRing * 16, 0, 16, 16));
+			CurrentRing++;
+			if (CurrentRing >= 4) {
+				CurrentRing = 0;
 			}
 		}
 
@@ -136,6 +150,10 @@ void Levels::Draw(RenderWindow* window) {
 			if (LvlGrid[i][j] == 's') {
 				spikeSprite.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(spikeSprite);
+			}
+			if (LvlGrid[i][j] == 'o') {
+				ringSprite.setPosition(j * CellSize - Center + 8, i * CellSize + 8);
+				window->draw(ringSprite);
 			}
 		}
 	}

@@ -16,6 +16,9 @@ class Levels
 	Sprite wallSprite1;
 	Texture spikeTex;
 	Sprite spikeSprite;
+	Texture ringTex;
+	Sprite ringSprite;
+	int CurrentRing;
 
 	int CollectiablesSize;
 	Collectiables** PtrCollectiables;
@@ -25,7 +28,8 @@ class Levels
 	int CurrentPlayer;
 	Clock PlayerClock;
 	Clock SwitchClock;
-	Clock AnimationClock;
+	Clock AnimationClock1;
+	Clock AnimationClock2;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);
