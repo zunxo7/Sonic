@@ -164,6 +164,14 @@ void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 	if (!OnGround && YSpeed != 0) {
 		ObjectAnimation.setAction(2, 4);
 	}
+
+	if (lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1] == 'w' && XSpeed > 0) {
+		Jump(lvl,cell_size);
+	}
+
+	if (lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1] == 'w' && XSpeed < 0) {
+		Jump(lvl, cell_size);
+	}
 }
 
 void CharacterFactory::Update() {
