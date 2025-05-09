@@ -34,7 +34,7 @@ void Game::pollEvents() {
             break;
         case Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Escape)
-                window->close();
+                GameState = 0;
             break;
         }
     }
@@ -61,7 +61,7 @@ void Game::update() {
 
         break;
         case 4:
-
+            MyScoreboard.Update(window);
 
         break;
     }
@@ -72,7 +72,6 @@ void Game::Draw() {
 
     switch (GameState) {
     case 1:
-
         MyLevels.Draw(window);
 
         break;
@@ -85,7 +84,7 @@ void Game::Draw() {
 
         break;
     case 4:
-
+        MyScoreboard.Draw(window);
 
         break;
     }
