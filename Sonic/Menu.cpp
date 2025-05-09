@@ -16,19 +16,20 @@ Menu::Menu(){
 
 void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 
-	if (MenuClock.getElapsedTime().asMilliseconds() >= 50) {
-		MenuClock.restart();
-		if (Keyboard::isKeyPressed(Keyboard::W) && CurrentChoice > 1) {
+	if (Keyboard::isKeyPressed(Keyboard::W) && CurrentChoice > 1) {
+		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
+			MenuClock.restart();
 			CurrentChoice -= 1; // Upper Option
-			cout << CurrentChoice << endl;
 		}
-		if (Keyboard::isKeyPressed(Keyboard::S) && CurrentChoice < 4) {
+	}
+	if (Keyboard::isKeyPressed(Keyboard::S) && CurrentChoice < 4) {
+		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
+			MenuClock.restart();
 			CurrentChoice += 1; // Lower Option
-			cout << CurrentChoice << endl;
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Enter)) {
-			GameState = CurrentChoice;
-		}
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Enter)) {
+		GameState = CurrentChoice;
 	}
 
 	Draw(window);
