@@ -162,4 +162,7 @@ void Levels::Draw(RenderWindow* window) {
 		Characters[i]->DrawMoveable(window, Center);
 	}
 
+	window->display();
+	window->clear();
+
 }

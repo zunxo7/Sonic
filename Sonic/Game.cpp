@@ -1,8 +1,9 @@
 #include "Game.h"
 
-Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles): MyLevels(sonic, tails, knuckles) {
+Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles) : MyLevels(sonic, tails, knuckles), MyMenu() {
     ScreenWidht = 1200;
     ScreenHeight = 900;
+    GameState = 0;
     window = new RenderWindow(VideoMode(ScreenWidht, ScreenHeight), "Sonic the Hedgehog-OOP", Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(120);
@@ -39,18 +40,53 @@ void Game::pollEvents() {
     }
 }
 
-//kys
 
 void Game::update() {
     this->pollEvents();
-    MyLevels.Update();
+
+    switch (GameState){
+        case 0:
+            MyMenu.Update(window, GameState, event);
+        break;
+        case 1:
+            MyLevels.Update();
+
+        break;
+        case 2:
+
+
+        break;
+        case 3:
+
+
+        break;
+        case 4:
+
+
+        break;
+    }
 }
 
 void Game::Draw() {
 
-    this->window->clear();
 
-    MyLevels.Draw(window);
+    switch (GameState) {
+    case 1:
 
-    this->window->display();
+        MyLevels.Draw(window);
+
+        break;
+    case 2:
+
+
+        break;
+    case 3:
+
+
+        break;
+    case 4:
+
+
+        break;
+    }
 }

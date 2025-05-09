@@ -12,18 +12,17 @@
 
 class Game {
 private:
-    sf::RenderWindow* window;
-    sf::Event event;
-    sf::Font font;
+    RenderWindow* window;
+    Event event;
+    Font font;
 
     int ScreenWidht;
     int ScreenHeight;
+    int GameState;
 
     Scoreboard MyScoreboard;
     Menu MyMenu;
     Levels MyLevels;
-
-    int CurrentState;
 
 public:
     Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);
