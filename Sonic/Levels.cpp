@@ -27,19 +27,19 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 		MaxWidht = 200;
 		char soniclevel[14][201] = {
-			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-			"w                                                                                                                                                                                                      w",
-			"w                                                                             ooo                                                                                                                      w",
-			"w                                                                             www                                                                                                                      w",
-			"w                                                                                        b        bb                                                                                                   w",
-			"w                                                                                        b        bb                                                             wwww                                  w",
-			"w                                                                     z                  b ssssooobb                                 s                                                              e  w",
-			"w                     o o                                    o     wwwwww            wwwwwwwwwwwwwwww                             s  www            z           oooooo                          wwwww  w",
-			"w                   oo   oo  s                               w                                                                 s  www            wwww           wwwwww                                 w",
-			"w              wwwww       wwwww                       o                                                   oooooo           s  www                                             wwwww                   w",
-			"w                                                      w                                                   wwwwww        s  www    www      wwww                                                       w",
-			"w       wwww                                     o                                                                       www      wooob                                                                w",
-			"w                                  sssooss       wsssssssssssssssssssssssoooozsssssssssssssssssssssssssssss             sw        wooob ssss          ssssssssss                 sssssssoooozooosssss  w",
+			"wwwwqwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"qeqweqwqeqweqwwbqeqwe                                                                                                                                                                                  w",
+			"bwbeq c wbew  e  wbe	                                                                                                                                                                                w",
+			"wq c    r e      r                                                                                                                                                                                     w",
+			"q                                                                                        b        bb                                                                                                   w",
+			"w                   oC                                                                     b        bb                                                             wwww                                w",
+			"w               oo  peqwwbqwwq                                                      z                                                          s                                                       w",
+			"w               bb   wqweewowqe                                                                                                                                                                        w",
+			"q       s   ooo                                       w                                                                 s  www            wwww           wwwwww                                        w",
+			"w     wwe   ppp                             o                                                   oooooo           s  www                                             wwwww                              w",
+			"w   qew  b                                                 w                                                                                                                                           w",
+			"w  wewooob                                    o                                                                       www      wooob                                                                   w",
+			"wwwqq ooob  ssssssssssss                                                                                                                                                                               w",
 			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
 		};
 
