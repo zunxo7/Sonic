@@ -16,13 +16,13 @@ Menu::Menu(){
 
 void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 
-	if (Keyboard::isKeyPressed(Keyboard::W) && CurrentChoice > 1) {
+	if (Keyboard::isKeyPressed(Keyboard::Up) && CurrentChoice > 1) {
 		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
 			MenuClock.restart();
 			CurrentChoice -= 1; // Upper Option
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::S) && CurrentChoice < 4) {
+	if (Keyboard::isKeyPressed(Keyboard::Down) && CurrentChoice < 4) {
 		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
 			MenuClock.restart();
 			CurrentChoice += 1; // Lower Option
@@ -131,6 +131,8 @@ void Menu::Draw(RenderWindow* window) {
 
 	}
 
+	Color backgroundColor(22, 29, 28);
+
 	window->display();
-	window->clear();
+	window->clear(backgroundColor);
 }
