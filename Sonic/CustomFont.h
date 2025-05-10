@@ -10,8 +10,6 @@ struct FontCharacter {
     char ch;
     Texture texture;
     Texture outlineTexture;
-
-    FontCharacter() = default;
 };
 
 class CustomFont {
