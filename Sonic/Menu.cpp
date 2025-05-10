@@ -3,29 +3,35 @@
 Menu::Menu(){
 	BackgroundFrame = 0;
 	CurrentChoice = 1;
-
+	font.load("Data/CustomFont");
 	MenuBackGroundTexture.loadFromFile("Data/Menu/Background.png");
 	MenuBackGroundSprite.setTexture(MenuBackGroundTexture);
 
-	MenuForeGroundTexture.loadFromFile("Data/Menu/Menu.png");
-	MenuForeGroundSprite.setTexture(MenuForeGroundTexture);
+	LogoTexture.loadFromFile("Data/Menu/Logo.png");
+	LogoSprite.setTexture(LogoTexture);
 
-	MenuButtonTexture1.loadFromFile("Data/Menu/Button1.png");
-	MenuButtonTexture2.loadFromFile("Data/Menu/Button2.png");
+	MenuForeGroundTexture.loadFromFile("Data/Menu/MenuForeground.png");
+	MenuForeGroundSprite.setTexture(MenuForeGroundTexture);
+	MenuForeGroundSprite.setColor(Color(0, 71, 255));
+
+	MenuButtonTexture.loadFromFile("Data/Menu/Button.png");
+
 }
 
 void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 
-	if (Keyboard::isKeyPressed(Keyboard::Up) && CurrentChoice > 1) {
+	if (Keyboard::isKeyPressed(Keyboard::Up)) {
 		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
 			MenuClock.restart();
 			CurrentChoice -= 1; // Upper Option
+			if (CurrentChoice < 1) CurrentChoice = 4;
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Down) && CurrentChoice < 4) {
+	if (Keyboard::isKeyPressed(Keyboard::Down)) {
 		if (MenuClock.getElapsedTime().asMilliseconds() >= 200) {
 			MenuClock.restart();
 			CurrentChoice += 1; // Lower Option
+			if (CurrentChoice > 4) CurrentChoice = 1;
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Enter)) {
@@ -36,7 +42,6 @@ void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 }
 
 void Menu::Draw(RenderWindow* window) {
-
 
 	window->draw(MenuBackGroundSprite);
 
@@ -53,86 +58,30 @@ void Menu::Draw(RenderWindow* window) {
 
 	window->draw(MenuForeGroundSprite);
 
-	if (CurrentChoice == 1) {
-		MenuButtonSprite.setTexture(MenuButtonTexture2);
+	LogoSprite.setTexture(LogoTexture);
+	LogoSprite.setPosition(429.6, 44.3);
+	window->draw(LogoSprite);
 
-		MenuButtonSprite.setPosition(419, 310); // 1 
-		window->draw(MenuButtonSprite);
+	MenuButtonSprite.setTexture(MenuButtonTexture);
+	
+	float posX = 418.9;
+	float posY[] = {310.4, 431.4, 557.1, 680.5};
 
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
-
-		MenuButtonSprite.setPosition(419, 434); // 2
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 557); // 3
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 681); // 4
-		window->draw(MenuButtonSprite);
-
-	}
-		
-	else if (CurrentChoice == 2) {
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
-
-		MenuButtonSprite.setPosition(419, 310); // 1 
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setTexture(MenuButtonTexture2);
-
-		MenuButtonSprite.setPosition(419, 434); // 2
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
-
-		MenuButtonSprite.setPosition(419, 557); // 3
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 681); // 4
+	for (int i = 0; i < 4; i++) {
+		MenuButtonSprite.setPosition(posX, posY[i]);
+		if (i + 1 == CurrentChoice)
+			MenuButtonSprite.setColor(Color(209, 144, 0));
+		else
+			MenuButtonSprite.setColor(Color(0, 71, 255));
 		window->draw(MenuButtonSprite);
 	}
-		
-	else if (CurrentChoice == 3) {
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
 
-		MenuButtonSprite.setPosition(419, 310); // 1 
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 434); // 2
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setTexture(MenuButtonTexture2);
-
-		MenuButtonSprite.setPosition(419, 557); // 3
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
-
-		MenuButtonSprite.setPosition(419, 681); // 4
-		window->draw(MenuButtonSprite);
-	}
-		
-	else if (CurrentChoice == 4) {
-		MenuButtonSprite.setTexture(MenuButtonTexture1);
-
-		MenuButtonSprite.setPosition(419, 310); // 1 
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 434); // 2
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setPosition(419, 557); // 3
-		window->draw(MenuButtonSprite);
-
-		MenuButtonSprite.setTexture(MenuButtonTexture2);
-
-		MenuButtonSprite.setPosition(419, 681); // 4
-		window->draw(MenuButtonSprite);
-
-	}
+	font.draw(window, "new game", 510, 338.5, 3, 15, 3.6);
+	font.draw(window, "options", 530, 456, 3, 15, 3.7);
+	font.draw(window, "continue", 512, 584, 3, 15, 3.7);
+	font.draw(window, "leaderboard", 476, 714, 3, 15, 3.4);
 
 	Color backgroundColor(22, 29, 28);
-
 	window->display();
 	window->clear(backgroundColor);
 }

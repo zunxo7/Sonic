@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
+#include "CustomFont.h"
 
 using namespace sf;
 using namespace std;
@@ -13,14 +14,16 @@ using namespace std;
 class Menu
 {
 	int CurrentChoice;
+	CustomFont font;
 
 	Texture MenuBackGroundTexture;
 	Sprite MenuBackGroundSprite;
 	Texture MenuForeGroundTexture;
 	Sprite MenuForeGroundSprite;
-	Texture MenuButtonTexture1;
-	Texture MenuButtonTexture2;
+	Texture MenuButtonTexture;
 	Sprite MenuButtonSprite;
+	Texture LogoTexture;
+	Sprite LogoSprite;
 
 	Clock MenuClock;
 	Clock MenuDisplayClock;

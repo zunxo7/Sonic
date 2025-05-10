@@ -21,5 +21,5 @@ private:
 
 public:
     void load(const string& folderPath);
-    void draw(RenderWindow& window, const string& text, float x, float y, float LetterSpacing = 3, float WordSpacing = 15, float Scale = 5, Color OutlineColor = Color(0, 71, 255), Color TextColor = Color::White);
+    void draw(RenderWindow* window, const string& text, float x, float y, float LetterSpacing = 3, float WordSpacing = 15, float Scale = 3, Color OutlineColor = Color(0, 71, 255), Color TextColor = Color::White);
 };

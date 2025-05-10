@@ -47,7 +47,7 @@ void CustomFont::load(const string& folderPath) {
 
 }
 
-void CustomFont::draw(RenderWindow& window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor, Color TextColor) {
+void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor, Color TextColor) {
     for (int i = 0; i < Text.size(); ++i) {
         char c = Text[i];
 
@@ -70,7 +70,7 @@ void CustomFont::draw(RenderWindow& window, const string& Text, float x, float y
                 outlineSprite.setScale(Scale, Scale);
                 outlineSprite.setPosition(x, y);
                 outlineSprite.setColor(OutlineColor);
-                window.draw(outlineSprite);
+                window->draw(outlineSprite);
             }
 
             Sprite sprite;
@@ -78,7 +78,7 @@ void CustomFont::draw(RenderWindow& window, const string& Text, float x, float y
             sprite.setScale(Scale, Scale);
             sprite.setPosition(x, y);
             sprite.setColor(TextColor);
-            window.draw(sprite);
+            window->draw(sprite);
 
             x += tex.getSize().x * Scale + LetterSpacing;
         }

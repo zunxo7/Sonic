@@ -2,6 +2,7 @@
 #include "Scoreboard.h"
 #include "Menu.h"
 #include "Levels.h"
+#include "CustomFont.h"
 
 #include <iostream>
 #include <fstream>
@@ -13,7 +14,7 @@
 class Game {
 private:
     RenderWindow* window;
-    Event event;
+    Event event; 
     Font font;
 
     int ScreenWidht;
