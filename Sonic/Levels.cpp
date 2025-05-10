@@ -23,6 +23,12 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	ringSprite.setScale(3, 3);
 	CurrentRing = 0;
 
+	Crystal1UTex.loadFromFile("Data/crystal1.png");
+	Crystal1DTex.loadFromFile("Data/crystal1d.png");
+	Crystal2UTex.loadFromFile("Data/crystal2.png");
+	Crystal2DTex.loadFromFile("Data/crystal2d.png");
+
+
 	CellSize = 64;
 	CurrentLevel = 1;
 
@@ -187,6 +193,26 @@ void Levels::Draw(RenderWindow* window) {
 			else if (LvlGrid[i][j] == 'o') {
 				ringSprite.setPosition(j * CellSize - Center + 8, i * CellSize + 8);
 				window->draw(ringSprite);
+			}
+			else if (LvlGrid[i][j] == 'C') {
+				CrystalSprite.setTexture(Crystal1UTex);
+				CrystalSprite.setPosition(j * CellSize - Center, i * CellSize );
+				window->draw(CrystalSprite);
+			}
+			else if (LvlGrid[i][j] == 'c') {
+				CrystalSprite.setTexture(Crystal1DTex);
+				CrystalSprite.setPosition(j * CellSize - Center , i * CellSize);
+				window->draw(CrystalSprite);
+			}
+			else if (LvlGrid[i][j] == 'R') {
+				CrystalSprite.setTexture(Crystal2UTex);
+				CrystalSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(CrystalSprite);
+			}
+			else if (LvlGrid[i][j] == 'r') {
+				CrystalSprite.setTexture(Crystal2DTex);
+				CrystalSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(CrystalSprite);
 			}
 		}
 	}

@@ -21,6 +21,11 @@ class Levels
 	Texture wallTex4;
 	Texture wallTex5;
 	Sprite wallSprite;
+	Texture Crystal1UTex;
+	Texture Crystal1DTex;
+	Texture Crystal2UTex;
+	Texture Crystal2DTex;
+	Sprite CrystalSprite;
 	Texture spikeTex;
 	Sprite spikeSprite;
 	Texture ringTex;
