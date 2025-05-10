@@ -233,8 +233,8 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 	char LeftM = lvl[(int)((YPosition + HitBoxY/2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
 	char RightM = lvl[(int)((YPosition + HitBoxY/2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
 
-	char LeftU = lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
-	char RightU = lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
+	char LeftU = lvl[(int)((YPosition + 10) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
+	char RightU = lvl[(int)((YPosition + 10) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
 
 	if (XSpeed > 0) {
 		switch (RightD) {
@@ -273,7 +273,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 			XSpeed = 0;
 			break;
 		case 'o':
-			lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
+			lvl[(int)((YPosition + 10) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
 			Rings++;
 			break;
 		}
@@ -315,7 +315,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 			XSpeed = 0;
 			break;
 		case 'o':
-			lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
+			lvl[(int)((YPosition + 10) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
 			Rings++;
 			break;
 		}
