@@ -33,6 +33,7 @@ public:
 	void Animate();
 
 	void CheckCollisionGrid(char** lvl, const int cell_size);
+	void UpdatedScore(Text ScoreText,int Score);
 
 	void Update();
 

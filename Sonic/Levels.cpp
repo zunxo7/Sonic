@@ -2,8 +2,20 @@
 
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles) : CharactersSize(3), Characters(new CharacterFactory*[3]) {
 
+	if (!SonicFont.loadFromFile("Data/Fonts/SonicFont.otf")) {
+		std::cout << "ERROR::GAME::INITFONTS::Failed to load font!" << std::endl;
+	}
+
+	ScoreText.setFont(SonicFont);
+	ScoreText.setCharacterSize(30);
+	ScoreText.setPosition(0, 64);
+	ScoreText.setString("Score: 0");
+
 	wallTex1.loadFromFile("Data/brick1.png");
-	wallSprite1.setTexture(wallTex1);
+	wallTex2.loadFromFile("Data/brick2.png");
+	wallTex3.loadFromFile("Data/brick3.png");
+	wallTex4.loadFromFile("Data/brick4.png");
+	wallTex5.loadFromFile("Data/brick5.png");
 	spikeTex.loadFromFile("Data/spike.png");
 	spikeSprite.setTexture(spikeTex);
 	ringTex.loadFromFile("Data/ring.png");
@@ -142,16 +154,37 @@ void Levels::Draw(RenderWindow* window) {
 	{
 		for (int j = 0; j < MaxWidht; j += 1)
 		{
-			if (LvlGrid[i][j] == 'w')
-			{
-				wallSprite1.setPosition(j * CellSize - Center, i * CellSize);
-				window->draw(wallSprite1);
+			if (LvlGrid[i][j] == 'w'){
+				wallSprite.setTexture(wallTex1);
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
 			}
-			if (LvlGrid[i][j] == 's') {
+			else if (LvlGrid[i][j] == 'p'){
+				wallSprite.setTexture(wallTex2);
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
+			}
+			else if (LvlGrid[i][j] == 'q') {
+				wallSprite.setTexture(wallTex3);
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
+			}
+			else if (LvlGrid[i][j] == 'e') {
+				wallSprite.setTexture(wallTex4);
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
+			}
+			else if (LvlGrid[i][j] == 'b') {
+				wallSprite.setTexture(wallTex5);
+				wallSprite.setTextureRect(IntRect(0, 0, CellSize, CellSize));
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
+			}
+			else if (LvlGrid[i][j] == 's') {
 				spikeSprite.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(spikeSprite);
 			}
-			if (LvlGrid[i][j] == 'o') {
+			else if (LvlGrid[i][j] == 'o') {
 				ringSprite.setPosition(j * CellSize - Center + 8, i * CellSize + 8);
 				window->draw(ringSprite);
 			}
@@ -161,6 +194,8 @@ void Levels::Draw(RenderWindow* window) {
 	for (int i = 0; i < CharactersSize;i++) { // Characters
 		Characters[i]->DrawMoveable(window, Center);
 	}
+
+	window->draw(ScoreText);
 
 	window->display();
 	window->clear();

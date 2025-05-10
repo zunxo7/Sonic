@@ -26,5 +26,7 @@ public:
 	void setAction(int Direc, int NextAct);
 	void NextFrame(Sprite& ObjectSprite, Texture& ObjectTexture, int x, int y);
 
+	int getDirection();
+
 };
 

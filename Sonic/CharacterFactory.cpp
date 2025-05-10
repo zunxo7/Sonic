@@ -5,8 +5,8 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	ObjectAnimation.setActions(Actions);
 
 	Scale = 2;
-	XPosition = 100;
-	YPosition = 100;
+	XPosition = 2 * 64;
+	YPosition = 7 * 64;
 	XSpeed = 0;
 	YSpeed = 0;
 
@@ -41,18 +41,19 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 {
 	float offset_y = YPosition + YSpeed;
 
-	char bottom_left_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-	char bottom_mid_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX/2.0) / cell_size ];
-	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char bottom_left_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 + 10) / cell_size))];
+	char bottom_mid_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
+	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
+	char WallCharac[6] = { 'w','p','q','e','b','\0' };
 
-	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w') && bottom_left_down != 0)
-	{
-		OnGround = true;
-	}
-	else
-	{
-		OnGround = false;
+	OnGround = false;
+
+	for (int i = 0; i < 5;i++) {
+		if ((bottom_left_down == WallCharac[i] || bottom_mid_down == WallCharac[i] || bottom_right_down == WallCharac[i]))
+		{
+			OnGround = true;
+		}
 	}
 
 	if (!OnGround)
@@ -114,18 +115,20 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 
 void CharacterFactory::Jump(char** lvl, const int cell_size) {
 
-	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
-	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX/2.0) / cell_size];
-	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 + 10) / cell_size))];
+	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
+	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
 
-	if ((bottom_left_down == 'w' || bottom_mid_down == 'w' || bottom_right_down == 'w') && bottom_left_down != 0)
-	{
-		OnGround = true;
-	}
-	else
-	{
-		OnGround = false;
+	char WallCharac[6] = { 'w','p','q','e','b','\0' };
+
+	OnGround = false;
+
+	for (int i = 0; i < 5;i++) {
+		if ((bottom_left_down == WallCharac[i] || bottom_mid_down == WallCharac[i] || bottom_right_down == WallCharac[i]))
+		{
+			OnGround = true;
+		}
 	}
 
 	if (OnGround && YSpeed == 0) {
@@ -185,52 +188,62 @@ void CharacterFactory::Animate() {
 
 void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 
-	float offset_y = YPosition + YSpeed;
+	float offset_x = XPosition + XSpeed;
 
-	char bottom_left_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + HitBoxX + 10) / cell_size - 1];
-	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(XPosition + HitBoxX / 2.0) / cell_size];
-	char bottom_right_down = lvl[(int)(offset_y + HitBoxY) / cell_size][(int)(XPosition + 10) / cell_size + 1];
+	char WallCharac[6] = { 'w','p','q','e','b','\0' };
 
-	if ((bottom_left_down == 'w' && bottom_mid_down != 'w' && bottom_right_down != 'w') && OnGround) {
+	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 - 10) / cell_size))];
+	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
+	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 + 10) / cell_size))];
+
+	if ((bottom_left_down == 'p' && bottom_mid_down != 'p' && bottom_right_down != 'p') && OnGround) {
 		ObjectAnimation.setAction(0, 6);
 	}
-	else if ((bottom_left_down != 'w' && bottom_mid_down != 'w' && bottom_right_down == 'w') && OnGround) {
+	else if ((bottom_left_down != 'p' && bottom_mid_down != 'p' && bottom_right_down == 'p') && OnGround) {
 		ObjectAnimation.setAction(1, 6);
 	}
 
-	char Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1];
-	char Mid = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size ];
-	char Left = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1];
+	char Right = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
+	char Mid = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)((offset_x + HitBoxX / 2.0) / cell_size)];
+	char Left = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
 
 	if (XSpeed > 0) {
 		switch (Right) {
 		case 'w':
+		case 'p':
+		case 'q':
+		case 'e':
+		case 'b':
 			XSpeed = 0;
 			ObjectAnimation.setAction(0, 5);
-			break;
-		case 'o':
-			Right = lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size + 1] = ' ';
-			Rings++;
 			break;
 		}
 	}
 	else if (XSpeed < 0) {
 		switch (Left) {
 		case 'w':
+		case 'p':
+		case 'q':
+		case 'e':
+		case 'b':
 			XSpeed = 0;
 			ObjectAnimation.setAction(1, 5);
-			break;
-		case 'o':
-			lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + HitBoxX) / cell_size - 1] = ' ';
-			Rings++;
 			break;
 		}
 	}
 
 	switch (Mid) {
-	case 'o':
-		lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)(XPosition + 10) / cell_size] = ' ';
-		Rings++;
+		case 'o':
+			lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)] = ' ';
+			Rings++;
 		break;
 	}
+
+
+
+}
+
+void CharacterFactory::UpdatedScore(Text ScoreText, int ScoreAdd) {
+	this->Score += ScoreAdd;
+	ScoreText.setString(to_string(Score));
 }

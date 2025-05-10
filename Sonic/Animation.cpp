@@ -10,6 +10,10 @@ void Animation::setActions(int Array[7]) {
 	}
 }
 
+int Animation::getDirection() {
+	return Direction;
+}
+
 
 void Animation::setAction(int Direc,int NextAct) {
 	if (Direc != 2) {

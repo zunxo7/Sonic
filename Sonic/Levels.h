@@ -10,10 +10,17 @@ class Levels
 	int CurrentLevel;
 	int MaxWidht;
 
+	Font SonicFont;
+	Text ScoreText;
+
 	Texture levelBackGroundTexture;
 	Sprite levelBackGroundSprite;
 	Texture wallTex1;
-	Sprite wallSprite1;
+	Texture wallTex2;
+	Texture wallTex3;
+	Texture wallTex4;
+	Texture wallTex5;
+	Sprite wallSprite;
 	Texture spikeTex;
 	Sprite spikeSprite;
 	Texture ringTex;
