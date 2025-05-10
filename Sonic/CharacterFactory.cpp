@@ -102,14 +102,6 @@ void CharacterFactory::PlayerMove(char** lvl, const int cell_size,int MaxWidht) 
 		}
 	}
 
-	if (XSpeed == 0) {
-		ObjectAnimation.setAction(2, 0);
-	}
-
-	if (!OnGround && YSpeed != 0) {
-		ObjectAnimation.setAction(2, 4);
-	}
-
 }
 
 
@@ -178,6 +170,15 @@ void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
 }
 
 void CharacterFactory::Update() {
+
+	if (XSpeed == 0) {
+		ObjectAnimation.setAction(2, 0);
+	}
+
+	if (!OnGround && YSpeed != 0) {
+		ObjectAnimation.setAction(2, 4);
+	}
+
 	XPosition += XSpeed;
 	YPosition += YSpeed;
 }
@@ -190,56 +191,142 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size) {
 
 	float offset_x = XPosition + XSpeed;
 
+	// Falling
+
 	char WallCharac[6] = { 'w','p','q','e','b','\0' };
 
 	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 - 10) / cell_size))];
 	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 + 10) / cell_size))];
 
-	if ((bottom_left_down == 'p' && bottom_mid_down != 'p' && bottom_right_down != 'p') && OnGround) {
-		ObjectAnimation.setAction(0, 6);
-	}
-	else if ((bottom_left_down != 'p' && bottom_mid_down != 'p' && bottom_right_down == 'p') && OnGround) {
-		ObjectAnimation.setAction(1, 6);
+	for (int i = 0; i < 5;i++) {
+		if ((bottom_left_down == WallCharac[i] && bottom_mid_down == ' ') && OnGround) {
+			ObjectAnimation.setAction(0, 6);
+		}
+		else if ((bottom_mid_down == ' ' && bottom_right_down == WallCharac[i]) && OnGround) {
+			ObjectAnimation.setAction(1, 6);
+		}
 	}
 
-	char Right = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
-	char Mid = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)((offset_x + HitBoxX / 2.0) / cell_size)];
-	char Left = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
+	// Top
+	
+	float offset_y = YPosition + YSpeed;
+
+	char LeftUp = lvl[(int)(offset_y + HitBoxY / 4.0) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 + 10) / cell_size))];
+	char MidUp = lvl[(int)(offset_y + HitBoxY / 4.0) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
+	char RightUp = lvl[(int)(offset_y + HitBoxY / 4.0) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
+
+	char WallCharacUp[5] = { 'w','q','e','b','\0' };
+
+	for (int i = 0; i < 5;i++) {
+		if (LeftUp == WallCharacUp[i] || MidUp == WallCharacUp[i] || RightUp == WallCharacUp[i]) {
+			YSpeed = 0;
+		}
+	}
+
+	// Left And Right
+
+	char LeftD = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
+	char MidD = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))];
+	char RightD = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
+
+	char LeftM = lvl[(int)((YPosition + HitBoxY/2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
+	char RightM = lvl[(int)((YPosition + HitBoxY/2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
+
+	char LeftU = lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))];
+	char RightU = lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))];
 
 	if (XSpeed > 0) {
-		switch (Right) {
+		switch (RightD) {
 		case 'w':
-		case 'p':
 		case 'q':
 		case 'e':
 		case 'b':
 			XSpeed = 0;
 			ObjectAnimation.setAction(0, 5);
 			break;
+		case 'o':
+			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
+			Rings++;
+			break;
+		}
+
+		switch (RightM) {
+		case 'w':
+		case 'q':
+		case 'e':
+		case 'b':
+			XSpeed = 0;
+			ObjectAnimation.setAction(0, 5);
+			break;
+		case 'o':
+			lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
+			Rings++;
+			break;
+		}
+
+		switch (RightU) {
+		case 'w':
+		case 'q':
+		case 'e':
+		case 'b':
+			XSpeed = 0;
+			break;
+		case 'o':
+			lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
+			Rings++;
+			break;
 		}
 	}
 	else if (XSpeed < 0) {
-		switch (Left) {
+		switch (LeftD) {
 		case 'w':
-		case 'p':
 		case 'q':
 		case 'e':
 		case 'b':
 			XSpeed = 0;
 			ObjectAnimation.setAction(1, 5);
 			break;
+		case 'o':
+			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
+			Rings++;
+			break;
+		}
+
+		switch (LeftM) {
+		case 'w':
+		case 'q':
+		case 'e':
+		case 'b':
+			XSpeed = 0;
+			ObjectAnimation.setAction(1, 5);
+			break;
+		case 'o':
+			lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
+			Rings++;
+			break;
+		}
+
+		switch (LeftU) {
+		case 'w':
+		case 'q':
+		case 'e':
+		case 'b':
+			XSpeed = 0;
+			break;
+		case 'o':
+			lvl[(int)((YPosition + 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
+			Rings++;
+			break;
 		}
 	}
 
-	switch (Mid) {
-		case 'o':
-			lvl[(int)(YPosition + HitBoxY / 2.0) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)] = ' ';
-			Rings++;
+	switch (MidD) {
+	case 'o':
+		lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))] = ' ';
+		Rings++;
 		break;
 	}
-
-
 
 }
 
