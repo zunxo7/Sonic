@@ -23,6 +23,7 @@ class Levels
 	Texture wallTex3;
 	Texture wallTex4;
 	Texture wallTex5;
+
 	Sprite wallSprite;
 	Texture Crystal1UTex;
 	Texture Crystal1DTex;
