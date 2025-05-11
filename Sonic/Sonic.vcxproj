@@ -220,6 +220,7 @@
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sonic.cpp" />
+    <ClCompile Include="SoundBoard.cpp" />
     <ClCompile Include="Tails.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
@@ -237,6 +238,7 @@
     <ClInclude Include="Moveable.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Sonic.h" />
+    <ClInclude Include="SoundBoard.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Tails.h" />
     <ClInclude Include="Time.h" />

@@ -61,7 +61,7 @@ void Game::update() {
 
         break;
         case 2:
-
+            MySoundBoard.Update(MusicOn,Volume);
 
         break;
         case 3:
@@ -84,7 +84,7 @@ void Game::Draw() {
 
         break;
     case 2:
-
+        MySoundBoard.Draw(window);
 
         break;
     case 3:

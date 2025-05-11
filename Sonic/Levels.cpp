@@ -203,13 +203,23 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 			for (int i = 0; i < Rows; ++i) {
 				for (int j = 0; j < MaxWidht; ++j) {
-					if (LvlGrid[i][j] == 'M') {
+					if (LvlGrid[i][j] == 'M' || LvlGrid[i][j] == 'A' || LvlGrid[i][j] == 'O' || LvlGrid[i][j] == 'T' || LvlGrid[i][j] == 'E') {
 						EnemyNum++;
 					}
 				}
 			}
 
 			Enemies = new EnemyFactory*[EnemyNum];
+
+			int Count = 0;
+
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						EnemyNum++;
+					}
+				}
+			}
 
 			break;
 		}

@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "Levels.h"
 #include "CustomFont.h"
+#include "SoundBoard.h"
 
 #include <iostream>
 #include <fstream>
@@ -21,8 +22,11 @@ private:
     int ScreenHeight;
     int GameState;
     int CurrentLevel;
+    int Volume;
+    bool MusicOn;
 
     Scoreboard MyScoreboard;
+    SoundBoard MySoundBoard;
     Menu MyMenu;
     Levels** MyLevels;
 
