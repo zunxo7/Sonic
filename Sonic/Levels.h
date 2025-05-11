@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterFactory.h"
+#include "EnemyFactory.h"
 #include "CustomFont.h"
 #include "Time.h"
 
@@ -46,6 +47,9 @@ class Levels
 	const int CharactersSize;
 	CharacterFactory** Characters;
 	int CurrentPlayer;
+
+	int EnemyNum;
+	EnemyFactory** Enemies;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock);
