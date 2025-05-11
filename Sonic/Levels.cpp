@@ -110,8 +110,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			}
 			break;
 		}
-			break;
-		}
 	case 2: 
 	{
 
