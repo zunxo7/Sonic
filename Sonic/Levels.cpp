@@ -11,11 +11,16 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	ScoreText.setPosition(0, 64);
 	ScoreText.setString("Score: 0");
 
-	wallTex1.loadFromFile("Data/brick1.png");
-	wallTex2.loadFromFile("Data/brick2.png");
-	wallTex3.loadFromFile("Data/brick3.png");
-	wallTex4.loadFromFile("Data/brick4.png");
-	wallTex5.loadFromFile("Data/brick5.png");
+	CurrentLevel = 1;
+	string basePath = "Data/Levels/Level";
+	basePath += (char)('0' + CurrentLevel);
+	basePath += "/";
+
+	wallTex1.loadFromFile(basePath + "/brick1.png");
+	wallTex2.loadFromFile(basePath + "brick2.png");
+	wallTex3.loadFromFile(basePath + "brick3.png");
+	wallTex4.loadFromFile(basePath + "brick4.png");
+	wallTex5.loadFromFile(basePath + "brick5.png");
 	spikeTex.loadFromFile("Data/spike.png");
 	spikeSprite.setTexture(spikeTex);
 	ringTex.loadFromFile("Data/ring.png");
@@ -23,14 +28,12 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	ringSprite.setScale(3, 3);
 	CurrentRing = 0;
 
-	Crystal1UTex.loadFromFile("Data/crystal1.png");
-	Crystal1DTex.loadFromFile("Data/crystal1d.png");
-	Crystal2UTex.loadFromFile("Data/crystal2.png");
-	Crystal2DTex.loadFromFile("Data/crystal2d.png");
-
+	Crystal1UTex.loadFromFile(basePath + "crystal1.png");
+	Crystal1DTex.loadFromFile(basePath + "crystal1d.png");
+	Crystal2UTex.loadFromFile(basePath + "crystal2.png");
+	Crystal2DTex.loadFromFile(basePath + "crystal2d.png");
 
 	CellSize = 64;
-	CurrentLevel = 1;
 
 	Characters[0] = sonic;
 	Characters[1] = tails;
@@ -40,25 +43,26 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	switch (CurrentLevel) {
 	case 1:
 
-		levelBackGroundTexture.loadFromFile("Data/bg1.png");
+		levelBackGroundTexture.loadFromFile("Data/Levels/Level1/bg1.png");
 		levelBackGroundSprite.setTexture(levelBackGroundTexture);
 
 		MaxWidht = 200;
 		char soniclevel[14][201] = {
-			"wwwwqwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-			"qeqweqwqeqweqwwbqeqwe                                                                                                                                                                                  w",
-			"bwbeq c wbew  e  wbe	                                                                                                                                                                                w",
-			"wq c    r e      r                                                                                                                                                                                     w",
-			"q                                                                                        b        bb                                                                                                   w",
-			"w                   oC                                                                     b        bb                                                             wwww                                w",
-			"w               oo  peqwwbqwwq                                                      z                                                          s                                                       w",
-			"w               bb   wqweewowqe                                                                                                                                                                        w",
-			"q       s   ooo                                       w                                                                 s  www            wwww           wwwwww                                        w",
-			"w     wwe   ppp                             o                                                   oooooo           s  www                                             wwwww                              w",
-			"w   qew  b                                                 w                                                                                                                                           w",
-			"w  wewooob                                    o                                                                       www      wooob                                                                   w",
-			"wwwqq ooob  ssssssssssss                                                                                                                                                                               w",
-			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+
+			"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"qeqweqwqeqweqwwbqeqwe       eqbqqweweeqeeweqeeqwbebw          wqwewbwqqr wbqwbewbwwwbwqqwwqw c eqwe c eewbwwwb wqwewbwqqr wbqwbewbwwwbwqqwwqw  wqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebbw",
+			"wwbeq c wbew  e  wbe         wqwwebqwwqweoobwb   er              ebqebb   bwbwwqqr wbqqweqw     eq     e         ebqebb   bwbwwqqr wbqqweqw       ebqebbbwbwwqqeqeweqqwewqwq C wwqe  wqwq     wq    qwqw",
+			"wq c    r e      r              qwe      ooee             o       qwbC eqwbqbb qqwq  eqr        r                  qwbC  qwbqbb qqwq  eqr             bwbwwqqwwbqqweqwqbbwbwwqqeqe ew     wqwq  C   R  w",
+			"q                                qw        we          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                                       bwbwwqqeqew R ebbbwbwwqqeqww",
+			"w                   oC                 o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
+			"w               oo  peqwwbqwwq         p            p   R    p         ew     qewe	             o                                             so                                    wweqw        weq   w",
+			"w               bb   wqweewowqe                  o     bbb      o              r e           o  p     o                                 oo    pp       wqqwwqw                                         w",
+			"q       s   ooo       webqwooww     C R          p     qoow     p                         o  p     o  p                                 pp          qwbqeqwbqbbqqwq                                    w",
+			"w     wwe   ppp       qweweooob    ebbbe      o         wqw        o                      p        p      wbb      oo  s oo soos  ooo            wqqwwqwwwoooboqqwqeq                       oo         w",
+			"w   qew  b             qwqwwoob   ew   we     p                    p                o                    qooow     pp pp pp pppp  ppp           qewee  c     booc oweb     oo    oo   oo    pp         w",
+			"w  wewooob             weweeoob  ew     wee                                         p                   wwooow                                 qqwqeq o o o obooooooob     pp    pp   pp               w",
+			"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C                    sssssssssss   eqooow   ssssssssssssssssssssssssssssswbqqweqw  C R  booC ooob  sssssssssssssssssssssssss   f  w",
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
 		};
 
 		LvlGrid = new char* [14];

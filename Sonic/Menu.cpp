@@ -69,8 +69,14 @@ void Menu::Draw(RenderWindow* window) {
 
 	for (int i = 0; i < 4; i++) {
 		MenuButtonSprite.setPosition(posX, posY[i]);
-		if (i + 1 == CurrentChoice)
-			MenuButtonSprite.setColor(Color(209, 144, 0));
+		if (i + 1 == CurrentChoice) {
+			if (i + 1 == 4) {
+				MenuButtonSprite.setColor(Color(175, 20, 12));
+			}
+			else {
+				MenuButtonSprite.setColor(Color(209, 144, 0));
+			}
+		}
 		else
 			MenuButtonSprite.setColor(Color(0, 71, 255));
 		window->draw(MenuButtonSprite);

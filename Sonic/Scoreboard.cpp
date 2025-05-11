@@ -1,37 +1,21 @@
 #include "Scoreboard.h"
+#include <fstream>
 
 Scoreboard::Scoreboard() {
-
 	DataDisplay = false;
 	Name = "";
 	ScoreString = "";
-
-	ScoreFont.loadFromFile("Data/Fonts/ScoreFont.ttf");
-
-	// High Score Names
-	HSNamesText.setFont(ScoreFont);
-	HSNamesText.setCharacterSize(20);
-	HSNamesText.setPosition(1200 / 4 + 2 * 64, 900 / 4);
-
-	// High Score Scores
-	HSScoreText.setFont(ScoreFont);
-	HSScoreText.setCharacterSize(20);
-	HSScoreText.setPosition(1200 / 4 * 2 + 2 * 64, 900 / 4);
-
-	HighScoreTitle.setFont(ScoreFont);
-	HighScoreTitle.setCharacterSize(90);
-	HighScoreTitle.setPosition(1200 / 4, 900 / 4 - 3 * 64);
-	HighScoreTitle.setString("HighScore");
-
+	MenuForeGroundTexture.loadFromFile("Data/Menu/MenuForeground.png");
+	MenuForeGroundSprite.setTexture(MenuForeGroundTexture);
+	BackGroundTexture.loadFromFile("Data/Scoreboard.png");
+	MenuForeGroundSprite.setColor(Color(175, 20, 12));
+	BackGroundSprite.setTexture(BackGroundTexture);
+	font.load("Data/CustomFont");
 }
 
-
 void Scoreboard::Update(RenderWindow* window) {
-
-	if (DataDisplay == false) {
-
-		string FileDataArray[10][2]; // To Store File Data
-
+	if (!DataDisplay) {
+		string FileDataArray[10][2];
 		string CurrentLine;
 
 		ifstream HighScoreFile("Data/HighScoreFile/HighScore.txt");
@@ -57,23 +41,21 @@ void Scoreboard::Update(RenderWindow* window) {
 		}
 
 		for (int i = 0; i < 10; i++) {
-			Name = Name + '\n' + FileDataArray[i][0];
-			ScoreString = ScoreString + '\n' + FileDataArray[i][1];
+			Name += FileDataArray[i][0] + '\n';
+			ScoreString += FileDataArray[i][1] + '\n';
 		}
 
-		HSNamesText.setString(Name);
-		HSScoreText.setString(ScoreString);
-
 		DataDisplay = true;
-
 	}
 }
 
-
 void Scoreboard::Draw(RenderWindow* window) {
-	window->draw(HSNamesText);
-	window->draw(HSScoreText);
-	window->draw(HighScoreTitle);
+
+	window->draw(MenuForeGroundSprite);
+	window->draw(BackGroundSprite);
+	font.draw(window, "High Score", 425, 60, 3, 20, 6, Color(175, 20, 12));
+	font.draw(window, Name,428, 190, 3, 15, 3, Color(175, 20, 12));
+	font.draw(window, ScoreString, 760, 190, 3, 15, 3, Color(175, 20, 12));
 
 	window->display();
 	window->clear();

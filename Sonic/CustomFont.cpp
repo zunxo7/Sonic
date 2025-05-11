@@ -45,15 +45,27 @@ void CustomFont::load(const string& folderPath) {
     dashOutline.loadFromFile(folderPath + "/Outline/-_outline.png");
     FC[CharacterCount++] = { '-', dash, dashOutline };
 
+    Texture underscore, underscoreOutline;
+    underscore.loadFromFile(folderPath + "/_.png");
+    underscoreOutline.loadFromFile(folderPath + "/Outline/__outline.png");
+    FC[CharacterCount++] = { '_', underscore, underscoreOutline };
+
 }
 
 void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor, Color TextColor) {
+    float originalX = x;
+    float lineHeight = 20 * Scale;
     for (int i = 0; i < Text.size(); ++i) {
         char c = Text[i];
+        
+        if (c == '\n') {
+            y += lineHeight;
+            x = originalX;
+            continue;
+        }
 
         if (c >= 'a' && c <= 'z') c -= 32;
 
-        // Handle space
         if (c == ' ') {
             x += WordSpacing;
             continue;

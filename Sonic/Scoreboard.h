@@ -1,30 +1,22 @@
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <cmath>
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Window.hpp>
+#include "CustomFont.h"
 
 using namespace sf;
 using namespace std;
 
-
-class Scoreboard
-{
+class Scoreboard {
 	bool DataDisplay;
-	String Name;
-	String ScoreString;
-
-	Font ScoreFont;
-	Text HSNamesText;
-	Text HSScoreText;
-	Text HighScoreTitle;
-
+	string Name;
+	string ScoreString;
+	Texture MenuForeGroundTexture;
+	Sprite MenuForeGroundSprite;
+	CustomFont font;
+	Texture BackGroundTexture;
+	Sprite BackGroundSprite;
 public:
 	Scoreboard();
 	void Update(RenderWindow* window);
 	void Draw(RenderWindow* window);
 };
-
