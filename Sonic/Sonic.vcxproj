@@ -209,6 +209,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="CustomFont.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GridObjects.cpp" />
@@ -226,6 +227,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="CustomFont.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GridObjects.h" />
