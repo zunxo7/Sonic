@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterFactory.h"
+#include "CustomFont.h"
 #include "Time.h"
 
 class Levels
@@ -12,10 +13,7 @@ class Levels
 	bool AbilityUsed;
 	TClass * GrandClock;
 
-	Font SonicFont;
-	Text ScoreText;
-	Text RingText;
-	Text HpText;
+	CustomFont font;
 
 	Texture levelBackGroundTexture;
 	Sprite levelBackGroundSprite;

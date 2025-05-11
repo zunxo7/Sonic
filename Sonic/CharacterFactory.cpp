@@ -487,25 +487,22 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 
 }
 
-void CharacterFactory::UpdatedScore(Text& ScoreText, int Add) {
+void CharacterFactory::UpdatedScore(int Add) {
 	this->Score += Add;
-	ScoreText.setString(to_string(Score));
 }
 
-void CharacterFactory::UpdatedRings(Text& RingText, int Add) {
+void CharacterFactory::UpdatedRings(int Add) {
 	this->Rings += Add;
-	RingText.setString(to_string(Rings));
 }
 
-void CharacterFactory::UpdatedHP(Text& HpText, Clock& InvincilibityClock, int Add) {
+void CharacterFactory::UpdatedHP(Clock& InvincilibityClock, int Add) {
 	if (InvincilibityClock.getElapsedTime().asSeconds() >= 1) {
 		InvincilibityClock.restart();
 		this->HP += Add;
-		HpText.setString(to_string(HP));
 	}
 }
 
-void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Text& HpText, Clock& InvincilibityClock) {
+void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Clock& InvincilibityClock) {
 
 	float offset_x = XPosition + XSpeed;
 
@@ -521,17 +518,17 @@ void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Text& Hp
 
 	if (XSpeed > 0) {
 		if (RightD == 's' || RightM == 's' || RightU == 's') {
-			UpdatedHP(HpText, InvincilibityClock, -1);
+			UpdatedHP(InvincilibityClock, -1);
 		}
 	}
 	else if (XSpeed < 0) {
 		if (LeftD == 's' || LeftM == 's' || LeftU == 's') {
-			UpdatedHP(HpText, InvincilibityClock, -1);
+			UpdatedHP(InvincilibityClock, -1);
 		}
 	}
 
 	if (MidD == 's') {
-		UpdatedHP(HpText, InvincilibityClock, -1);
+		UpdatedHP(InvincilibityClock, -1);
 		YSpeed = -20;
 	}
 }

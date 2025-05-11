@@ -2,25 +2,9 @@
 
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
-	if (!SonicFont.loadFromFile("Data/Fonts/SonicFont.otf")) {
-		std::cout << "ERROR::GAME::INITFONTS::Failed to load font!" << std::endl;
-	}
+	font.load("Data/CustomFont");
 
 	AbilityUsed = false;
-
-	ScoreText.setFont(SonicFont);
-	ScoreText.setCharacterSize(50);
-	ScoreText.setPosition(5, 0);
-	ScoreText.setString("0");
-
-	RingText.setFont(SonicFont);
-	RingText.setCharacterSize(30);
-	RingText.setPosition(32 + 10, 64 - 5);
-	RingText.setString("0");
-
-	HpText.setFont(SonicFont);
-	HpText.setCharacterSize(30);
-	HpText.setPosition(32 + 10, 64 + 32 - 5);
 
 	LivesTex.loadFromFile("Data/Lives.png");
 	LivesSprite.setTexture(LivesTex);
@@ -68,7 +52,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Characters[2] = knuckles;
 	CurrentPlayer = 2; // Sonic
 
-	Characters[CurrentPlayer]->UpdatedHP(HpText, GrandClock->getInvincilibityClock());
+	Characters[CurrentPlayer]->UpdatedHP(GrandClock->getInvincilibityClock());
 
 	switch (CurrentLevel) {
 	case 1:
@@ -198,7 +182,7 @@ void Levels::Update() {
 			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, GrandClock->getRingClock());
 		}
 
-		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, HpText, GrandClock->getInvincilibityClock());
+		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, GrandClock->getInvincilibityClock());
 
 		if (GrandClock->getAnimationClock1().getElapsedTime().asMilliseconds() >= 100) {
 			GrandClock->getAnimationClock1().restart();
@@ -227,8 +211,8 @@ void Levels::Update() {
 			Characters[i]->Update();
 		}
 
-		Characters[CurrentPlayer]->UpdatedScore(ScoreText);
-		Characters[CurrentPlayer]->UpdatedRings(RingText);
+		Characters[CurrentPlayer]->UpdatedScore();
+		Characters[CurrentPlayer]->UpdatedRings();
 	}
 }
 
@@ -242,6 +226,8 @@ void Levels::Draw(RenderWindow* window) {
 	else if (Center > (MaxWidht - 19) * CellSize + 15) {
 		Center = (MaxWidht - 19) * CellSize + 15;
 	}
+	
+	
 
 	levelBackGroundSprite.setPosition(0 - Center, 0);
 	window->draw(levelBackGroundSprite);
@@ -355,12 +341,13 @@ void Levels::Draw(RenderWindow* window) {
 	window->draw(LivesSprite);
 
 	ringSprite.setScale(2, 2);
-	ringSprite.setPosition(0,CellSize);
+	ringSprite.setPosition(5,CellSize);
 	window->draw(ringSprite);
 
-	window->draw(ScoreText);
-	window->draw(RingText);
-	window->draw(HpText);
+
+	font.draw(window, to_string(CharacterFactory::getRings()), 32 + 10, 62 , 3, 15, 2.7,Color::Black);
+	font.draw(window, to_string(CharacterFactory::getHP()), 32 + 10, 64 + 33, 3, 15, 2.7, Color::Black);
+	font.draw(window, "Score: " + to_string(CharacterFactory::getScore()), 10, 10, 2.0f, 15, 2.7, Color::Black);
 
 	window->display();
 	window->clear();

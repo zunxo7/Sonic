@@ -38,11 +38,15 @@ public:
 	void Animate();
 
 	void CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock);
-	void SpikeCollisions(char** lvl, const int cell_size, Text& HpText, Clock& InvincilibityClock);
+	void SpikeCollisions(char** lvl, const int cell_size, Clock& InvincilibityClock);
 
-	void UpdatedScore(Text& ScoreText,int Add = 0);
-	void UpdatedRings(Text& RingText, int Add = 0);
-	void UpdatedHP(Text& HpText, Clock& InvincilibityClock, int Add = 0);
+	void UpdatedScore(int Add = 0);
+	void UpdatedRings(int Add = 0);
+	void UpdatedHP(Clock& InvincilibityClock, int Add = 0);
+	
+	static int getRings() { return Rings; }
+	static int getScore() { return Score; }
+	static int getHP() { return HP; }
 
 	void Update();
 
