@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterFactory.h"
+#include "Time.h"
 
 class Levels
 {
@@ -9,6 +10,7 @@ class Levels
 	int CurrentLevel;
 	int MaxWidht;
 	bool AbilityUsed;
+	TClass * GrandClock;
 
 	Font SonicFont;
 	Text ScoreText;
@@ -46,16 +48,9 @@ class Levels
 	const int CharactersSize;
 	CharacterFactory** Characters;
 	int CurrentPlayer;
-	Clock PlayerClock;
-	Clock SwitchClock;
-	Clock AnimationClock1;
-	Clock AnimationClock2;
-	Clock RingClock;
-	Clock AbilityClock;
-	Clock InvincilibityClock;
 
 public:
-	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);
+	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock);
 	~Levels();
 
 	void Update();

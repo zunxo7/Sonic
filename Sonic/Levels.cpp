@@ -1,6 +1,6 @@
 #include "Levels.h"
 
-Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles) : CharactersSize(3), Characters(new CharacterFactory*[3]) {
+Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
 	if (!SonicFont.loadFromFile("Data/Fonts/SonicFont.otf")) {
 		std::cout << "ERROR::GAME::INITFONTS::Failed to load font!" << std::endl;
@@ -115,8 +115,8 @@ Levels::~Levels() {
 }
 
 void Levels::Update() {
-	if (PlayerClock.getElapsedTime().asMilliseconds() >= 25) {
-		PlayerClock.restart();
+	if (GrandClock->getPlayerClock().getElapsedTime().asMilliseconds() >= 25) {
+		GrandClock->getPlayerClock().restart();
 		for (int i = 0; i < CharactersSize;i++) { // Characters
 			Characters[i]->ApplyGravity(LvlGrid,CellSize);
 			if (i == CurrentPlayer) {
@@ -133,8 +133,8 @@ void Levels::Update() {
 			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Z) && SwitchClock.getElapsedTime().asSeconds() > 1) {
-				SwitchClock.restart();
+		if (Keyboard::isKeyPressed(Keyboard::Z) && GrandClock->getSwitchClock().getElapsedTime().asSeconds() > 1) {
+			GrandClock->getSwitchClock().restart();
 
 				AbilityUsed = false;
 			
@@ -146,31 +146,31 @@ void Levels::Update() {
 				
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::E) && AbilityClock.getElapsedTime().asSeconds() > 1 * (CurrentPlayer == 2) + 5 * (CurrentPlayer == 1) && !AbilityUsed) {
-			AbilityClock.restart();
+		if (Keyboard::isKeyPressed(Keyboard::E) && GrandClock->getAbilityClock().getElapsedTime().asSeconds() > 1 * (CurrentPlayer == 2) + 5 * (CurrentPlayer == 1) && !AbilityUsed) {
+			GrandClock->getAbilityClock().restart();
 			AbilityUsed = true;
 		}
 
 		if (AbilityUsed) {
-			Characters[CurrentPlayer]->UsedAbility(LvlGrid, CellSize, AbilityClock, AbilityUsed);
+			Characters[CurrentPlayer]->UsedAbility(LvlGrid, CellSize, GrandClock->getAbilityClock(), AbilityUsed);
 		}
 
 
 		for (int i = 0; i < CharactersSize;i++) {
-			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, RingClock);
+			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, GrandClock->getRingClock());
 		}
 
-		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, HpText, InvincilibityClock);
+		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, HpText, GrandClock->getInvincilibityClock());
 
-		if (AnimationClock1.getElapsedTime().asMilliseconds() >= 100) {
-			AnimationClock1.restart();
+		if (GrandClock->getAnimationClock1().getElapsedTime().asMilliseconds() >= 100) {
+			GrandClock->getAnimationClock1().restart();
 			for (int i = 0; i < CharactersSize;i++) {
 				Characters[i]->Animate();
 			}
 		}
 
-		if (AnimationClock2.getElapsedTime().asMilliseconds() >= 150) {
-			AnimationClock2.restart();
+		if (GrandClock->getAnimationClock2().getElapsedTime().asMilliseconds() >= 150) {
+			GrandClock->getAnimationClock2().restart();
 
 			ringSprite.setTextureRect(IntRect(CurrentRing * 17, 0, 15, 16));
 			CurrentRing++;
@@ -191,7 +191,7 @@ void Levels::Update() {
 
 		Characters[CurrentPlayer]->UpdatedScore(ScoreText);
 		Characters[CurrentPlayer]->UpdatedRings(RingText);
-		Characters[CurrentPlayer]->UpdatedHP(HpText, InvincilibityClock);
+		Characters[CurrentPlayer]->UpdatedHP(HpText, GrandClock->getInvincilibityClock());
 	}
 }
 

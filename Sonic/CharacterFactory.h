@@ -15,6 +15,7 @@ protected:
 	static float Acceleration;
 	static float Friction;
 	static float JumpStrength;
+	static bool IsInvincable;
 
 	static int HP;
 	static int Rings;
