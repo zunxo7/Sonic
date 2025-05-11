@@ -160,6 +160,8 @@ void Levels::Update() {
 			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, RingClock);
 		}
 
+		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, HpText, InvincilibityClock);
+
 		if (AnimationClock1.getElapsedTime().asMilliseconds() >= 100) {
 			AnimationClock1.restart();
 			for (int i = 0; i < CharactersSize;i++) {
@@ -189,7 +191,7 @@ void Levels::Update() {
 
 		Characters[CurrentPlayer]->UpdatedScore(ScoreText);
 		Characters[CurrentPlayer]->UpdatedRings(RingText);
-		Characters[CurrentPlayer]->UpdatedHP(HpText);
+		Characters[CurrentPlayer]->UpdatedHP(HpText, InvincilibityClock);
 	}
 }
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "CharacterFactory.h"
-#include "Collectiables.h"
 
 class Levels
 {
@@ -44,9 +43,6 @@ class Levels
 	int CurrentRing;
 	int CurrentSign;
 
-	int CollectiablesSize;
-	Collectiables** PtrCollectiables;
-
 	const int CharactersSize;
 	CharacterFactory** Characters;
 	int CurrentPlayer;
@@ -56,6 +52,7 @@ class Levels
 	Clock AnimationClock2;
 	Clock RingClock;
 	Clock AbilityClock;
+	Clock InvincilibityClock;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);

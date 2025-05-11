@@ -496,7 +496,40 @@ void CharacterFactory::UpdatedRings(Text& RingText, int Add) {
 	RingText.setString(to_string(Rings));
 }
 
-void CharacterFactory::UpdatedHP(Text& HpText, int Add) {
-	this->HP += Add;
-	HpText.setString(to_string(HP));
+void CharacterFactory::UpdatedHP(Text& HpText, Clock& InvincilibityClock, int Add) {
+	if (InvincilibityClock.getElapsedTime().asSeconds() >= 1) {
+		InvincilibityClock.restart();
+		this->HP += Add;
+		HpText.setString(to_string(HP));
+	}
+}
+
+void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Text& HpText, Clock& InvincilibityClock) {
+
+	float offset_x = XPosition + XSpeed;
+	char MidD = lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))];
+
+	char LeftM = lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0) / cell_size))];
+	char RightM = lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0) / cell_size))];
+
+	char LeftD = lvl[(int)((YPosition + HitBoxY) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 ) / cell_size))];
+	char RightD = lvl[(int)((YPosition + HitBoxY) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0) / cell_size))];
+
+	char LeftU = lvl[(int)((YPosition + 20) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0) / cell_size))];
+	char RightU = lvl[(int)((YPosition + 20) / cell_size)][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0) / cell_size))];
+
+	if (XSpeed > 0) {
+		if (RightD == 's' || RightM == 's' || RightU == 's') {
+			UpdatedHP(HpText, InvincilibityClock, -1);
+		}
+	}
+	else if (XSpeed < 0) {
+		if (LeftD == 's' || LeftM == 's' || LeftU == 's') {
+			UpdatedHP(HpText, InvincilibityClock, -1);
+		}
+	}
+
+	if (MidD == 's') {
+		UpdatedHP(HpText, InvincilibityClock, -1);
+	}
 }
