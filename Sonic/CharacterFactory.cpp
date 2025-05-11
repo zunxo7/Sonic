@@ -5,7 +5,7 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	ObjectAnimation.setActions(Actions);
 
 	Scale = 2;
-	XPosition = 2 * 64;
+	XPosition = 3 * 64;
 	YPosition = 7 * 64;
 	XSpeed = 0;
 	YSpeed = 0;
@@ -284,6 +284,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				Rings++;
 			}
 			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'H';
+				HP++;
+			}
+			break;
 		}
 
 		switch (RightM) {
@@ -302,6 +316,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				Rings++;
 			}
 			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'H';
+				HP++;
+			}
+			break;
 		}
 
 		switch (RightU) {
@@ -317,6 +345,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
 				Rings++;
+			}
+			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'H';
+				HP++;
 			}
 			break;
 		}
@@ -338,6 +380,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				Rings++;
 			}
 			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'H';
+				HP++;
+			}
+			break;
 		}
 
 		switch (LeftM) {
@@ -354,6 +410,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
 				Rings++;
+			}
+			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'H';
+				HP++;
 			}
 			break;
 		}
@@ -373,6 +443,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				Rings++;
 			}
 			break;
+		case 'u':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'U';
+				Boosted = true;
+			}
+			break;
+		case 'h':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'H';
+				HP++;
+			}
+			break;
 		}
 	}
 
@@ -382,6 +466,20 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 			RingClock.restart();
 			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))] = ' ';
 			Rings++;
+		}
+		break;
+	case 'u':
+		if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+			RingClock.restart();
+			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))] = 'U';
+			Boosted = true;
+		}
+		break;
+	case 'h':
+		if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+			RingClock.restart();
+			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))] = 'H';
+			HP++;
 		}
 		break;
 	}

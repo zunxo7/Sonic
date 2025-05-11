@@ -26,6 +26,14 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	LivesTex.loadFromFile("Data/Lives.png");
 	LivesSprite.setTexture(LivesTex);
 
+	BoostTex.loadFromFile("Data/SpecialBoost.png");
+	BoostSprite.setTexture(BoostTex);
+	BoostSprite.setScale(2, 2);
+
+	HPBoostTex.loadFromFile("Data/LivesBoost.png");
+	HPBoostSprite.setTexture(HPBoostTex);
+	HPBoostSprite.setScale(2, 2);
+
 	CurrentLevel = 1;
 	string basePath = "Data/Levels/Level";
 	basePath += (char)('0' + CurrentLevel);
@@ -42,10 +50,17 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	ringSprite.setTexture(ringTex);
 	CurrentRing = 0;
 
+	SignPostTex.loadFromFile(basePath + "Signpost.png");
+	SignPostSprite.setTexture(SignPostTex);
+	CurrentSign = 0;
+
 	Crystal1UTex.loadFromFile(basePath + "crystal1.png");
 	Crystal1DTex.loadFromFile(basePath + "crystal1d.png");
 	Crystal2UTex.loadFromFile(basePath + "crystal2.png");
 	Crystal2DTex.loadFromFile(basePath + "crystal2d.png");
+
+	levelBackGroundTexture.loadFromFile(basePath + "bg1.png");
+	levelBackGroundSprite.setTexture(levelBackGroundTexture);
 
 	CellSize = 64;
 
@@ -57,18 +72,15 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	switch (CurrentLevel) {
 	case 1:
 
-		levelBackGroundTexture.loadFromFile("Data/Levels/Level1/bg1.png");
-		levelBackGroundSprite.setTexture(levelBackGroundTexture);
-
 		MaxWidht = 200;
-		char soniclevel[14][201] = {
+		char soniclevel[15][201] = {
 
 			"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 			"qeqweqwqeqweqwwbqeqwe       eqbqqweweeqeeweqeeqwbebw          wqwewbwqqr wbqwbewbwwwbwqqwwqw c eqwe c eewbwwwb wqwewbwqqr wbqwbewbwwwbwqqwwqw  wqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebbw",
 			"wwbeq c wbew  e  wbe         wqwwebqwwqweoobwb   er              ebqebb   bwbwwqqr wbqqweqw     eq     e         ebqebb   bwbwwqqr wbqqweqw       ebqebbbwbwwqqeqeweqqwewqwq C wwqe  wqwq     wq    qwqw",
 			"wq c    r e      r              qwe      ooee             o       qwbC eqwbqbb qqwq  eqr        r                  qwbC  qwbqbb qqwq  eqr             bwbwwqqwwbqqweqwqbbwbwwqqeqe ew     wqwq  C   R  w",
 			"q                                qw        we          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                                       bwbwwqqeqew R ebbbwbwwqqeqww",
-			"w                   oC                 o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
+			"w                   oC  u   h          o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
 			"w               oo  peqwwbqwwq         p            p   R    p         ew     qewe	             o                                             so                                    wweqw        weq   w",
 			"w               bb   wqweewowqe                  o     bbb      o              r e           o  p     o                                 oo    pp       wqqwwqw                                         w",
 			"q       s   ooo       webqwooww     C R          p     qoow     p                         o  p     o  p                                 pp          qwbqeqwbqbbqqwq                                    w",
@@ -76,7 +88,8 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			"w   qew  b             qwqwwoob   ew   we     p                    p                o                    qooow     pp pp pp pppp  ppp           qewee  c     booc oweb     oo    oo   oo    pp         w",
 			"w  wewooob             weweeoob  ew     wee                                         p                   wwooow                                 qqwqeq o o o obooooooob     pp    pp   pp               w",
 			"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C                    sssssssssss   eqooow   ssssssssssssssssssssssssssssswbqqweqw  C R  booC ooob  sssssssssssssssssssssssss   f  w",
-			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwKKKKKwwKKwwKKwwKKwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww" // For Bottomless Pit
 		};
 
 		LvlGrid = new char* [14];
@@ -161,6 +174,12 @@ void Levels::Update() {
 			CurrentRing++;
 			if (CurrentRing >= 4) {
 				CurrentRing = 0;
+			}
+
+			SignPostSprite.setTextureRect(IntRect(CurrentSign * 48, 0, 48, 48));
+			CurrentSign++;
+			if (CurrentSign >= 5) {
+				CurrentSign = 0;
 			}
 		}
 
@@ -253,6 +272,35 @@ void Levels::Draw(RenderWindow* window) {
 				CrystalSprite.setTexture(Crystal2DTex);
 				CrystalSprite.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(CrystalSprite);
+			}
+			else if (LvlGrid[i][j] == 'h') {
+				HPBoostSprite.setTexture(HPBoostTex);
+				HPBoostSprite.setTextureRect(IntRect(0, 0, 32, 32));
+				HPBoostSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(HPBoostSprite);
+			}
+			else if (LvlGrid[i][j] == 'H') {
+				HPBoostSprite.setTexture(HPBoostTex);
+				HPBoostSprite.setTextureRect(IntRect(32, 0, 32, 32));
+				HPBoostSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(HPBoostSprite);
+			}
+			else if (LvlGrid[i][j] == 'u') {
+				BoostSprite.setTexture(BoostTex);
+				BoostSprite.setTextureRect(IntRect(0, 0, 32, 32));
+				BoostSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(BoostSprite);
+			}
+			else if (LvlGrid[i][j] == 'U') {
+				BoostSprite.setTexture(BoostTex);
+				BoostSprite.setTextureRect(IntRect(32, 0, 32, 32));
+				BoostSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(BoostSprite);
+			}
+			else if (LvlGrid[i][j] == 'f') {
+				SignPostSprite.setScale(2, 2);
+				SignPostSprite.setPosition(j * CellSize - Center - 24, i * CellSize - 34);
+				window->draw(SignPostSprite);
 			}
 		}
 	}

@@ -35,7 +35,14 @@ class Levels
 	Sprite ringSprite;
 	Texture LivesTex;
 	Sprite LivesSprite;
+	Texture SignPostTex;
+	Sprite SignPostSprite;
+	Texture BoostTex;
+	Sprite BoostSprite;
+	Texture HPBoostTex;
+	Sprite HPBoostSprite;
 	int CurrentRing;
+	int CurrentSign;
 
 	int CollectiablesSize;
 	Collectiables** PtrCollectiables;
