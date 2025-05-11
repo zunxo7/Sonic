@@ -181,7 +181,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w                 w",
+				"w         M       w",
 				"w    qqqqqqqqq    w",
 				"w                 w",
 				"w                 w",

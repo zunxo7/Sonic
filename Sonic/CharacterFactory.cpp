@@ -3,6 +3,12 @@
 int CharacterFactory::HP = 3;
 
 CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
+	jumpBuffer.loadFromFile("Data/Sounds/Jump.wav");
+	jumpSound.setBuffer(jumpBuffer);
+
+	ringBuffer.loadFromFile("Data/Sounds/Ring.wav");
+	ringSound.setBuffer(ringBuffer);
+
 	int Actions[7] = { 1, 12, 10, 8, 16, 10, 8 };
 	ObjectAnimation.setActions(Actions);
 
@@ -187,6 +193,7 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 
 	if (OnGround && YSpeed == 0 && !inGround) {
 		YSpeed += JumpStrength;
+		jumpSound.play();
 	}
 
 }
@@ -322,6 +329,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -361,6 +369,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -398,6 +407,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -437,6 +447,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -475,6 +486,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -512,6 +524,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = ' ';
 				Rings++;
+				ringSound.play();
 			}
 			break;
 		case 'u':
@@ -543,6 +556,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 			RingClock.restart();
 			lvl[(int)((YPosition + HitBoxY - 1) / cell_size)][(int)(((offset_x + HitBoxX / 2.0) / cell_size))] = ' ';
 			Rings++;
+			ringSound.play();
 		}
 		break;
 	case 'u':
