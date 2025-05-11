@@ -32,6 +32,7 @@ public:
 	float getYPosition();
 	float getHitBoxX();
 	float getHitBoxY();
+	bool getIsFlying();
 	void Teleport(int X, int Y);
 
 	bool AttackMode();

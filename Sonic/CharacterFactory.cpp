@@ -42,6 +42,10 @@ bool CharacterFactory::AttackMode() {
 	return (IsFlying == false && YSpeed != 0);
 }
 
+bool CharacterFactory::getIsFlying() {
+	return IsFlying;
+}
+
 void CharacterFactory::Teleport(int X, int Y) {
 	XPosition = X * 64;
 	YPosition = Y * 64;

@@ -8,6 +8,8 @@ protected:
 	int SpawnY;
 	int HP;
 	int AttackTime;
+	Clock HurtTimer;
+	Clock AttackTimer;
 
 public:
 
