@@ -18,5 +18,7 @@ public:
 	virtual int Score() = 0;
 
 	bool CheckCollision(int X,int Y,int HitX,int HitY);
+	int getHP();
+	void ChangeHP(int Diff);
 };
 

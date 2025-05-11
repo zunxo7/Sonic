@@ -13,3 +13,11 @@ bool EnemyFactory::CheckCollision(int X, int Y, int HitX, int HitY) {
 
 	return collided;
 }
+
+int EnemyFactory::getHP() {
+	return HP;
+}
+
+void EnemyFactory::ChangeHP(int Diff) {
+	HP += Diff;
+}

@@ -335,11 +335,14 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 			for (int j = 0; j < CharactersSize; j++) {
 				if (Enemies[i]->CheckCollision(Characters[j]->getXPosition(),Characters[j]->getYPosition(),Characters[j]->getHitBoxX(),Characters[j]->getHitBoxY())) {
 					if (Characters[j]->AttackMode()) {
-						Characters[j]->setScore(Enemies[i]->Score());
-						delete Enemies[i];
-						Enemies[i] = nullptr;
-						enemyDestroyed = true;
-						break; 
+						Enemies[i]->ChangeHP(-5);
+						if (Enemies[i]->getHP() <= 0) {
+							Characters[j]->setScore(Enemies[i]->Score());
+							delete Enemies[i];
+							Enemies[i] = nullptr;
+							enemyDestroyed = true;
+							break;
+						} 
 					}
 					else {
 						Characters[j]->UpdatedHP(GrandClock->getInvincilibityClock(), -1);
