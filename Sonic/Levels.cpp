@@ -181,7 +181,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w        M        w",
+				"w                 w",
 				"w    qqqqqqqqq    w",
 				"w                 w",
 				"w                 w",
@@ -216,7 +216,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			for (int i = 0; i < Rows; ++i) {
 				for (int j = 0; j < MaxWidht; ++j) {
 					if (LvlGrid[i][j] == 'M') {
-						EnemyNum++;
+						Enemies[Count++] = new Motobug(j,i);
 					}
 				}
 			}
@@ -233,35 +233,83 @@ Levels::~Levels() {
 	delete[] LvlGrid;
 	LvlGrid = nullptr;
 
+	for (int i = 0; i < 3; ++i) {
+		Characters[i] = nullptr;
+	}
+
 	delete[] Characters;
 	Characters = nullptr;
+
+	for (int i = 0; i < EnemyNum; ++i) {
+		Enemies[i] = nullptr;
+	}
 
 	delete[] Enemies;
 	Enemies = nullptr;
 }
 
-void Levels::Update(int& CurrentLevel) {
+void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 
 	if (FirstSpawn) {
 		switch (CurrentLevel) {
 			case 1:
 				for (int i = 0; i < CharactersSize;i++) {
-					Characters[i]->Teleport(1, 10);
+					Characters[i]->Teleport(190, 10);
+					lvlMus.openFromFile("Data/Sounds/level1.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(2);
+
 				}
 			break;
 			case 2:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(2, 10);
+					lvlMus.openFromFile("Data/Sounds/level2.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(1);
 				}
 			break;
 			case 3:
 				for (int i = 0; i < CharactersSize;i++) {
-					Characters[i]->Teleport(7, 11);
+					Characters[i]->Teleport(5, 9);
+					lvlMus.openFromFile("Data/Sounds/level3.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(0.5);
+					Characters[CurrentPlayer]->setFriction(2);
 				}
 			break;
 			case 4:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(9, 6);
+					lvlMus.openFromFile("Data/Sounds/level4.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(2);
 				}
 			break;
 		}
@@ -272,11 +320,40 @@ void Levels::Update(int& CurrentLevel) {
 		GrandClock->getPlayerClock().restart();
 
 		for (int i = 0; i < EnemyNum;i++) { // Enemies
-			Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+			if (Enemies[i] != nullptr) {
+				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+			}
 		}
 
+		for (int i = 0; i < EnemyNum; i++) {
+			if (Enemies[i] == nullptr) {
+				continue;
+			}
 
+			bool enemyDestroyed = false;
 
+			for (int j = 0; j < CharactersSize; j++) {
+				if (Enemies[i]->CheckCollision(Characters[j]->getXPosition(),Characters[j]->getYPosition(),Characters[j]->getHitBoxX(),Characters[j]->getHitBoxY())) {
+					if (Characters[j]->AttackMode()) {
+						Enemies[i]->ChangeHP(-5);
+						if (Enemies[i]->getHP() <= 0) {
+							Characters[j]->setScore(Enemies[i]->Score());
+							delete Enemies[i];
+							Enemies[i] = nullptr;
+							enemyDestroyed = true;
+							break;
+						} 
+					}
+					else {
+						Characters[j]->UpdatedHP(GrandClock->getInvincilibityClock(), -1);
+					}
+				}
+			}
+
+			if (enemyDestroyed) {
+				continue;
+			}
+		}
 
 		for (int i = 0; i < CharactersSize;i++) { // Characters
 			Characters[i]->ApplyGravity(LvlGrid,CellSize);
@@ -329,7 +406,9 @@ void Levels::Update(int& CurrentLevel) {
 				Characters[i]->Animate();
 			}
 			for (int i = 0; i < EnemyNum;i++) {
-				Enemies[i]->Animate();
+				if (Enemies[i] != nullptr) {
+					Enemies[i]->Animate();
+				}
 			}
 		}
 
@@ -473,7 +552,9 @@ void Levels::Draw(RenderWindow* window) {
 	}
 
 	for (int i = 0; i < EnemyNum;i++) { // Enemies
-		Enemies[i]->DrawMoveable(window, Center);
+		if (Enemies[i] != nullptr) {
+			Enemies[i]->DrawMoveable(window, Center);
+		}
 	}
 
 	for (int i = 0; i < CharactersSize;i++) { // Characters

@@ -17,6 +17,7 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 
 	MaxSpeed = MSpeed;
 	OnGround = false;
+	IsFlying = false;
 	Boosted = 0;
 	BoostTimer = 0;
 }
@@ -27,6 +28,18 @@ float CharacterFactory::getXPosition() {
 
 float CharacterFactory::getYPosition() {
 	return YPosition;
+}
+
+float CharacterFactory::getHitBoxX() {
+	return HitBoxX;
+}
+
+float CharacterFactory::getHitBoxY() {
+	return HitBoxY;
+}
+
+bool CharacterFactory::AttackMode() {
+	return (IsFlying == false && YSpeed != 0);
 }
 
 void CharacterFactory::Teleport(int X, int Y) {
@@ -42,6 +55,18 @@ float CharacterFactory::JumpStrength = -20;
 
 int CharacterFactory::Rings = 0;
 int CharacterFactory::Score = 0;
+
+void CharacterFactory::setGravity(float grav) {
+	Gravity = grav;
+}
+
+void CharacterFactory::setFriction(float Fric) {
+	Friction = Fric;
+}
+
+void CharacterFactory::setScore(float score) {
+	Score += score;
+}
 
 void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 {
@@ -167,6 +192,15 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 }
 
 void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
+
+	if (X - XPosition > 10 * cell_size) {
+		for (int i = 13; i > 0; i--) {
+			if (lvl[i][(int)((X + HitBoxX) / cell_size - 10)] == ' ' && lvl[i + 1][(int)((X + HitBoxX) / cell_size - 10)] == ' ') {
+				Teleport((int)((X + HitBoxX) / cell_size - 10), i);
+			}
+		}
+	}
+
 	if (X < XPosition - HitBoxX) {
 		XSpeed -= Acceleration;
 		ObjectAnimation.setAction(1, 1);

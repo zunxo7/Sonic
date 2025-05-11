@@ -53,3 +53,7 @@ void Motobug::MovePattern(char** lvl, const int cell_size,float X) {
 void Motobug::Animate() {
 	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2 , HitBoxY / 2);
 }
+
+int Motobug::Score() {
+	return 100;
+}

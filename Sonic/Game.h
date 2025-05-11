@@ -17,6 +17,7 @@ private:
     RenderWindow* window;
     Event event; 
     Font font;
+    Music BgMusic;
 
     int ScreenWidht;
     int ScreenHeight;
