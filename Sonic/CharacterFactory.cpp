@@ -34,14 +34,6 @@ void CharacterFactory::Teleport(int X, int Y) {
 	YPosition = Y * 64;
 }
 
-void setGravity(float grav) {
-	float CharacterFactory::Gravity = grav;
-}
-
-void setFriction(float Fric) {
-	float CharacterFactory::Friction = Fric;
-}
-
 float CharacterFactory::Gravity = 1;
 float CharacterFactory::TerminalVelocity = 20;
 float CharacterFactory::Acceleration = 0.5;
@@ -50,6 +42,14 @@ float CharacterFactory::JumpStrength = -20;
 
 int CharacterFactory::Rings = 0;
 int CharacterFactory::Score = 0;
+
+void CharacterFactory::setGravity(float grav) {
+	Gravity = grav;
+}
+
+void CharacterFactory::setFriction(float Fric) {
+	Friction = Fric;
+}
 
 void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 {

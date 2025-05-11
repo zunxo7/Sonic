@@ -216,7 +216,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			for (int i = 0; i < Rows; ++i) {
 				for (int j = 0; j < MaxWidht; ++j) {
 					if (LvlGrid[i][j] == 'M') {
-						EnemyNum++;
+						Enemies[Count++] = new Motobug(j,i);
 					}
 				}
 			}
@@ -246,7 +246,7 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 		switch (CurrentLevel) {
 			case 1:
 				for (int i = 0; i < CharactersSize;i++) {
-					Characters[i]->Teleport(1, 10);
+					Characters[i]->Teleport(190, 10);
 					lvlMus.openFromFile("Data/Sounds/level1.ogg");
 					lvlMus.setVolume(Volume);
 					lvlMus.play();
@@ -276,7 +276,7 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 			break;
 			case 3:
 				for (int i = 0; i < CharactersSize;i++) {
-					Characters[i]->Teleport(7, 11);
+					Characters[i]->Teleport(5, 9);
 					lvlMus.openFromFile("Data/Sounds/level3.ogg");
 					lvlMus.setVolume(Volume);
 					lvlMus.play();
