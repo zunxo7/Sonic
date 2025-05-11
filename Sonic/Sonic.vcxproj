@@ -215,6 +215,7 @@
     <ClCompile Include="Knuckles.cpp" />
     <ClCompile Include="Levels.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Motobug.cpp" />
     <ClCompile Include="Moveable.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="Levels.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="CharacterFactory.h" />
+    <ClInclude Include="Motobug.h" />
     <ClInclude Include="Moveable.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Sonic.h" />

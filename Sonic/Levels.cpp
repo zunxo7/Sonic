@@ -21,7 +21,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	HpText.setFont(SonicFont);
 	HpText.setCharacterSize(30);
 	HpText.setPosition(32 + 10, 64 + 32 - 5);
-	HpText.setString("0");
 
 	LivesTex.loadFromFile("Data/Lives.png");
 	LivesSprite.setTexture(LivesTex);
@@ -68,6 +67,8 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Characters[1] = tails;
 	Characters[2] = knuckles;
 	CurrentPlayer = 2; // Sonic
+
+	Characters[CurrentPlayer]->UpdatedHP(HpText, GrandClock->getInvincilibityClock());
 
 	switch (CurrentLevel) {
 	case 1:
@@ -191,7 +192,6 @@ void Levels::Update() {
 
 		Characters[CurrentPlayer]->UpdatedScore(ScoreText);
 		Characters[CurrentPlayer]->UpdatedRings(RingText);
-		Characters[CurrentPlayer]->UpdatedHP(HpText, GrandClock->getInvincilibityClock());
 	}
 }
 

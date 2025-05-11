@@ -1,5 +1,7 @@
 #include "CharacterFactory.h"
 
+int CharacterFactory::HP = 3;
+
 CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	int Actions[7] = { 1, 12, 10, 8, 16, 10, 8 };
 	ObjectAnimation.setActions(Actions);
@@ -33,7 +35,6 @@ float CharacterFactory::Acceleration = 0.5;
 float CharacterFactory::Friction = 2;
 float CharacterFactory::JumpStrength = -20;
 
-int CharacterFactory::HP = 3;
 int CharacterFactory::Rings = 0;
 int CharacterFactory::Score = 0;
 
@@ -521,17 +522,16 @@ void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Text& Hp
 	if (XSpeed > 0) {
 		if (RightD == 's' || RightM == 's' || RightU == 's') {
 			UpdatedHP(HpText, InvincilibityClock, -1);
-			XSpeed = 0;
 		}
 	}
 	else if (XSpeed < 0) {
 		if (LeftD == 's' || LeftM == 's' || LeftU == 's') {
 			UpdatedHP(HpText, InvincilibityClock, -1);
-			XSpeed = 0;
 		}
 	}
 
 	if (MidD == 's') {
 		UpdatedHP(HpText, InvincilibityClock, -1);
+		YSpeed = -20;
 	}
 }
