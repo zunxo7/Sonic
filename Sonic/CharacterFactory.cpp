@@ -29,6 +29,11 @@ float CharacterFactory::getYPosition() {
 	return YPosition;
 }
 
+void CharacterFactory::Teleport(int X, int Y) {
+	XPosition = X * 64;
+	YPosition = Y * 64;
+}
+
 float CharacterFactory::Gravity = 1;
 float CharacterFactory::TerminalVelocity = 20;
 float CharacterFactory::Acceleration = 0.5;
@@ -219,7 +224,7 @@ void CharacterFactory::Animate() {
 	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2, HitBoxY / 2);
 }
 
-void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock) {
+void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock,int& CurrentLevel) {
 
 	float offset_x = XPosition + XSpeed;
 
@@ -299,7 +304,14 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				HP++;
 			}
 			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
+			}
+			break;
 		}
+
 
 		switch (RightM) {
 		case 'w':
@@ -331,6 +343,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				HP++;
 			}
 			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
+			}
+			break;
 		}
 
 		switch (RightU) {
@@ -360,6 +378,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + 20) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 + HitBoxX / 4.0 - 5) / cell_size))] = 'H';
 				HP++;
+			}
+			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
 			}
 			break;
 		}
@@ -395,6 +419,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				HP++;
 			}
 			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
+			}
+			break;
 		}
 
 		switch (LeftM) {
@@ -425,6 +455,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				RingClock.restart();
 				lvl[(int)((YPosition + HitBoxY / 2.0) / cell_size)][(int)(((offset_x + HitBoxX / 2.0 - HitBoxX / 4.0 + 5) / cell_size))] = 'H';
 				HP++;
+			}
+			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
 			}
 			break;
 		}
@@ -458,6 +494,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				HP++;
 			}
 			break;
+		case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
+			}
+			break;
 		}
 	}
 
@@ -483,6 +525,12 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 			HP++;
 		}
 		break;
+	case 'f':
+			if (RingClock.getElapsedTime().asMilliseconds() >= 10) {
+				RingClock.restart();
+				CurrentLevel++;
+			}
+			break;
 	}
 
 }
