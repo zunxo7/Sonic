@@ -5,7 +5,9 @@ class Motobug : public EnemyFactory
 public:
     Motobug(int X, int Y);
 
-    void MovePattern(char** lvl, const int cell_size,float X);
-    virtual void Animate() override;
+    void MovePattern(char** lvl, const int cell_size,float X) override;
+    void Animate() override;
+
+    int Score();
 };
 

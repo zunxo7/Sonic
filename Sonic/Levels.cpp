@@ -181,7 +181,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w        M        w",
+				"w                 w",
 				"w    qqqqqqqqq    w",
 				"w                 w",
 				"w                 w",
@@ -233,8 +233,16 @@ Levels::~Levels() {
 	delete[] LvlGrid;
 	LvlGrid = nullptr;
 
+	for (int i = 0; i < 3; ++i) {
+		Characters[i] = nullptr;
+	}
+
 	delete[] Characters;
 	Characters = nullptr;
+
+	for (int i = 0; i < EnemyNum; ++i) {
+		Enemies[i] = nullptr;
+	}
 
 	delete[] Enemies;
 	Enemies = nullptr;
@@ -312,11 +320,37 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 		GrandClock->getPlayerClock().restart();
 
 		for (int i = 0; i < EnemyNum;i++) { // Enemies
-			Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+			if (Enemies[i] != nullptr) {
+				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+			}
 		}
 
+		for (int i = 0; i < EnemyNum; i++) {
+			if (Enemies[i] == nullptr) {
+				continue;
+			}
 
+			bool enemyDestroyed = false;
 
+			for (int j = 0; j < CharactersSize; j++) {
+				if (Enemies[i]->CheckCollision(Characters[j]->getXPosition(),Characters[j]->getYPosition(),Characters[j]->getHitBoxX(),Characters[j]->getHitBoxY())) {
+					if (Characters[j]->AttackMode()) {
+						Characters[j]->setScore(Enemies[i]->Score());
+						delete Enemies[i];
+						Enemies[i] = nullptr;
+						enemyDestroyed = true;
+						break; 
+					}
+					else {
+						Characters[j]->UpdatedHP(GrandClock->getInvincilibityClock(), -1);
+					}
+				}
+			}
+
+			if (enemyDestroyed) {
+				continue;
+			}
+		}
 
 		for (int i = 0; i < CharactersSize;i++) { // Characters
 			Characters[i]->ApplyGravity(LvlGrid,CellSize);
@@ -369,7 +403,9 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 				Characters[i]->Animate();
 			}
 			for (int i = 0; i < EnemyNum;i++) {
-				Enemies[i]->Animate();
+				if (Enemies[i] != nullptr) {
+					Enemies[i]->Animate();
+				}
 			}
 		}
 
@@ -513,7 +549,9 @@ void Levels::Draw(RenderWindow* window) {
 	}
 
 	for (int i = 0; i < EnemyNum;i++) { // Enemies
-		Enemies[i]->DrawMoveable(window, Center);
+		if (Enemies[i] != nullptr) {
+			Enemies[i]->DrawMoveable(window, Center);
+		}
 	}
 
 	for (int i = 0; i < CharactersSize;i++) { // Characters

@@ -30,10 +30,15 @@ public:
 
 	float getXPosition();
 	float getYPosition();
+	float getHitBoxX();
+	float getHitBoxY();
 	void Teleport(int X, int Y);
+
+	bool AttackMode();
 
 	void setGravity(float grav);
 	void setFriction(float Fric);
+	void setScore(float score);
 
 	void ApplyGravity(char** lvl, const int cell_size);
 	void PlayerMove(char** lvl, const int cell_size, int MaxWidht);
