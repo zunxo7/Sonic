@@ -61,9 +61,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Crystal2UTex.loadFromFile(basePath + "crystal2.png");
 	Crystal2DTex.loadFromFile(basePath + "crystal2d.png");
 
-	levelBackGroundTexture.loadFromFile(basePath + "bg1.png");
-	levelBackGroundSprite.setTexture(levelBackGroundTexture);
-
 	CellSize = 64;
 
 	Characters[0] = sonic;
@@ -75,12 +72,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 	switch (CurrentLevel) {
 	case 1:
-
-		levelBackGroundTexture.loadFromFile("Data/Levels/Level1/bg1.png");
-		levelBackGroundSprite.setTexture(levelBackGroundTexture);
-
-		levelBackGroundSprite.setTexture(levelBackGroundTexture);
-
+	{
 		MaxWidht = 200;
 		char soniclevel[14][201] = {
 
@@ -103,13 +95,17 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 		LvlGrid = new char* [14];
 		for (int i = 0; i < 14; ++i) {
 			LvlGrid[i] = new char[MaxWidht];
-			for (int i = 0; i < 14; ++i) {
-				for (int j = 0; j < MaxWidht; ++j) {
-					LvlGrid[i][j] = soniclevel[i][j];
-				}
-			}
-			break;
 		}
+
+		for (int i = 0; i < 14; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				LvlGrid[i][j] = soniclevel[i][j];
+			}
+		}
+
+		break;
+	}
+
 	case 2: 
 	{
 
