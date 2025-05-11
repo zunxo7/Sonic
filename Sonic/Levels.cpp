@@ -17,7 +17,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	HPBoostSprite.setTexture(HPBoostTex);
 	HPBoostSprite.setScale(2, 2);
 
-	CurrentLevel = 4;
+	CurrentLevel = 3;
 	string basePath = "Data/Levels/Level";
 	basePath += (char)('0' + CurrentLevel);
 	basePath += "/";
@@ -66,15 +66,15 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"qeqweqwqeqweqwwbqeqwe       eqbqqweweeqeeweqeeqwbebw          wqwewbwqqr wbqwbewbwwwbwqqwwqw c eqwe c eewbwwwb wqwewbwqqr wbqwbewbwwwbwqqwwqw  wqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebbw",
 				"wwbeq c wbew  e  wbe         wqwwebqwwqweoobwb   er              ebqebb   bwbwwqqr wbqqweqw     eq     e         ebqebb   bwbwwqqr wbqqweqw       ebqebbbwbwwqqeqeweqqwewqwq C wwqe  wqwq     wq    qwqw",
 				"wq c    r e      r              qwe      ooee             o       qwbC eqwbqbb qqwq  eqr        r                  qwbC  qwbqbb qqwq  eqr             bwbwwqqwwbqqweqwqbbwbwwqqeqe ew     wqwq  C   R  w",
-				"q                                qw        we          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                                       bwbwwqqeqew R ebbbwbwwqqeqww",
+				"q                                qw       uwe          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                                       bwbwwqqeqew R ebbbwbwwqqeqww",
 				"w                   oC                 o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
 				"w               oo  peqwwbqwwq         p            p   R    p         ew     qewe	             o                                             so                                    wweqw        weq   w",
 				"w               bb   wqweewowqe                  o     bbb      o              r e           o  p     o                                 oo    pp       wqqwwqw                                         w",
-				"q       s   ooo       webqwooww     C R          p     qoow     p                         o  p     o  p                                 pp          qwbqeqwbqbbqqwq                                    w",
-				"w     wwe   ppp       qweweooob    ebbbe      o         wqw        o                      p        p      wbb      oo  s oo soos  ooo            wqqwwqwwwoooboqqwqeq                       oo         w",
-				"w   qew  b             qwqwwoob   ew   we     p                    p                o                    qooow     pp pp pp pppp  ppp           qewee  c     booc oweb     oo    oo   oo    pp         w",
-				"w  wewooob             weweeoob  ew     wee                                         p                   wwooow                                 qqwqeq o o o obooooooob     pp    pp   pp               w",
-				"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C                    sssssssssss   eqooow   ssssssssssssssssssssssssssssswbqqweqw  C R  booC ooob  sssssssssssssssssssssssss   f  w",
+				"q       s   ooo       webqwooww     C R          p     quob     p                         o  p     o  p                                 pp          qwbqeqwbqbbqqwq                                    w",
+				"w     wwe   ppp       qweweooob    ebbbe      o         wqb        o                      p        p      wbb      oo  s oo soos  ooo            wqqwwqwwwoooboqqwqeq                       oo         w",
+				"w   qew  b             qwqwwoob   ew   we     p            qq      p                o                    qooob     pp pp pp pppp  ppp          qewee  c      booc oweb     oo    oo   oo    pp         w",
+				"w  wewooob             weweeoob  ew     wee                                         p                   wwooob                                 qqwqeq o o o obooooooob     pp    pp   pp               w",
+				"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C                    sssssssssss   eqooob   ssssssssssssssssssssssssssssswbqqweqw  C R hbooC ooob  sssssssssssssssssssssssss   f  w",
 				"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 				"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 			};
@@ -106,9 +106,9 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                                                          b                                                             oC                             o   p     o                                                                                      w",
 				"w                         o                                b                                                         oo  peqwwbqwwq                     p    R    p                                                   wwqwq                              w",
 				"w               soo   o   p                         o   ooob                                                         bb   wqweewqwqe                 o       bbb      o                                            wqqwwqwwww                            w",
-				"q         soo   ppp   p       ooo              o    p   pppp                                                  s   ooo       webqwooww     C R        p       qoow     p                            oo            qwwq c   wwq R                          w",
-				"w     o   ppp                 ppp    o     o   p               C o       ooo        R  C   R   C            wwe   ppp       qweweooob    ebbbe     o          wqw       o     oo  s oo soos  ooo   pp       wqqwwqwww     qqwqeq pwp     ss              w",
-				"w     p            bbb               p     p                   ppp       ppp      bbbbwqwqbbbbwqbq       qew  b             qwqwwoob   ew   we     p                    p     pp pp pp pppp  ppp           qewee  c             b   qwwqqqwqqqe          w",
+				"q         soo   ppp   p       ooo              o    p   pppp                                                  s   ooo       webqwooww     C R        p       qoob     p                            oo            qwwq c   wwq R                          w",
+				"w     o   ppp                 ppp    o     o   p               C o       ooo        R  C   R   C            wwe   ppp       qweweooob    ebbbe     o          wqb       o     oo  s oo soos  ooo   pp       wqqwwqwww     qqwqeq pwp     ss              w",
+				"w     p            bbb               p     p                   ppp       ppp      bbbbwqwqbbbbwqbq       qew  b             qwqwwoob   ew   we     p             qq     p     pp pp pp pppp  ppp           qewee  c             b   qwwqqqwqqqe          w",
 				"w                  qooq                                                         eeewqwqeeewqeqwqqwqe    wewooob             weweeoob  ew     wee                          C                               qqwqeq                b              b         w",
 				"wwqqwssssssssssssssesosqsssssssssssssssssssssssssssssssssssssssssssssssssssssssqweewqwqewqeweweewqewqqwwqq ooob  sssssssssssseweweeewwwssssssswwwsssssssssssssssssssssssspppssssssssssssssssssssssssssssswbqqweqw  C   f        b              b   ssss  w",
 				"wwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
@@ -128,6 +128,42 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 			break;
 		}
+	case 3:
+	{
+		MaxWidht = 300;
+		const int Rows = 15;
+		char soniclevel2[Rows][301] = {
+
+			"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"qeqweqwqeqw                           qweqwqeqw  C    C  qweqwqeqw                                                                                                                                       qwwqqwwqwqoouoo          qwqwqwwqqwqwqwqwooooooooeqwwqeewqqqqeq      r     c                eqwwqew",
+			"weqweq C                                qweqw              qweqw                 r     c     c                                                                                                                qwwqqooooo           ooooooooooooooooooooooooewqwqewqeqqq                             eqwwqeww",
+			"weq                                      eqq                eqq        qpppwwqeeqweeqwqeqeeeqwwqw                                                          r  c  r                                               qwwqqwwqwq        oooooooooooooooooooooooooooooewqewq                               eqwwqew",
+			"q               oooo                      R                  C               eeqwwqw             b                                                    qwwqqwwqwqqwwqqwwqwq  oooo                                   qwwqqwwqwq      qwwqqwqwewqwqeewqweqeqwwqeeqewqwwq                                  ewwew",
+			"w               pppp    ooos                                                 wqwww               b                                                 qwwqqwwqwq               pppp                                  qwwqqwwqwqeepppppp                                                                       w",
+			"w                       pppp                                                 qqewqq  s    qqqwwqeqwq                                          ooqwwqqwwqwq                        oooo                                                                                                                     w",
+			"w       sooo                                                           qpppwwqweqwqeqw  oooo     wqwqe U                                   ooqwwqqwwqwq                           pppp           oooo    ooo                    soos                                                                       w",
+			"q       pppp                                                                wqweqwqqweq oooo      ewqeqw                                 ooqwwqqwwqwq                                   oooo     pppp    ppp                    pppp    ooso                                                               w",
+			"w                                                                           qqweqwqqweqqwqqqqw     qewqeweq                             qwwqqwwqwq          bbbbbb            oooo      pppp                               qqqq         pppp      sooos                 R                                  w",
+			"wq	           oooos                      eqq                qwe             wwqqw        oooob      qwqwqwwqqq         o o          qwwqqwwqwq             boooooob           pppp                                 qwwqqwwqwq                     ppppp      qwwqqwwqwqqwoCooo                             w",
+			"weqwe r       ppppp                  qweqwqweqw            qweqwqwooowqqbbbwweq          oooob      ooooooooob       o    o         qwwqqwwqwq             boohooob                                              qwwqqwwqwq                                qwwqqwwqwqqwwqqwwqwqoHoo                        w",
+			"weqweqwqsssssssssssssssssssssssqweqwqeqwqweqwqeqwsssssssqweqwqweqwqweqwsssssw    u       oooob      ooooooooob        oooo         wqwqe                    bbbbbb         ssssssssssssssssssssssssssssssssssqwwqqwwqwqsssssssssssssssssssssssssssssssssqwwqqwwqwqqwwqqwwqwqqwwqqwwq         f    C  R     w",
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbbbbbbbbbbbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
+		};
+
+		LvlGrid = new char* [Rows];
+		for (int i = 0; i < Rows; ++i) {
+			LvlGrid[i] = new char[MaxWidht];
+		}
+
+		for (int i = 0; i < Rows; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				LvlGrid[i][j] = soniclevel2[i][j];
+			}
+		}
+
+		break;
+	}
 	case 4:
 		{
 			MaxWidht = 19;
