@@ -18,7 +18,7 @@ Motobug::Motobug(int X,int Y) {
 	HitBoxX = 41 * Scale;
 	HitBoxY = 32 * Scale;
 
-	ObjectTexture.loadFromFile("Data/Eniemies/Bug.png");
+	ObjectTexture.loadFromFile("Data/Enemies/Bug.png");
 	ObjectSprite.setTexture(ObjectTexture);
 	ObjectSprite.setTextureRect(IntRect(0, 0, 41, 32));
 	ObjectSprite.setScale(Scale, Scale);
@@ -35,15 +35,21 @@ void Motobug::MovePattern(char** lvl, const int cell_size,float X) {
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY + 1) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
 
-	if (X < XPosition && (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ')) {
-		XSpeed = -10;
-		ObjectAnimation.setAction(1, 1);
+	if (X < XPosition - 10 && (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ')) {
+		XSpeed = -2;
+		ObjectAnimation.setAction(1, 0);
 	}
-	else if (X > XPosition && (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ')) {
-		XSpeed = 10;
-		ObjectAnimation.setAction(0, 1);
+	else if (X > XPosition + 10 && (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ')) {
+		XSpeed = 2;
+		ObjectAnimation.setAction(0, 0);
 	}
 	else {
 		XSpeed = 0;
 	}
+
+	XPosition += XSpeed;
+}
+
+void Motobug::Animate() {
+	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2 , HitBoxY / 2);
 }

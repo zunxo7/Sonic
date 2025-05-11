@@ -1,4 +1,5 @@
 #include "Levels.h"
+#include "Motobug.h"
 
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
@@ -143,7 +144,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w                 w",
+				"w        M        w",
 				"w    qqqqqqqqq    w",
 				"w                 w",
 				"w                 w",
@@ -163,6 +164,30 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				}
 			}
 
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						EnemyNum++;
+					}
+				}
+			}
+
+			Enemies = new EnemyFactory*[EnemyNum];
+
+			for (int i = 0; i < EnemyNum; ++i) {
+				Enemies[i] = nullptr;
+			}
+
+			int Count = 0;
+
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						Enemies[Count++] = new Motobug(j,i);
+					}
+				}
+			}
+
 			break;
 		}
 	}
@@ -174,11 +199,22 @@ Levels::~Levels() {
 	}
 	delete[] LvlGrid;
 	LvlGrid = nullptr;
+
+	delete[] Characters;
+	Characters = nullptr;
 }
 
 void Levels::Update() {
 	if (GrandClock->getPlayerClock().getElapsedTime().asMilliseconds() >= 25) {
 		GrandClock->getPlayerClock().restart();
+
+		for (int i = 0; i < EnemyNum;i++) { // Enemies
+			Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+		}
+
+
+
+
 		for (int i = 0; i < CharactersSize;i++) { // Characters
 			Characters[i]->ApplyGravity(LvlGrid,CellSize);
 			if (i == CurrentPlayer) {
@@ -228,6 +264,9 @@ void Levels::Update() {
 			GrandClock->getAnimationClock1().restart();
 			for (int i = 0; i < CharactersSize;i++) {
 				Characters[i]->Animate();
+			}
+			for (int i = 0; i < EnemyNum;i++) {
+				Enemies[i]->Animate();
 			}
 		}
 
@@ -368,6 +407,10 @@ void Levels::Draw(RenderWindow* window) {
 				window->draw(SignPostSprite);
 			}
 		}
+	}
+
+	for (int i = 0; i < EnemyNum;i++) { // Enemies
+		Enemies[i]->DrawMoveable(window, Center);
 	}
 
 	for (int i = 0; i < CharactersSize;i++) { // Characters

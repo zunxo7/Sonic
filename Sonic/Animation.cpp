@@ -38,10 +38,10 @@ void Animation::NextFrame(Sprite& ObjectSprite, Texture& ObjectTexture, int x, i
 	PreviousDirection = Direction;
 	PreviousAction = NextAction;
 	if (PreviousDirection == 1) {
-		ObjectSprite.setTextureRect(IntRect((Action[PreviousAction] * (x + 1) * PreviousDirection) - (CurrentFrame + 1) * (x + 1) + 1, PreviousAction * (y + 1) * 2 + 49 * PreviousDirection, x, y));
+		ObjectSprite.setTextureRect(IntRect((Action[PreviousAction] * (x + 1) * PreviousDirection) - (CurrentFrame + 1) * (x + 1) + 1, PreviousAction * (y + 1) * 2 + (y + 1) * PreviousDirection, x, y));
 	}
 	else{
-		ObjectSprite.setTextureRect(IntRect(CurrentFrame * (x + 1) + 1, PreviousAction * (y + 1) * 2 + 49 * PreviousDirection, x, y));
+		ObjectSprite.setTextureRect(IntRect(CurrentFrame * (x + 1) + 1, PreviousAction * (y + 1) * 2 + (y + 1) * PreviousDirection, x, y));
 	}
 	
 }

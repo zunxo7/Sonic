@@ -13,7 +13,7 @@ public:
 
 	virtual ~EnemyFactory() {};
 
-	virtual void MovePattern() = 0;
-	
+	virtual void MovePattern(char** lvl, const int cell_size, float X) = 0;
+	virtual void Animate() = 0;
 };
 
