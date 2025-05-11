@@ -7,7 +7,7 @@ Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* k
     window = new RenderWindow(VideoMode(ScreenWidht, ScreenHeight), "Sonic the Hedgehog-OOP", Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(120);
-    CurrentLevel = 4;
+    CurrentLevel = 1;
 
     MyLevels = new Levels*[4];
 

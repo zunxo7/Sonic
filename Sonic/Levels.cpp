@@ -19,7 +19,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	HPBoostSprite.setTexture(HPBoostTex);
 	HPBoostSprite.setScale(2, 2);
 
-	CurrentLevel = 4;
 	string basePath = "Data/Levels/Level";
 	basePath += (char)('0' + CurrentLevel);
 	basePath += "/";
