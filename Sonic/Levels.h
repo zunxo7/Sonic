@@ -9,6 +9,7 @@ class Levels
 	float CellSize;
 	int CurrentLevel;
 	int MaxWidht;
+	bool AbilityUsed;
 
 	Font SonicFont;
 	Text ScoreText;
@@ -47,6 +48,7 @@ class Levels
 	Clock AnimationClock1;
 	Clock AnimationClock2;
 	Clock RingClock;
+	Clock AbilityClock;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);

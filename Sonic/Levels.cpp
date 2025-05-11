@@ -6,6 +6,8 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 		std::cout << "ERROR::GAME::INITFONTS::Failed to load font!" << std::endl;
 	}
 
+	AbilityUsed = false;
+
 	ScoreText.setFont(SonicFont);
 	ScoreText.setCharacterSize(50);
 	ScoreText.setPosition(5, 0);
@@ -50,7 +52,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Characters[0] = sonic;
 	Characters[1] = tails;
 	Characters[2] = knuckles;
-	CurrentPlayer = 0; // Sonic
+	CurrentPlayer = 2; // Sonic
 
 	switch (CurrentLevel) {
 	case 1:
@@ -120,6 +122,8 @@ void Levels::Update() {
 
 		if (Keyboard::isKeyPressed(Keyboard::Z) && SwitchClock.getElapsedTime().asSeconds() > 1) {
 				SwitchClock.restart();
+
+				AbilityUsed = false;
 			
 				CurrentPlayer++;
 
@@ -127,7 +131,15 @@ void Levels::Update() {
 					CurrentPlayer = 0;
 				}
 				
-			
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::E) && AbilityClock.getElapsedTime().asSeconds() > 1 * (CurrentPlayer == 2) + 5 * (CurrentPlayer == 1) && !AbilityUsed) {
+			AbilityClock.restart();
+			AbilityUsed = true;
+		}
+
+		if (AbilityUsed) {
+			Characters[CurrentPlayer]->UsedAbility(LvlGrid, CellSize, AbilityClock, AbilityUsed);
 		}
 
 
@@ -205,6 +217,13 @@ void Levels::Draw(RenderWindow* window) {
 				wallSprite.setTextureRect(IntRect(0, 0, CellSize, CellSize));
 				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
 				window->draw(wallSprite);
+			}
+			else if (LvlGrid[i][j] == 'B') {
+				wallSprite.setTexture(wallTex5);
+				wallSprite.setTextureRect(IntRect(64, 0, 64, 64));
+				wallSprite.setPosition(j * CellSize - Center, i * CellSize);
+				window->draw(wallSprite);
+				wallSprite.setTextureRect(IntRect(0, 0, 64, 64));
 			}
 			else if (LvlGrid[i][j] == 's') {
 				spikeSprite.setPosition(j * CellSize - Center, i * CellSize);

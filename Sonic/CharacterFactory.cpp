@@ -15,7 +15,7 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 
 	MaxSpeed = MSpeed;
 	OnGround = false;
-	Boosted = false;
+	Boosted = 0;
 	BoostTimer = 0;
 }
 
@@ -49,18 +49,18 @@ void CharacterFactory::ApplyGravity(char** lvl, const int cell_size)
 	char bottom_mid_down2 = lvl[(int)(offset_y + HitBoxY - 10) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
 	char bottom_right_down2 = lvl[(int)(offset_y + HitBoxY - 10) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
-	char WallCharac[6] = { 'w','p','q','e','b','\0' };
+	char WallCharac[7] = { 'w','p','q','e','b','B','\0' };
 
 	OnGround = false;
 	bool inGround = false;
 
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 6;i++) {
 		if ((bottom_left_down == WallCharac[i] || bottom_mid_down == WallCharac[i] || bottom_right_down == WallCharac[i])){
 			OnGround = true;
 		}
 	}
 
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 6;i++) {
 		if (bottom_left_down2 == WallCharac[i] || bottom_mid_down2 == WallCharac[i] || bottom_right_down2 == WallCharac[i]) {
 			inGround = true;
 		}
@@ -136,18 +136,18 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 	char bottom_right_down2 = lvl[(int)(YPosition + HitBoxY - 10) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
 
-	char WallCharac[6] = { 'w','p','q','e','b','\0' };
+	char WallCharac[7] = { 'w','p','q','e','b','B','\0' };
 
 	OnGround = false;
 	bool inGround = false;
 
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 6;i++) {
 		if (bottom_left_down2 == WallCharac[i] || bottom_mid_down2 == WallCharac[i] || bottom_right_down2 == WallCharac[i]) {
 			inGround = true;
 		}
 	}
 
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 6;i++) {
 		if ((bottom_left_down == WallCharac[i] || bottom_mid_down == WallCharac[i] || bottom_right_down == WallCharac[i]))
 		{
 			OnGround = true;
@@ -224,13 +224,13 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 
 	// Falling
 
-	char WallCharac[6] = { 'w','p','q','e','b','\0' };
+	char WallCharac[7] = { 'w','p','q','e','b','B','\0' };
 
 	char bottom_left_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 - HitBoxX / 4.0 - 10) / cell_size))];
 	char bottom_mid_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 + 10) / cell_size))];
 
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 6;i++) {
 		if ((bottom_left_down == WallCharac[i] && bottom_mid_down == ' ') && OnGround) {
 			ObjectAnimation.setAction(0, 6);
 		}
@@ -247,7 +247,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 	char MidUp = lvl[(int)(offset_y + HitBoxY / 4.0) / cell_size][(int)((XPosition + HitBoxX / 2.0) / cell_size)];
 	char RightUp = lvl[(int)(offset_y + HitBoxY / 4.0) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
-	char WallCharacUp[5] = { 'w','q','e','b','\0' };
+	char WallCharacUp[6] = { 'w','q','e','b','B','\0'};
 
 	for (int i = 0; i < 5;i++) {
 		if (LeftUp == WallCharacUp[i] || MidUp == WallCharacUp[i] || RightUp == WallCharacUp[i]) {
@@ -273,6 +273,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			ObjectAnimation.setAction(0, 5);
 			break;
@@ -290,6 +291,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			ObjectAnimation.setAction(0, 5);
 			break;
@@ -307,6 +309,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			break;
 		case 'o':
@@ -324,6 +327,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			ObjectAnimation.setAction(1, 5);
 			break;
@@ -341,6 +345,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			ObjectAnimation.setAction(1, 5);
 			break;
@@ -358,6 +363,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 		case 'q':
 		case 'e':
 		case 'b':
+		case 'B':
 			XSpeed = 0;
 			break;
 		case 'o':

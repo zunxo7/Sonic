@@ -6,6 +6,7 @@ class CharacterFactory : public Moveable
 protected:
 	float MaxSpeed;
 	bool OnGround;
+	bool IsFlying;
 	bool Boosted;
 	int BoostTimer;
 
@@ -22,6 +23,9 @@ protected:
 public:
 	CharacterFactory(int MSpeed);
 	virtual ~CharacterFactory() {}
+
+	virtual bool canFly() = 0;
+	virtual void UsedAbility(char** lvl, const int cell_size, Clock& AbilityClock, bool& AbilityUsed) = 0;
 
 	float getXPosition();
 	float getYPosition();
