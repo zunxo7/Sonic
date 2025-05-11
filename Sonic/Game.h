@@ -40,6 +40,5 @@ public:
     void pollEvents();
     void update();
     void Draw();
-
 };
 

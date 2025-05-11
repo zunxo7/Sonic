@@ -3,7 +3,10 @@
 Menu::Menu(){
 	BackgroundFrame = 0;
 	CurrentChoice = 1;
-	font.load("Data/CustomFont");
+	font.load();
+	font2.load();
+	font3.load();
+	font4.load();
 	MenuBackGroundTexture.loadFromFile("Data/Menu/Background.png");
 	MenuBackGroundSprite.setTexture(MenuBackGroundTexture);
 
@@ -69,23 +72,45 @@ void Menu::Draw(RenderWindow* window) {
 
 	for (int i = 0; i < 4; i++) {
 		MenuButtonSprite.setPosition(posX, posY[i]);
+
 		if (i + 1 == CurrentChoice) {
-			if (i + 1 == 4) {
-				MenuButtonSprite.setColor(Color(175, 20, 12));
-			}
-			else {
+			if (i == 0) {
 				MenuButtonSprite.setColor(Color(209, 144, 0));
+				font.setOutlineColor(Color(209, 144, 0));
+			}
+			else if (i == 1) {
+				MenuButtonSprite.setColor(Color(91, 204, 81));
+				font2.setOutlineColor(Color(53, 166, 43));
+			}
+			else if (i == 2) {
+				MenuButtonSprite.setColor(Color(203, 108, 230));
+				font3.setOutlineColor(Color(203, 108, 230));
+			}
+			else if (i == 3) {
+				MenuButtonSprite.setColor(Color(175, 20, 12));
+				font4.setOutlineColor(Color(175, 20, 12));
 			}
 		}
-		else
+		else {
 			MenuButtonSprite.setColor(Color(0, 71, 255));
+
+			if (i == 0)
+				font.setOutlineColor(Color(0, 71, 255));
+			else if (i == 1)
+				font2.setOutlineColor(Color(0, 71, 255));
+			else if (i == 2)
+				font3.setOutlineColor(Color(0, 71, 255));
+			else
+				font4.setOutlineColor(Color(0, 71, 255));
+		}
+
 		window->draw(MenuButtonSprite);
 	}
 
 	font.draw(window, "new game", 510, 338.5, 3, 15, 3.6);
-	font.draw(window, "options", 530, 456, 3, 15, 3.7);
-	font.draw(window, "continue", 512, 584, 3, 15, 3.7);
-	font.draw(window, "leaderboard", 476, 714, 3, 15, 3.4);
+	font2.draw(window, "options", 530, 456, 3, 15, 3.7);
+	font3.draw(window, "continue", 512, 584, 3, 15, 3.7);
+	font4.draw(window, "leaderboard", 476, 714, 3, 15, 3.4);
 
 	Color backgroundColor(22, 29, 28);
 	window->display();

@@ -13,9 +13,18 @@ using namespace std;
 
 class SoundBoard
 {
+	CustomFont font;
+
+	Texture MenuBackGroundTexture;
+	Sprite MenuBackGroundSprite;
+	Texture MenuForeGroundTexture;
+	Sprite MenuForeGroundSprite;
+	Texture MenuButtonTexture;
+	Sprite MenuButtonSprite;
 
 public:
+	SoundBoard();
 	void Update(bool& MusicOn, int& Volume);
-	void Draw(RenderWindow* window);
+	void Draw(RenderWindow* window, int& Volume);
 };
 

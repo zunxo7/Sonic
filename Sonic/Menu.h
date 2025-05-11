@@ -14,7 +14,7 @@ using namespace std;
 class Menu
 {
 	int CurrentChoice;
-	CustomFont font;
+	CustomFont font, font2, font3, font4;
 
 	Texture MenuBackGroundTexture;
 	Sprite MenuBackGroundSprite;

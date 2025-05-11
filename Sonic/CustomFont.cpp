@@ -50,11 +50,19 @@ void CustomFont::load(const string& folderPath) {
     underscoreOutline.loadFromFile(folderPath + "/Outline/__outline.png");
     FC[CharacterCount++] = { '_', underscore, underscoreOutline };
 
+    Texture plus, plusOutline;
+    plus.loadFromFile(folderPath + "/+.png");
+    plusOutline.loadFromFile(folderPath + "/Outline/+_outline.png");
+    FC[CharacterCount++] = { '+', plus, plusOutline };
+
 }
 
-void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor, Color TextColor) {
+void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor,float LineSpacing, Color TextColor) {
     float originalX = x;
-    float lineHeight = 20 * Scale;
+    float lineHeight = LineSpacing * Scale;
+    Color outline = (OutlineColor == Color(0, 71, 255)) ? currentOutlineColor : OutlineColor;
+    Color text = (TextColor == Color::White) ? currentTextColor : TextColor;
+
     for (int i = 0; i < Text.size(); ++i) {
         char c = Text[i];
         
@@ -81,7 +89,7 @@ void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y
                 outlineSprite.setTexture(outlineTex);
                 outlineSprite.setScale(Scale, Scale);
                 outlineSprite.setPosition(x, y);
-                outlineSprite.setColor(OutlineColor);
+                outlineSprite.setColor(outline);
                 window->draw(outlineSprite);
             }
 
@@ -89,7 +97,7 @@ void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y
             sprite.setTexture(tex);
             sprite.setScale(Scale, Scale);
             sprite.setPosition(x, y);
-            sprite.setColor(TextColor);
+            sprite.setColor(text);
             window->draw(sprite);
 
             x += tex.getSize().x * Scale + LetterSpacing;
@@ -97,3 +105,10 @@ void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y
     }
 }
 
+void CustomFont::setOutlineColor(Color color) {
+    currentOutlineColor = color;
+}
+
+void CustomFont::setTextColor(Color color) {
+    currentTextColor = color;
+}
