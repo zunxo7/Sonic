@@ -20,10 +20,11 @@ private:
     int ScreenWidht;
     int ScreenHeight;
     int GameState;
+    int CurrentLevel;
 
     Scoreboard MyScoreboard;
     Menu MyMenu;
-    Levels MyLevels;
+    Levels** MyLevels;
 
 public:
     Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* Clock);

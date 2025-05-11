@@ -30,6 +30,7 @@ public:
 
 	float getXPosition();
 	float getYPosition();
+	void Teleport(int X, int Y);
 
 	void ApplyGravity(char** lvl, const int cell_size);
 	void PlayerMove(char** lvl, const int cell_size, int MaxWidht);
@@ -37,7 +38,7 @@ public:
 	void MoveTo(char** lvl, const int cell_size,int X);
 	void Animate();
 
-	void CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock);
+	void CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock, int& CurrentLevel);
 	void SpikeCollisions(char** lvl, const int cell_size, Clock& InvincilibityClock);
 
 	void UpdatedScore(int Add = 0);

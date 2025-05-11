@@ -1,10 +1,12 @@
 #include "Levels.h"
+#include "Motobug.h"
 
-Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
+Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
 	font.load("Data/CustomFont");
 
 	AbilityUsed = false;
+	FirstSpawn = true;
 
 	LivesTex.loadFromFile("Data/Lives.png");
 	LivesSprite.setTexture(LivesTex);
@@ -17,7 +19,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	HPBoostSprite.setTexture(HPBoostTex);
 	HPBoostSprite.setScale(2, 2);
 
-	CurrentLevel = 3;
+	CurrentLevel = 4;
 	string basePath = "Data/Levels/Level";
 	basePath += (char)('0' + CurrentLevel);
 	basePath += "/";
@@ -51,13 +53,14 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Characters[0] = sonic;
 	Characters[1] = tails;
 	Characters[2] = knuckles;
-	CurrentPlayer = 2; // Sonic
+	CurrentPlayer = 0; // Sonic
 
 	Characters[CurrentPlayer]->UpdatedHP(GrandClock->getInvincilibityClock());
 
 	switch (CurrentLevel) {
 	case 1:
 		{
+
 			MaxWidht = 200;
 			const int Rows = 15;
 			char soniclevel[Rows][201] = {
@@ -179,7 +182,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w                 w",
+				"w        M        w",
 				"w    qqqqqqqqq    w",
 				"w                 w",
 				"w                 w",
@@ -199,6 +202,16 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				}
 			}
 
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						EnemyNum++;
+					}
+				}
+			}
+
+			Enemies = new EnemyFactory*[EnemyNum];
+
 			break;
 		}
 	}
@@ -210,11 +223,52 @@ Levels::~Levels() {
 	}
 	delete[] LvlGrid;
 	LvlGrid = nullptr;
+
+	delete[] Characters;
+	Characters = nullptr;
+
+	delete[] Enemies;
+	Enemies = nullptr;
 }
 
-void Levels::Update() {
+void Levels::Update(int& CurrentLevel) {
+
+	if (FirstSpawn) {
+		switch (CurrentLevel) {
+			case 1:
+				for (int i = 0; i < CharactersSize;i++) {
+					Characters[i]->Teleport(1, 10);
+				}
+			break;
+			case 2:
+				for (int i = 0; i < CharactersSize;i++) {
+					Characters[i]->Teleport(2, 10);
+				}
+			break;
+			case 3:
+				for (int i = 0; i < CharactersSize;i++) {
+					Characters[i]->Teleport(7, 11);
+				}
+			break;
+			case 4:
+				for (int i = 0; i < CharactersSize;i++) {
+					Characters[i]->Teleport(9, 6);
+				}
+			break;
+		}
+		FirstSpawn = false;
+	}
+
 	if (GrandClock->getPlayerClock().getElapsedTime().asMilliseconds() >= 25) {
 		GrandClock->getPlayerClock().restart();
+
+		for (int i = 0; i < EnemyNum;i++) { // Enemies
+			Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+		}
+
+
+
+
 		for (int i = 0; i < CharactersSize;i++) { // Characters
 			Characters[i]->ApplyGravity(LvlGrid,CellSize);
 			if (i == CurrentPlayer) {
@@ -255,7 +309,7 @@ void Levels::Update() {
 
 
 		for (int i = 0; i < CharactersSize;i++) {
-			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, GrandClock->getRingClock());
+			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, GrandClock->getRingClock(), CurrentLevel);
 		}
 
 		Characters[CurrentPlayer]->SpikeCollisions(LvlGrid, CellSize, GrandClock->getInvincilibityClock());
@@ -264,6 +318,9 @@ void Levels::Update() {
 			GrandClock->getAnimationClock1().restart();
 			for (int i = 0; i < CharactersSize;i++) {
 				Characters[i]->Animate();
+			}
+			for (int i = 0; i < EnemyNum;i++) {
+				Enemies[i]->Animate();
 			}
 		}
 
@@ -404,6 +461,10 @@ void Levels::Draw(RenderWindow* window) {
 				window->draw(SignPostSprite);
 			}
 		}
+	}
+
+	for (int i = 0; i < EnemyNum;i++) { // Enemies
+		Enemies[i]->DrawMoveable(window, Center);
 	}
 
 	for (int i = 0; i < CharactersSize;i++) { // Characters

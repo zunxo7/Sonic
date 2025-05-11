@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterFactory.h"
+#include "EnemyFactory.h"
 #include "CustomFont.h"
 #include "Time.h"
 
@@ -8,9 +9,9 @@ class Levels
 
 	char** LvlGrid;
 	float CellSize;
-	int CurrentLevel;
 	int MaxWidht;
 	bool AbilityUsed;
+	bool FirstSpawn;
 	TClass * GrandClock;
 
 	CustomFont font;
@@ -48,11 +49,14 @@ class Levels
 	CharacterFactory** Characters;
 	int CurrentPlayer;
 
+	int EnemyNum;
+	EnemyFactory** Enemies;
+
 public:
-	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock);
+	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock, int CurrentLevel);
 	~Levels();
 
-	void Update();
+	void Update(int& CurrentLevel);
 	void Draw(RenderWindow* window);
 };
 
