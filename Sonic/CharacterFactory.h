@@ -21,6 +21,11 @@ protected:
 	static int Rings;
 	static int Score;
 
+	SoundBuffer jumpBuffer;
+	SoundBuffer ringBuffer;
+	Sound jumpSound;
+	Sound ringSound;
+
 public:
 	CharacterFactory(int MSpeed);
 	virtual ~CharacterFactory() {}
