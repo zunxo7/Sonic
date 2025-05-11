@@ -1,17 +1,11 @@
 #pragma once
-#include "Moveable.h"
+#include "Enemy.h"
 
-class EnemyFactory : public Moveable
+
+class EnemyFactory
 {
-	int SpawnX;
-	int SpwanY;
-	int HP;
-
+	Enemy** MyEnemies;
 public:
-
-	virtual ~EnemyFactory() {};
-
-	virtual void MovePattern() = 0;
 	
 };
 

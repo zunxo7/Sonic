@@ -61,9 +61,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	Crystal2UTex.loadFromFile(basePath + "crystal2.png");
 	Crystal2DTex.loadFromFile(basePath + "crystal2d.png");
 
-	levelBackGroundTexture.loadFromFile(basePath + "bg1.png");
-	levelBackGroundSprite.setTexture(levelBackGroundTexture);
-
 	CellSize = 64;
 
 	Characters[0] = sonic;
@@ -75,9 +72,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 	switch (CurrentLevel) {
 	case 1:
-
-		levelBackGroundTexture.loadFromFile("Data/Levels/Level1/bg1.png");
-		levelBackGroundSprite.setTexture(levelBackGroundTexture);
+	{
 
 		MaxWidht = 200;
 		char soniclevel[14][201] = {
@@ -98,51 +93,54 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
 		};
 
-			LvlGrid = new char* [14];
-			for (int i = 0; i < 14; ++i) {
-				LvlGrid[i] = new char[MaxWidht];
-			}
-
-			for (int i = 0; i < 14; ++i) {
-				for (int j = 0; j < MaxWidht; ++j) {
-					LvlGrid[i][j] = soniclevel[i][j];
-				}
-			}
-			break;
+		LvlGrid = new char* [14];
+		for (int i = 0; i < 14; ++i) {
+			LvlGrid[i] = new char[MaxWidht];
 		}
+
+		for (int i = 0; i < 14; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				LvlGrid[i][j] = soniclevel[i][j];
+			}
+		}
+		break;
+	}
+		
 	case 2: 
-		{
-			MaxWidht = 250;
-			char soniclevel2[14][250] = {
+	{
 
-				"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-				"qeqweqwqeqweqwwbqeqwe eqbqqweqbqqweweeqeeweqeeqwbebw    wqwewbwqqr    wbqwbewbwwwbwqqwwqw c eqwe c eqbqqweweeqeeweqeeqwbebwqwqwewbwqqr wbqwbewbwwwbwqqwwqwwwwqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebb      wwqwqebb      qqqewebw   qqqeww",
-				"wwbeq c wbew  e  wbe   wbe     wbeq c wbew  e  wbe          ebqebb       bwbwwqqr wbqqweqw   qqweq    wbeq  wbew  e  wbewwqqr wbqqweqw      e       w                q        ewebw    ewebw      ewebw     ewebw           ewebw        ewebw     ewebww",
-				"wq c    r e      r      r        c    r e      r             b  r          qwbc     eqwb      qqwq      c    r e      r    qwb  qwbqbb                                           r       c          r         c                           eeq        qeew",
-				"q                                                           b               e         e        w                                                                                                                                                       qw",
-				"w                                                          b                                                             oC                             o   p     o                                                                                     w",
-				"w                         o                                b                                                         oo  peqwwbqwwq                     p    R    p                                                   wwqwq                             w",
-				"w               soo   o   p                         o   ooob                                                         bb   wqweewqwqe                 o       bbb      o                                            wqqwwqwwww                           w",
-				"q         soo   ppp   p       ooo              o    p   pppp                                                  s   ooo       webqwooww     C R        p       qoow     p                            oo            qwwq c   wwq R                         w",
-				"w     o   ppp                 ppp    o     o   p               C o       ooo        R  C   R   C            wwe   ppp       qweweooob    ebbbe     o          wqw       o     oo  s oo soos  ooo   pp       wqqwwqwww     qqwqeq pwp     ss             w",
-				"w     p            bbb               p     p                   ppp       ppp      bbbbwqwqbbbbwqbq       qew  b             qwqwwoob   ew   we     p                    p     pp pp pp pppp  ppp           qewee  c             b   qwwqqqwqqqe         w",
-				"w                  qooq                                                         eeewqwqeeewqeqwqqwqe    wewooob             weweeoob  ew     wee                          C                               qqwqeq                b              b        w",
-				"wwqqwssssssssssssssesosqsssssssssssssssssssssssssssssssssssssssssssssssssssssssqweewqwqewqeweweewqewqqwwqq ooob  sssssssssssseweweeewwwssssssswwwsssssssssssssssssssssssspppssssssssssssssssssssssssssssswbqqweqw  C   f        b              b   ssss w",
-				"wwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-			};
+		MaxWidht = 250;
+		char soniclevel2[14][250] = {
 
-			LvlGrid = new char* [14];
-			for (int i = 0; i < 14; ++i) {
-				LvlGrid[i] = new char[MaxWidht];
-			}
+			"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"qeqweqwqeqweqwwbqeqwe eqbqqweqbqqweweeqeeweqeeqwbebw    wqwewbwqqr    wbqwbewbwwwbwqqwwqw c eqwe c eqbqqweweeqeeweqeeqwbebwqwqwewbwqqr wbqwbewbwwwbwqqwwqwwwwqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebb      wwqwqebb      qqqewebw   qqqeww",
+			"wwbeq c wbew  e  wbe   wbe     wbeq c wbew  e  wbe          ebqebb       bwbwwqqr wbqqweqw   qqweq    wbeq  wbew  e  wbewwqqr wbqqweqw      e       w                q        ewebw    ewebw      ewebw     ewebw           ewebw        ewebw     ewebww",
+			"wq c    r e      r      r        c    r e      r             b  r          qwbc     eqwb      qqwq      c    r e      r    qwb  qwbqbb                                           r       c          r         c                           eeq        qeew",
+			"q                                                           b               e         e        w                                                                                                                                                       qw",
+			"w                                                          b                                                             oC                             o   p     o                                                                                     w",
+			"w                         o                                b                                                         oo  peqwwbqwwq                     p    R    p                                                   wwqwq                             w",
+			"w               soo   o   p                         o   ooob                                                         bb   wqweewqwqe                 o       bbb      o                                            wqqwwqwwww                           w",
+			"q         soo   ppp   p       ooo              o    p   pppp                                                  s   ooo       webqwooww     C R        p       qoow     p                            oo            qwwq c   wwq R                         w",
+			"w     o   ppp                 ppp    o     o   p               C o       ooo        R  C   R   C            wwe   ppp       qweweooob    ebbbe     o          wqw       o     oo  s oo soos  ooo   pp       wqqwwqwww     qqwqeq pwp     ss             w",
+			"w     p            bbb               p     p                   ppp       ppp      bbbbwqwqbbbbwqbq       qew  b             qwqwwoob   ew   we     p                    p     pp pp pp pppp  ppp           qewee  c             b   qwwqqqwqqqe         w",
+			"w                  qooq                                                         eeewqwqeeewqeqwqqwqe    wewooob             weweeoob  ew     wee                          C                               qqwqeq                b              b        w",
+			"wwqqwssssssssssssssesosqsssssssssssssssssssssssssssssssssssssssssssssssssssssssqweewqwqewqeweweewqewqqwwqq ooob  sssssssssssseweweeewwwssssssswwwsssssssssssssssssssssssspppssssssssssssssssssssssssssssswbqqweqw  C   f        b              b   ssss w",
+			"wwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+		};
 
-			for (int i = 0; i < 14; ++i) {
-				for (int j = 0; j < MaxWidht; ++j) {
-					LvlGrid[i][j] = soniclevel2[i][j];
-				}
-			}
-			break;
+		LvlGrid = new char* [14];
+		for (int i = 0; i < 14; ++i) {
+			LvlGrid[i] = new char[MaxWidht];
 		}
+
+		for (int i = 0; i < 14; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				LvlGrid[i][j] = soniclevel2[i][j];
+			}
+		}
+		break;
+
+	}
 	}
 }
 
