@@ -34,6 +34,14 @@ void CharacterFactory::Teleport(int X, int Y) {
 	YPosition = Y * 64;
 }
 
+void setGravity(float grav) {
+	float CharacterFactory::Gravity = grav;
+}
+
+void setFriction(float Fric) {
+	float CharacterFactory::Friction = Fric;
+}
+
 float CharacterFactory::Gravity = 1;
 float CharacterFactory::TerminalVelocity = 20;
 float CharacterFactory::Acceleration = 0.5;
@@ -167,6 +175,15 @@ void CharacterFactory::Jump(char** lvl, const int cell_size) {
 }
 
 void CharacterFactory::MoveTo(char** lvl, const int cell_size, int X) {
+
+	if (X - XPosition > 10 * cell_size) {
+		for (int i = 13; i > 0; i--) {
+			if (lvl[i][(int)((X + HitBoxX) / cell_size - 10)] == ' ' && lvl[i + 1][(int)((X + HitBoxX) / cell_size - 10)] == ' ') {
+				Teleport((int)((X + HitBoxX) / cell_size - 10), i);
+			}
+		}
+	}
+
 	if (X < XPosition - HitBoxX) {
 		XSpeed -= Acceleration;
 		ObjectAnimation.setAction(1, 1);

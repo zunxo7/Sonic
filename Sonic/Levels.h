@@ -56,7 +56,7 @@ public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock, int CurrentLevel);
 	~Levels();
 
-	void Update(int& CurrentLevel);
+	void Update(int& CurrentLevel, Music& lvlMus, int Volume, bool MusicOn);
 	void Draw(RenderWindow* window);
 };
 

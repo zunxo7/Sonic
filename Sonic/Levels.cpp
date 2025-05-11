@@ -240,28 +240,68 @@ Levels::~Levels() {
 	Enemies = nullptr;
 }
 
-void Levels::Update(int& CurrentLevel) {
+void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 
 	if (FirstSpawn) {
 		switch (CurrentLevel) {
 			case 1:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(1, 10);
+					lvlMus.openFromFile("Data/Sounds/level1.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(2);
+
 				}
 			break;
 			case 2:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(2, 10);
+					lvlMus.openFromFile("Data/Sounds/level2.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(1);
 				}
 			break;
 			case 3:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(7, 11);
+					lvlMus.openFromFile("Data/Sounds/level3.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(0.5);
+					Characters[CurrentPlayer]->setFriction(2);
 				}
 			break;
 			case 4:
 				for (int i = 0; i < CharactersSize;i++) {
 					Characters[i]->Teleport(9, 6);
+					lvlMus.openFromFile("Data/Sounds/level4.ogg");
+					lvlMus.setVolume(Volume);
+					lvlMus.play();
+					lvlMus.setLoop(true);
+					if (!MusicOn) {
+						lvlMus.stop();
+					}
+
+					Characters[CurrentPlayer]->setGravity(1);
+					Characters[CurrentPlayer]->setFriction(2);
 				}
 			break;
 		}

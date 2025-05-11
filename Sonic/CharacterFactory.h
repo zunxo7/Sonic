@@ -32,6 +32,9 @@ public:
 	float getYPosition();
 	void Teleport(int X, int Y);
 
+	void setGravity(float grav);
+	void setFriction(float Fric);
+
 	void ApplyGravity(char** lvl, const int cell_size);
 	void PlayerMove(char** lvl, const int cell_size, int MaxWidht);
 	void Jump(char** lvl, const int cell_size);
