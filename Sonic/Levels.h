@@ -12,6 +12,8 @@ class Levels
 
 	Font SonicFont;
 	Text ScoreText;
+	Text RingText;
+	Text HpText;
 
 	Texture levelBackGroundTexture;
 	Sprite levelBackGroundSprite;
@@ -30,6 +32,8 @@ class Levels
 	Sprite spikeSprite;
 	Texture ringTex;
 	Sprite ringSprite;
+	Texture LivesTex;
+	Sprite LivesSprite;
 	int CurrentRing;
 
 	int CollectiablesSize;
@@ -42,6 +46,7 @@ class Levels
 	Clock SwitchClock;
 	Clock AnimationClock1;
 	Clock AnimationClock2;
+	Clock RingClock;
 
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);

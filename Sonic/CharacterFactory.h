@@ -32,8 +32,10 @@ public:
 	void MoveTo(char** lvl, const int cell_size,int X);
 	void Animate();
 
-	void CheckCollisionGrid(char** lvl, const int cell_size);
-	void UpdatedScore(Text ScoreText,int Score);
+	void CheckCollisionGrid(char** lvl, const int cell_size, Clock& RingClock);
+	void UpdatedScore(Text& ScoreText,int Add = 0);
+	void UpdatedRings(Text& RingText, int Add = 0);
+	void UpdatedHP(Text& HpText, int Add = 0);
 
 	void Update();
 

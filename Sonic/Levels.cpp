@@ -7,9 +7,22 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	}
 
 	ScoreText.setFont(SonicFont);
-	ScoreText.setCharacterSize(30);
-	ScoreText.setPosition(0, 64);
-	ScoreText.setString("Score: 0");
+	ScoreText.setCharacterSize(50);
+	ScoreText.setPosition(5, 0);
+	ScoreText.setString("0");
+
+	RingText.setFont(SonicFont);
+	RingText.setCharacterSize(30);
+	RingText.setPosition(32 + 10, 64 - 5);
+	RingText.setString("0");
+
+	HpText.setFont(SonicFont);
+	HpText.setCharacterSize(30);
+	HpText.setPosition(32 + 10, 64 + 32 - 5);
+	HpText.setString("0");
+
+	LivesTex.loadFromFile("Data/Lives.png");
+	LivesSprite.setTexture(LivesTex);
 
 	CurrentLevel = 1;
 	string basePath = "Data/Levels/Level";
@@ -25,7 +38,6 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 	spikeSprite.setTexture(spikeTex);
 	ringTex.loadFromFile("Data/ring.png");
 	ringSprite.setTexture(ringTex);
-	ringSprite.setScale(3, 3);
 	CurrentRing = 0;
 
 	Crystal1UTex.loadFromFile(basePath + "crystal1.png");
@@ -120,7 +132,7 @@ void Levels::Update() {
 
 
 		for (int i = 0; i < CharactersSize;i++) {
-			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize);
+			Characters[i]->CheckCollisionGrid(LvlGrid, CellSize, RingClock);
 		}
 
 		if (AnimationClock1.getElapsedTime().asMilliseconds() >= 100) {
@@ -133,7 +145,7 @@ void Levels::Update() {
 		if (AnimationClock2.getElapsedTime().asMilliseconds() >= 150) {
 			AnimationClock2.restart();
 
-			ringSprite.setTextureRect(IntRect(CurrentRing * 16, 0, 16, 16));
+			ringSprite.setTextureRect(IntRect(CurrentRing * 17, 0, 15, 16));
 			CurrentRing++;
 			if (CurrentRing >= 4) {
 				CurrentRing = 0;
@@ -143,6 +155,10 @@ void Levels::Update() {
 		for (int i = 0; i < CharactersSize;i++) { // Characters Update
 			Characters[i]->Update();
 		}
+
+		Characters[CurrentPlayer]->UpdatedScore(ScoreText);
+		Characters[CurrentPlayer]->UpdatedRings(RingText);
+		Characters[CurrentPlayer]->UpdatedHP(HpText);
 	}
 }
 
@@ -195,6 +211,7 @@ void Levels::Draw(RenderWindow* window) {
 				window->draw(spikeSprite);
 			}
 			else if (LvlGrid[i][j] == 'o') {
+				ringSprite.setScale(3, 3);
 				ringSprite.setPosition(j * CellSize - Center + 8, i * CellSize + 8);
 				window->draw(ringSprite);
 			}
@@ -225,7 +242,19 @@ void Levels::Draw(RenderWindow* window) {
 		Characters[i]->DrawMoveable(window, Center);
 	}
 
+
+	LivesSprite.setTextureRect(IntRect(24 * CurrentPlayer,0,24,24));
+	ringSprite.setScale(1.5, 1.5);
+	LivesSprite.setPosition(5, CellSize + 32 + 5);
+	window->draw(LivesSprite);
+
+	ringSprite.setScale(2, 2);
+	ringSprite.setPosition(0,CellSize);
+	window->draw(ringSprite);
+
 	window->draw(ScoreText);
+	window->draw(RingText);
+	window->draw(HpText);
 
 	window->display();
 	window->clear();
