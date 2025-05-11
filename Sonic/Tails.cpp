@@ -9,3 +9,11 @@ Tails::Tails() : CharacterFactory(10) {
 	ObjectSprite.setTextureRect(IntRect(0, 0, 48, 48));
 	ObjectSprite.setScale(Scale, Scale);
 }
+
+bool Tails::canFly() {
+	return true;
+}
+
+void Tails::UsedAbility(char** lvl, const int cell_size, Clock& AbilityClock, bool& AbilityUsed) {
+
+}

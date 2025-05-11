@@ -7,3 +7,9 @@ Sonic::Sonic(): CharacterFactory(18) {
 	ObjectSprite.setTextureRect(IntRect(0, 0, 48, 48));
 	ObjectSprite.setScale(Scale, Scale);
 }
+
+bool Sonic::canFly() {
+	return false;
+}
+
+void Sonic::UsedAbility(char** lvl, const int cell_size, Clock& AbilityClock, bool& AbilityUsed) {}

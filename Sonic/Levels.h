@@ -1,6 +1,6 @@
 #pragma once
 #include "CharacterFactory.h"
-#include "Collectiables.h"
+#include "Time.h"
 
 class Levels
 {
@@ -9,9 +9,13 @@ class Levels
 	float CellSize;
 	int CurrentLevel;
 	int MaxWidht;
+	bool AbilityUsed;
+	TClass * GrandClock;
 
 	Font SonicFont;
 	Text ScoreText;
+	Text RingText;
+	Text HpText;
 
 	Texture levelBackGroundTexture;
 	Sprite levelBackGroundSprite;
@@ -30,21 +34,23 @@ class Levels
 	Sprite spikeSprite;
 	Texture ringTex;
 	Sprite ringSprite;
+	Texture LivesTex;
+	Sprite LivesSprite;
+	Texture SignPostTex;
+	Sprite SignPostSprite;
+	Texture BoostTex;
+	Sprite BoostSprite;
+	Texture HPBoostTex;
+	Sprite HPBoostSprite;
 	int CurrentRing;
-
-	int CollectiablesSize;
-	Collectiables** PtrCollectiables;
+	int CurrentSign;
 
 	const int CharactersSize;
 	CharacterFactory** Characters;
 	int CurrentPlayer;
-	Clock PlayerClock;
-	Clock SwitchClock;
-	Clock AnimationClock1;
-	Clock AnimationClock2;
 
 public:
-	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);
+	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock);
 	~Levels();
 
 	void Update();

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles) : MyLevels(sonic, tails, knuckles), MyMenu() {
+Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* Clock) : MyLevels(sonic, tails, knuckles, Clock), MyMenu() {
     ScreenWidht = 1200;
     ScreenHeight = 900;
     GameState = 0;

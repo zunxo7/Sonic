@@ -26,7 +26,7 @@ private:
     Levels MyLevels;
 
 public:
-    Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles);
+    Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* Clock);
     ~Game();
 
     const bool running() const;

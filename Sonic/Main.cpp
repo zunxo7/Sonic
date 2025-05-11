@@ -37,8 +37,9 @@ int main()
 	Sonic MySonic;
 	Tails MyTails;
 	Knuckles MyKnucles;
+	TClass MyClock;
 
-	Game MyGame(&MySonic, &MyTails, &MyKnucles);
+	Game MyGame(&MySonic, &MyTails, &MyKnucles, &MyClock);
 
 	while (MyGame.running()) {
 		MyGame.update();
