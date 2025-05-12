@@ -35,11 +35,11 @@ void CrabMeat::MovePattern(char** lvl, const int cell_size, float X, float Y) {
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY + 1) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
 
-	if ( (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ') && XPosition < (SpawnX - 2) * 64) {
+	if ( (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ') && XPosition > (SpawnX - 2) * 64) {
 		XSpeed = -2;
 		ObjectAnimation.setAction(1, 0);
 	}
-	else if ( (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ') && XPosition > (SpawnX + 2) * 64) {
+	else if ( (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ') && XPosition < (SpawnX + 2) * 64) {
 		XSpeed = 2;
 		ObjectAnimation.setAction(0, 0);
 	}

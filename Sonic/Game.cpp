@@ -87,6 +87,9 @@ void Game::update() {
 
 void Game::Draw() {
 
+    if (CurrentLevel > 4) {
+        GameState = 5;
+    }
 
     switch (GameState) {
     case 1:

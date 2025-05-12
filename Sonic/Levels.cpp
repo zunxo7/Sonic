@@ -8,7 +8,7 @@
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock), MaxChars(20), NameArray(new char[MaxChars]) {
 
 	font.load("Data/CustomFont");
-	ScoreFont.loadFromFile("ScoreFont.ttf");
+	ScoreFont.loadFromFile("Data/Fonts/ScoreFont.ttf");
 
 	AbilityUsed = false;
 	FirstSpawn = true;
@@ -71,18 +71,18 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 				"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 				"qeqweqwqeqweqwwbqeqwe       eqbqqweweeqeeweqeeqwbebw          wqwewbwqqr wbqwbewbwwwbwqqwwqw c eqwe c eewbwwwb wqwewbwqqr wbqwbewbwwwbwqqwwqw  wqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebbw",
-				"wwbeq c wbew  e  wbe         wqwwebqwwqweoobwb   er              ebqebb   bwbwwqqr wbqqweqw     eq     e         ebqebb   bwbwwqqr wbqqweqw       ebqebbbwbwwqqeqeweqqwewqwq C wwqe  wqwq     wq    qwqw",
+				"wwbeq c wbew  e  wbe         wqwwebqwwqweoobwb   er        T     ebqebb   bwbwwqqr wbqqweqw     eq     e         ebqebb   bwbwwqqr wbqqweqw       ebqebbbwbwwqqeqeweqqwewqwq C wwqe  wqwq     wq    qwqw",
 				"wq c    r e      r              qwe      ooee             o       qwbC eqwbqbb qqwq  eqr        r                  qwbC  qwbqbb qqwq  eqr             bwbwwqqwwbqqweqwqbbwbwwqqeqe ew     wqwq  C   R  w",
-				"q                                qw       uwe          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                                       bwbwwqqeqew R ebbbwbwwqqeqww",
-				"w                   oC                 o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
-				"w               oo  peqwwbqwwq         p            p   R    p         ew     qewe	             o                                             so                                    wweqw        weq   w",
+				"q                                qw       uwe          o  p         ewbwbqw wbC eq   c                               qwbq eqw  qw   q                          O            bwbwwqqeqew R ebbbwbwwqqeqww",
+				"w                   oC    M            o  we        o  p     o       qewee   eewbw                                                                                             ebbbwbwwqqeweq  qeweqq  w",
+				"w               oo  peqwwbqwwq         p            p   R    p         ew     qewe	             o                                             so         M                          wweqw        weq   w",
 				"w               bb   wqweewowqe                  o     bbb      o              r e           o  p     o                                 oo    pp       wqqwwqw                                         w",
 				"q       s   ooo       webqwooww     C R          p     quob     p                         o  p     o  p                                 pp          qwbqeqwbqbbqqwq                                    w",
 				"w     wwe   ppp       qweweooob    ebbbe      o         wqb        o                      p        p      wbb      oo  s oo soos  ooo            wqqwwqwwwoooboqqwqeq                       oo         w",
 				"w   qew  b             qwqwwoob   ew   we     p            qq      p                o                    qooob     pp pp pp pppp  ppp          qewee  c      booc oweb     oo    oo   oo    pp         w",
 				"w  wewooob             weweeoob  ew     wee                                         p                   wwooob                                 qqwqeq o o o obooooooob     pp    pp   pp               w",
-				"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C                    sssssssssss   eqooob   ssssssssssssssssssssssssssssswbqqweqw  C R hbooC ooob  sssssssssssssssssssssssss   f  w",
-				"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbwwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+				"wwwqq ooob  sssssssssssseweweeewwwssssssswwwssssssssssssssssssssssss C        M    A      sssssssssss   eqooob   ssssssssssssssssssssssssssssswbqqweqw  C R hbooC ooob  sssssssssssssssssssssssss   f  w",
+				"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww     wwbbwwbbwwbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 				"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 			};
 
@@ -97,6 +97,38 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				}
 			}
 
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M' || LvlGrid[i][j] == 'A' || LvlGrid[i][j] == 'O' || LvlGrid[i][j] == 'T' || LvlGrid[i][j] == 'E') {
+						EnemyNum++;
+					}
+				}
+			}
+
+			Enemies = new EnemyFactory * [EnemyNum];
+
+			int Count = 0;
+
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						Enemies[Count++] = new Motobug(j, i);
+					}
+					if (LvlGrid[i][j] == 'E') {
+						Enemies[Count++] = new Boss(j, i);
+					}
+					if (LvlGrid[i][j] == 'A') {
+						Enemies[Count++] = new CrabMeat(j, i);
+					}
+					if (LvlGrid[i][j] == 'O') {
+						Enemies[Count++] = new BeeBot(j, i);
+					}
+					if (LvlGrid[i][j] == 'T') {
+						Enemies[Count++] = new BatBrain(j, i);
+					}
+				}
+			}
+
 			break;
 		}
 	case 2: 
@@ -108,16 +140,16 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 				"qeqweqwqeqweqwwbqeqwe eqbqqweqbqqweweeqeeweqeeqwbebw    wqwewbwqqr    wbqwbewbwwwbwqqwwqw c eqwe c eqbqqweweeqeeweqeeqwbebwqwqwewbwqqr wbqwbewbwwwbwqqwwqwwwwqqwwqwebqebbqewebwbwwqqbbqewebqqweqwqbwqqbbqew wwqwqebb      wwqwqebb      qqqewebw   qqqewww",
 				"wwbeq c wbew  e  wbe   wbe     wbeq c wbew  e  wbe          ebqebb       bwbwwqqr wbqqweqw   qqweq    wbeq  wbew  e  wbewwqqr wbqqweqw      e       w                q        ewebw    ewebw      ewebw     ewebw           ewebw        ewebw     ewebwww",
-				"wq c    r e      r      r        c    r e      r             b  r          qwbc     eqwb      qqwq      c    r e      r    qwb  qwbqbb                                           r       c          r         c                           eeq        qeeww",
-				"q                                                           b               e         e        w                                                                                                                                                       qww",
-				"w                                                          b                                                             oC                             o   p     o                                                                                      w",
+				"wq c    r e      r      r        c    r e      r             b  r          qwbc     eqwb      qqwq      c    r e      r    qwb  qwbqbb                     T                     r       c          r         c                           eeq        qeeww",
+				"q                                                           b         T     e         e        w                                                                                                                                                       qww",
+				"w                                                          b                                                             oC    A                        o   p     o                                                                                      w",
 				"w                         o                                b                                                         oo  peqwwbqwwq                     p    R    p                                                   wwqwq                              w",
 				"w               soo   o   p                         o   ooob                                                         bb   wqweewqwqe                 o       bbb      o                                            wqqwwqwwww                            w",
 				"q         soo   ppp   p       ooo              o    p   pppp                                                  s   ooo       webqwooww     C R        p       qoob     p                            oo            qwwq c   wwq R                          w",
 				"w     o   ppp                 ppp    o     o   p               C o       ooo        R  C   R   C            wwe   ppp       qweweooob    ebbbe     o          wqb       o     oo  s oo soos  ooo   pp       wqqwwqwww     qqwqeq pwp     ss              w",
 				"w     p            bbb               p     p                   ppp       ppp      bbbbwqwqbbbbwqbq       qew  b             qwqwwoob   ew   we     p             qq     p     pp pp pp pppp  ppp           qewee  c             b   qwwqqqwqqqe          w",
 				"w                  qooq                                                         eeewqwqeeewqeqwqqwqe    wewooob             weweeoob  ew     wee                          C                               qqwqeq                b              b         w",
-				"wwqqwssssssssssssssesosqsssssssssssssssssssssssssssssssssssssssssssssssssssssssqweewqwqewqeweweewqewqqwwqq ooob  sssssssssssseweweeewwwssssssswwwsssssssssssssssssssssssspppssssssssssssssssssssssssssssswbqqweqw  C   f        b              b   ssss  w",
+				"wwqqwssssssssssssssesosqsssssssssssssssssssssssssssssssssssssssssssssssssssssssqweewqwqewqeweweewqewqqwwqq ooob  sssssssssssseweweeewwwssssssswwwsssssssssssssssssssssssspppssssssssssssssssssssssssssssswbqqweqw  C   f        b        M     b   ssss  w",
 				"wwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 				"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 			};
@@ -133,6 +165,38 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				}
 			}
 
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M' || LvlGrid[i][j] == 'A' || LvlGrid[i][j] == 'O' || LvlGrid[i][j] == 'T' || LvlGrid[i][j] == 'E') {
+						EnemyNum++;
+					}
+				}
+			}
+
+			Enemies = new EnemyFactory * [EnemyNum];
+
+			int Count = 0;
+
+			for (int i = 0; i < Rows; ++i) {
+				for (int j = 0; j < MaxWidht; ++j) {
+					if (LvlGrid[i][j] == 'M') {
+						Enemies[Count++] = new Motobug(j, i);
+					}
+					if (LvlGrid[i][j] == 'E') {
+						Enemies[Count++] = new Boss(j, i);
+					}
+					if (LvlGrid[i][j] == 'A') {
+						Enemies[Count++] = new CrabMeat(j, i);
+					}
+					if (LvlGrid[i][j] == 'O') {
+						Enemies[Count++] = new BeeBot(j, i);
+					}
+					if (LvlGrid[i][j] == 'T') {
+						Enemies[Count++] = new BatBrain(j, i);
+					}
+				}
+			}
+
 			break;
 		}
 	case 3:
@@ -143,18 +207,18 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 
 			"wwwwqwwqwwwwwwwqwwwwwwwwqwwwwewwwwwwwwwwwwwwwwwwwwwwwbwwwwwwwwwwqwwewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 			"qeqweqwqeqw                           qweqwqeqw  C    C  qweqwqeqw                                                                                                                                       qwwqqwwqwqoouoo          qwqwqwwqqwqwqwqwooooooooeqwwqeewqqqqeq      r     c                eqwwqew",
-			"weqweq C                                qweqw              qweqw                 r     c     c                                                                                                                qwwqqooooo           ooooooooooooooooooooooooewqwqewqeqqq                             eqwwqeww",
-			"weq                                      eqq                eqq        qpppwwqeeqweeqwqeqeeeqwwqw                                                          r  c  r                                               qwwqqwwqwq        oooooooooooooooooooooooooooooewqewq                               eqwwqew",
-			"q               oooo                      R                  C               eeqwwqw             b                                                    qwwqqwwqwqqwwqqwwqwq  oooo                                   qwwqqwwqwq      qwwqqwqwewqwqeewqweqeqwwqeeqewqwwq                                  ewwew",
+			"weqweq C                                qweqw              qweqw            M    r     c     c                                                                                                                qwwqqooooo           ooooooooooooooooooooooooewqwqewqeqqq                         O   eqwwqeww",
+			"weq                                      eqq                eqq        qpppwwqeeqweeqwqeqeeeqwwqw                                                          r  c  r    A                                          qwwqqwwqwq        oooooooooooooooooooooooooooooewqewq                               eqwwqew",
+			"q               oooo                      R                  C               eeqwwqw             b                          T                         qwwqqwwqwqqwwqqwwqwq  oooo                      T            qwwqqwwqwq      qwwqqwqwewqwqeewqweqeqwwqeeqewqwwq                                  ewwew",
 			"w               pppp    ooos                                                 wqwww               b                                                 qwwqqwwqwq               pppp                                  qwwqqwwqwqeepppppp                                                                       w",
 			"w                       pppp                                                 qqewqq  s    qqqwwqeqwq                                          ooqwwqqwwqwq                        oooo                                                                                                                     w",
 			"w       sooo                                                           qpppwwqweqwqeqw  oooo     wqwqe U                                   ooqwwqqwwqwq                           pppp           oooo    ooo                    soos                                                                       w",
 			"q       pppp                                                                wqweqwqqweq oooo      ewqeqw                                 ooqwwqqwwqwq                                   oooo     pppp    ppp                    pppp    ooso                                                               w",
 			"w                                                                           qqweqwqqweqqwqqqqw     qewqeweq                             qwwqqwwqwq          bbbbbb            oooo      pppp                               qqqq         pppp      sooos                 R                                  w",
 			"wq	           oooos                      eqq                qwe             wwqqw        oooob      qwqwqwwqqq         o o          qwwqqwwqwq             boooooob           pppp                                 qwwqqwwqwq                     ppppp      qwwqqwwqwqqwoCooo                             w",
-			"weqwe r       ppppp                  qweqwqweqw            qweqwqwooowqqbbbwweq          oooob      ooooooooob       o    o         qwwqqwwqwq             boohooob                                              qwwqqwwqwq                                qwwqqwwqwqqwwqqwwqwqoHoo                        w",
+			"weqwe r       ppppp                  qweqwqweqw            qweqwqwooowqq   wweq          oooob      ooooooooob       o    o         qwwqqwwqwq             boohooob                                              qwwqqwwqwq                                qwwqqwwqwqqwwqqwwqwqoHoo                        w",
 			"weqweqwqsssssssssssssssssssssssqweqwqeqwqweqwqeqwsssssssqweqwqweqwqweqwsssssw    u       oooob      ooooooooob        oooo         wqwqe                    bbbbbb         ssssssssssssssssssssssssssssssssssqwwqqwwqwqsssssssssssssssssssssssssssssssssqwwqqwwqwqqwwqqwwqwqqwwqqwwq         f    C  R     w",
-			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbbbbbbbbbbbbbbbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+			"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwewwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwbbb   bbbbbb  bbbwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 			"KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 		};
 
@@ -166,6 +230,38 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 		for (int i = 0; i < Rows; ++i) {
 			for (int j = 0; j < MaxWidht; ++j) {
 				LvlGrid[i][j] = soniclevel2[i][j];
+			}
+		}
+
+		for (int i = 0; i < Rows; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				if (LvlGrid[i][j] == 'M' || LvlGrid[i][j] == 'A' || LvlGrid[i][j] == 'O' || LvlGrid[i][j] == 'T' || LvlGrid[i][j] == 'E') {
+					EnemyNum++;
+				}
+			}
+		}
+
+		Enemies = new EnemyFactory * [EnemyNum];
+
+		int Count = 0;
+
+		for (int i = 0; i < Rows; ++i) {
+			for (int j = 0; j < MaxWidht; ++j) {
+				if (LvlGrid[i][j] == 'M') {
+					Enemies[Count++] = new Motobug(j, i);
+				}
+				if (LvlGrid[i][j] == 'E') {
+					Enemies[Count++] = new Boss(j, i);
+				}
+				if (LvlGrid[i][j] == 'A') {
+					Enemies[Count++] = new CrabMeat(j, i);
+				}
+				if (LvlGrid[i][j] == 'O') {
+					Enemies[Count++] = new BeeBot(j, i);
+				}
+				if (LvlGrid[i][j] == 'T') {
+					Enemies[Count++] = new BatBrain(j, i);
+				}
 			}
 		}
 
@@ -186,7 +282,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w                 w",
-				"w         M       w",
+				"w                 w",
 				"w  qqqqqqqqqqqqq  w",
 				"w                 w",
 				"w                 w",
@@ -300,6 +396,17 @@ Levels::~Levels() {
 }
 
 void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
+
+	if (Characters[0]->getHP() <= 0 || (CurrentLevel == 5 && Enemies[0] == nullptr)) {
+		CurrentLevel = 5;
+	}
+
+	if (!MusicOn) {
+		lvlMus.stop();
+	}
+	else {
+		lvlMus.setVolume(Volume);
+	}
 
 	if (FirstSpawn) {
 		switch (CurrentLevel) {
@@ -688,7 +795,7 @@ void Levels::GameOverDraw(RenderWindow* window) {
 
 			string CurrentLine;
 
-			ifstream HighScoreFile("HighScoreFile/HighScore.txt");
+			ifstream HighScoreFile("Data/HighScoreFile/HighScore.txt");
 
 			for (int i = 0; i < 10; i++) {
 				HighScoreFile >> CurrentLine;
@@ -712,7 +819,7 @@ void Levels::GameOverDraw(RenderWindow* window) {
 
 			HighScoreFile.close();
 
-			ofstream HighScoreFileInput("HighScoreFile/HighScore.txt");
+			ofstream HighScoreFileInput("Data/HighScoreFile/HighScore.txt");
 
 			for (int i = 0; i < 10; i++) {
 				if (stoi(FileDataArray[i][1]) <= Characters[0]->getScore() && isScoreStored == false) {

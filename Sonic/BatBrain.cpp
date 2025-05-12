@@ -37,11 +37,11 @@ void BatBrain::MovePattern(char** lvl, const int cell_size, float X,float Y) {
 
 	if (X < XPosition - 10 && (LeftM < 'a' || LeftM > 'z')) {
 		XSpeed = -1;
-		ObjectAnimation.setAction(1, 0);
+		ObjectAnimation.setAction(1, 1);
 	}
 	else if (X > XPosition + 10 && (RightM < 'a' || RightM > 'z')) {
 		XSpeed = 1;
-		ObjectAnimation.setAction(0, 0);
+		ObjectAnimation.setAction(0, 1);
 	}
 	else {
 		XSpeed = 0;
