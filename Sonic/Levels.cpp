@@ -1,5 +1,6 @@
 #include "Levels.h"
 #include "Motobug.h"
+#include "Boss.h"
 
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
@@ -173,7 +174,7 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			char bossLevel[Rows][20] = {
 
 				"wwwwwwwwwwwwwwwwwww",
-				"w                 w",
+				"w       E         w",
 				"w                 w",
 				"w                 w",
 				"w                 w",
@@ -217,6 +218,9 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				for (int j = 0; j < MaxWidht; ++j) {
 					if (LvlGrid[i][j] == 'M') {
 						Enemies[Count++] = new Motobug(j,i);
+					}
+					if (LvlGrid[i][j] == 'E') {
+						Enemies[Count++] = new Boss(j, i);
 					}
 				}
 			}
@@ -345,7 +349,9 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 						} 
 					}
 					else {
-						Characters[j]->UpdatedHP(GrandClock->getInvincilibityClock(), -1);
+						if (j == CurrentPlayer) {
+							Characters[j]->UpdatedHP(GrandClock->getInvincilibityClock(), -1);
+						}
 					}
 				}
 			}
@@ -356,7 +362,9 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 		}
 
 		for (int i = 0; i < CharactersSize;i++) { // Characters
-			Characters[i]->ApplyGravity(LvlGrid,CellSize);
+			if (!Characters[i]->getIsFlying()) {
+				Characters[i]->ApplyGravity(LvlGrid, CellSize);
+			}
 			if (i == CurrentPlayer) {
 				Characters[i]->PlayerMove(LvlGrid, CellSize,MaxWidht);
 			}

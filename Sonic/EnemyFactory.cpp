@@ -19,5 +19,8 @@ int EnemyFactory::getHP() {
 }
 
 void EnemyFactory::ChangeHP(int Diff) {
-	HP += Diff;
+	if (HurtTimer.getElapsedTime().asSeconds() > 0.1) {
+		HurtTimer.restart();
+		HP += Diff;
+	}
 }
