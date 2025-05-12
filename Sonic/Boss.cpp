@@ -34,7 +34,7 @@ Boss::Boss(int X, int Y) {
 	SpikeSprite.setPosition(-64, -64);
 }
 
-void Boss::MovePattern(char** lvl, const int cell_size, float X) {
+void Boss::MovePattern(char** lvl, const int cell_size, float X, float Y) {
 
 	float offset_x = XPosition + XSpeed;
 	float offset_y = YPosition + YSpeed;

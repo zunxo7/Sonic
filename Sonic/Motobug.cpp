@@ -24,7 +24,7 @@ Motobug::Motobug(int X,int Y) {
 	ObjectSprite.setScale(Scale, Scale);
 }
 
-void Motobug::MovePattern(char** lvl, const int cell_size,float X) {
+void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
 
 	float offset_x = XPosition + XSpeed;
 

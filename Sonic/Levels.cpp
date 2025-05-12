@@ -325,7 +325,7 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 
 		for (int i = 0; i < EnemyNum;i++) { // Enemies
 			if (Enemies[i] != nullptr) {
-				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition(), Characters[CurrentPlayer]->getYPosition());
 			}
 		}
 

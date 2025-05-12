@@ -6,7 +6,7 @@ class BeeBot :
 public:
     BeeBot(int X, int Y);
 
-    void MovePattern(char** lvl, const int cell_size, float X) override;
+    void MovePattern(char** lvl, const int cell_size, float X, float Y) override;
     void Animate() override;
 
     int Score();
