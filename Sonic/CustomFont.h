@@ -23,7 +23,7 @@ private:
 
 public:
     void load(const string& folderPath = "Data/CustomFont");
-    void draw(RenderWindow* window, const string& text, float x, float y, float LetterSpacing = 3, float WordSpacing = 15, float Scale = 3, Color OutlineColor = Color(0, 71, 255), float LineSpacing = 20, Color TextColor = Color::White);
+    void draw(RenderWindow* window, const string& text, float x, float y, float LetterSpacing = 3, float WordSpacing = 15, float Scale = 3, Color OutlineColor = Color(0, 71, 255), float LineSpacing = 20, bool override = 0, Color TextColor = Color::White);
     void setOutlineColor(Color color);
     void setTextColor(Color color);
 };
