@@ -207,8 +207,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BatBrain.cpp" />
+    <ClCompile Include="BeeBot.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="CharacterFactory.cpp" />
+    <ClCompile Include="CrabMeat.cpp" />
     <ClCompile Include="CustomFont.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -227,7 +230,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BatBrain.h" />
+    <ClInclude Include="BeeBot.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="CrabMeat.h" />
     <ClInclude Include="CustomFont.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Game.h" />

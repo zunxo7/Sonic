@@ -1,8 +1,8 @@
-#include "Motobug.h"
+#include "CrabMeat.h"
 
-Motobug::Motobug(int X,int Y) {
+CrabMeat::CrabMeat(int X, int Y) {
 
-	int Actions[7] = { 5, 0, 0, 0, 0, 0, 0 };
+	int Actions[7] = { 3, 0, 0, 0, 0, 0, 0 };
 	ObjectAnimation.setActions(Actions);
 
 	SpawnX = X;
@@ -15,16 +15,16 @@ Motobug::Motobug(int X,int Y) {
 	XSpeed = 0;
 	YSpeed = 0;
 
-	HitBoxX = 41 * Scale;
+	HitBoxX = 45 * Scale;
 	HitBoxY = 32 * Scale;
 
-	ObjectTexture.loadFromFile("Data/Enemies/Bug.png");
+	ObjectTexture.loadFromFile("Data/Enemies/Crab.png");
 	ObjectSprite.setTexture(ObjectTexture);
-	ObjectSprite.setTextureRect(IntRect(0, 0, 41, 32));
+	ObjectSprite.setTextureRect(IntRect(0, 0, 45, 32));
 	ObjectSprite.setScale(Scale, Scale);
 }
 
-void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
+void CrabMeat::MovePattern(char** lvl, const int cell_size, float X, float Y) {
 
 	float offset_x = XPosition + XSpeed;
 
@@ -35,11 +35,11 @@ void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
 	char bottom_right_down = lvl[(int)(YPosition + HitBoxY + 1) / cell_size][(int)(((XPosition + HitBoxX / 2.0 + HitBoxX / 4.0 - 10) / cell_size))];
 
 
-	if (X < XPosition - 10 && (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ')) {
+	if ( (LeftM < 'a' || LeftM > 'z') && (bottom_left_down != ' ') && XPosition < (SpawnX - 2) * 64) {
 		XSpeed = -2;
 		ObjectAnimation.setAction(1, 0);
 	}
-	else if (X > XPosition + 10 && (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ')) {
+	else if ( (RightM < 'a' || RightM > 'z') && (bottom_right_down != ' ') && XPosition > (SpawnX + 2) * 64) {
 		XSpeed = 2;
 		ObjectAnimation.setAction(0, 0);
 	}
@@ -50,10 +50,10 @@ void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
 	XPosition += XSpeed;
 }
 
-void Motobug::Animate() {
-	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2 , HitBoxY / 2);
+void CrabMeat::Animate() {
+	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2, HitBoxY / 2);
 }
 
-int Motobug::Score() {
-	return 100;
+int CrabMeat::Score() {
+	return 50;
 }

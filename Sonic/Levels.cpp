@@ -1,6 +1,9 @@
 #include "Levels.h"
 #include "Motobug.h"
 #include "Boss.h"
+#include "BatBrain.h"
+#include "BeeBot.h"
+#include "CrabMeat.h"
 
 Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
 
@@ -183,10 +186,10 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 				"w                 w",
 				"w                 w",
 				"w         M       w",
-				"w    qqqqqqqqq    w",
+				"w  qqqqqqqqqqqqq  w",
 				"w                 w",
 				"w                 w",
-				"wwwwwwwwwwwwwwwwwww",
+				"w                 w",
 				"KKKKKKKKKKKKKKKKKKK"
 			};
 
@@ -221,6 +224,15 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 					}
 					if (LvlGrid[i][j] == 'E') {
 						Enemies[Count++] = new Boss(j, i);
+					}
+					if (LvlGrid[i][j] == 'A') {
+						Enemies[Count++] = new CrabMeat(j, i);
+					}
+					if (LvlGrid[i][j] == 'O') {
+						Enemies[Count++] = new BeeBot(j, i);
+					}
+					if (LvlGrid[i][j] == 'T') {
+						Enemies[Count++] = new BatBrain(j, i);
 					}
 				}
 			}
@@ -258,7 +270,7 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 		switch (CurrentLevel) {
 			case 1:
 				for (int i = 0; i < CharactersSize;i++) {
-					Characters[i]->Teleport(190, 10);
+					Characters[i]->Teleport(2, 10);
 					lvlMus.openFromFile("Data/Sounds/level1.ogg");
 					lvlMus.setVolume(Volume);
 					lvlMus.play();
@@ -325,7 +337,7 @@ void Levels::Update(int& CurrentLevel,Music& lvlMus,int Volume,bool MusicOn) {
 
 		for (int i = 0; i < EnemyNum;i++) { // Enemies
 			if (Enemies[i] != nullptr) {
-				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition());
+				Enemies[i]->MovePattern(LvlGrid, CellSize, Characters[CurrentPlayer]->getXPosition(), Characters[CurrentPlayer]->getYPosition());
 			}
 		}
 

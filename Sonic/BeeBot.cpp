@@ -1,8 +1,8 @@
-#include "Motobug.h"
+#include "BeeBot.h"
 
-Motobug::Motobug(int X,int Y) {
+BeeBot::BeeBot(int X, int Y) {
 
-	int Actions[7] = { 5, 0, 0, 0, 0, 0, 0 };
+	int Actions[7] = { 4, 4, 0, 0, 0, 0, 0 };
 	ObjectAnimation.setActions(Actions);
 
 	SpawnX = X;
@@ -15,16 +15,16 @@ Motobug::Motobug(int X,int Y) {
 	XSpeed = 0;
 	YSpeed = 0;
 
-	HitBoxX = 41 * Scale;
-	HitBoxY = 32 * Scale;
+	HitBoxX = 46 * Scale;
+	HitBoxY = 38 * Scale;
 
 	ObjectTexture.loadFromFile("Data/Enemies/Bug.png");
 	ObjectSprite.setTexture(ObjectTexture);
-	ObjectSprite.setTextureRect(IntRect(0, 0, 41, 32));
+	ObjectSprite.setTextureRect(IntRect(0, 0, 46, 38));
 	ObjectSprite.setScale(Scale, Scale);
 }
 
-void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
+void BeeBot::MovePattern(char** lvl, const int cell_size, float X, float Y) {
 
 	float offset_x = XPosition + XSpeed;
 
@@ -50,10 +50,10 @@ void Motobug::MovePattern(char** lvl, const int cell_size,float X, float Y) {
 	XPosition += XSpeed;
 }
 
-void Motobug::Animate() {
-	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2 , HitBoxY / 2);
+void BeeBot::Animate() {
+	ObjectAnimation.NextFrame(ObjectSprite, ObjectTexture, HitBoxX / 2, HitBoxY / 2);
 }
 
-int Motobug::Score() {
-	return 100;
+int BeeBot::Score() {
+	return 200;
 }

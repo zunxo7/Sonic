@@ -554,6 +554,7 @@ void CharacterFactory::CheckCollisionGrid(char** lvl, const int cell_size, Clock
 				CurrentLevel++;
 			}
 			break;
+
 		}
 	}
 
@@ -601,7 +602,12 @@ void CharacterFactory::UpdatedRings(int Add) {
 void CharacterFactory::UpdatedHP(Clock& InvincilibityClock, int Add) {
 	if (InvincilibityClock.getElapsedTime().asSeconds() >= 1) {
 		InvincilibityClock.restart();
-		this->HP += Add;
+		if (Add == -3) {
+			this->HP = 0;
+		}
+		else {
+			this->HP += Add;
+		}
 	}
 }
 
@@ -636,5 +642,10 @@ void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Clock& I
 		UpdatedHP(InvincilibityClock, -1);
 		HurtSound.play();
 		YSpeed = -20;
+	}
+
+	if (MidD == 'K') {
+		UpdatedHP(InvincilibityClock, -3);
+		YSpeed = 0;
 	}
 }
