@@ -45,7 +45,7 @@ float CharacterFactory::getHitBoxY() {
 }
 
 bool CharacterFactory::AttackMode() {
-	return (IsFlying == false && YSpeed != 0);
+	return (IsFlying == false && YSpeed != 0 && !OnGround);
 }
 
 bool CharacterFactory::getIsFlying() {

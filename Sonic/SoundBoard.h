@@ -22,6 +22,9 @@ class SoundBoard
 	Texture MenuButtonTexture;
 	Sprite MenuButtonSprite;
 
+	Clock MenuClock;
+	int CurrentChoice;
+
 public:
 	SoundBoard();
 	void Update(bool& MusicOn, int& Volume);
