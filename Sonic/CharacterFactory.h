@@ -23,8 +23,10 @@ protected:
 
 	SoundBuffer jumpBuffer;
 	SoundBuffer ringBuffer;
+	SoundBuffer HurtBuffer;
 	Sound jumpSound;
 	Sound ringSound;
+	Sound HurtSound;
 
 public:
 	CharacterFactory(int MSpeed);

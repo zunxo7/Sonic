@@ -23,7 +23,10 @@ class Menu
 	Texture MenuButtonTexture;
 	Sprite MenuButtonSprite;
 	Texture LogoTexture;
-	Sprite LogoSprite;
+	Sprite LogoSprite; 
+	
+	SoundBuffer MenuBuffer;
+	Sound MenuSound;
 
 	Clock MenuClock;
 	Clock MenuDisplayClock;
