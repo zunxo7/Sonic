@@ -57,10 +57,10 @@ void CustomFont::load(const string& folderPath) {
 
 }
 
-void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor,float LineSpacing, Color TextColor) {
+void CustomFont::draw(RenderWindow* window, const string& Text, float x, float y, float LetterSpacing, float WordSpacing, float Scale, Color OutlineColor,float LineSpacing, bool Override, Color TextColor) {
     float originalX = x;
     float lineHeight = LineSpacing * Scale;
-    Color outline = (OutlineColor == Color(0, 71, 255)) ? currentOutlineColor : OutlineColor;
+    Color outline = (OutlineColor == Color(0, 71, 255) || Override) ? currentOutlineColor : OutlineColor;
     Color text = (TextColor == Color::White) ? currentTextColor : TextColor;
 
     for (int i = 0; i < Text.size(); ++i) {

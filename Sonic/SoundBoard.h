@@ -13,7 +13,7 @@ using namespace std;
 
 class SoundBoard
 {
-	CustomFont font;
+	CustomFont font, font2, font3, font4;
 
 	Texture MenuBackGroundTexture;
 	Sprite MenuBackGroundSprite;
@@ -24,10 +24,11 @@ class SoundBoard
 
 	Clock MenuClock;
 	int CurrentChoice;
+	int VolumeSelector;
 
 public:
 	SoundBoard();
 	void Update(bool& MusicOn, int& Volume);
-	void Draw(RenderWindow* window, int& Volume);
+	void Draw(RenderWindow* window, int& Volume, bool& MusicOn);
 };
 

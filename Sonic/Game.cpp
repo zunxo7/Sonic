@@ -94,7 +94,7 @@ void Game::Draw() {
 
         break;
     case 2:
-        MySoundBoard.Draw(window, Volume);
+        MySoundBoard.Draw(window, Volume, MusicOn);
 
         break;
     case 3:
