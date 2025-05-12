@@ -15,6 +15,7 @@ class Levels
 	TClass * GrandClock;
 
 	CustomFont font;
+	Font ScoreFont;
 
 	Texture levelBackGroundTexture;
 	Sprite levelBackGroundSprite;
@@ -52,11 +53,29 @@ class Levels
 	int EnemyNum;
 	EnemyFactory** Enemies;
 
+	const int MaxChars;
+	char* NameArray;
+
+	int CurrentIndex;
+	string Name;
+	string ScoreString;
+	bool NameCompelete;
+	bool DataStore;
+	bool DataDisplay;
+	bool isScoreStored;
+	Text DisplayName;
+	Text HSNamesText;
+	Text HSScoreText;
+	Text HighScoreTitle;
+	Text GameOver;
+	Text ScoreBoard;
+
 public:
 	Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass* MyClock, int CurrentLevel);
 	~Levels();
 
 	void Update(int& CurrentLevel, Music& lvlMus, int Volume, bool MusicOn);
 	void Draw(RenderWindow* window);
+	void GameOverDraw(RenderWindow* window);
 };
 

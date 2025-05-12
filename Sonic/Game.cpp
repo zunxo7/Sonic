@@ -7,7 +7,7 @@ Game::Game(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* k
     window = new RenderWindow(VideoMode(ScreenWidht, ScreenHeight), "Sonic the Hedgehog-OOP", Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(120);
-    CurrentLevel = 3;
+    CurrentLevel = 1;
 
     MyLevels = new Levels*[4];
 
@@ -58,6 +58,10 @@ void Game::pollEvents() {
 void Game::update() {
     this->pollEvents();
 
+    if (CurrentLevel > 4) {
+        GameState = 5;
+    }
+
     switch (GameState){
         case 0:
             MyMenu.Update(window, GameState, event);
@@ -99,6 +103,10 @@ void Game::Draw() {
         break;
     case 4:
         MyScoreboard.Draw(window);
+
+        break;
+    case 5:
+        MyLevels[0]->GameOverDraw(window);
 
         break;
     }

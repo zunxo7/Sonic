@@ -5,9 +5,10 @@
 #include "BeeBot.h"
 #include "CrabMeat.h"
 
-Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock) {
+Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactory* knuckles, TClass * MyClock, int CurrentLevel) : CharactersSize(3), Characters(new CharacterFactory*[3]), GrandClock(MyClock), MaxChars(20), NameArray(new char[MaxChars]) {
 
 	font.load("Data/CustomFont");
+	ScoreFont.loadFromFile("ScoreFont.ttf");
 
 	AbilityUsed = false;
 	FirstSpawn = true;
@@ -240,6 +241,40 @@ Levels::Levels(CharacterFactory* sonic, CharacterFactory* tails, CharacterFactor
 			break;
 		}
 	}
+
+	int CurrentIndex = 0;
+	NameCompelete = false;
+	DataStore = false;
+	isScoreStored = false;
+
+	DisplayName.setFont(ScoreFont);
+	DisplayName.setCharacterSize(20);
+	DisplayName.setPosition(1200 / 2 - 8 * 64, 90 / 2 + 3 * 64);
+	DisplayName.setString("(A-Z And UnderScore) \n      Enter Your Name :   ");
+
+	HSNamesText.setFont(ScoreFont);
+	HSNamesText.setCharacterSize(20);
+	HSNamesText.setPosition(1200 / 4 + 2 * 54, 900 / 4);
+
+	HSScoreText.setFont(ScoreFont);
+	HSScoreText.setCharacterSize(20);
+	HSScoreText.setPosition(1200 / 4 * 2 + 2 * 64, 900 / 4);
+
+	HighScoreTitle.setFont(ScoreFont);
+	HighScoreTitle.setCharacterSize(90);
+	HighScoreTitle.setPosition(1200 / 4, 900 / 4 - 3 * 64);
+	HighScoreTitle.setString("HighScore");
+
+	GameOver.setFont(ScoreFont);
+	GameOver.setCharacterSize(90);
+	GameOver.setPosition(1200 / 4, 900 / 4 - 3 * 64);
+	GameOver.setString("Game Over");
+
+	ScoreBoard.setFont(ScoreFont);
+	ScoreBoard.setCharacterSize(60);
+	ScoreBoard.setPosition((14 - 6)* 64, (18 - 2)* 64 - 5);
+	ScoreBoard.setString(to_string(Characters[0]->getScore()));
+
 }
 
 Levels::~Levels() {
@@ -599,4 +634,107 @@ void Levels::Draw(RenderWindow* window) {
 	window->display();
 	window->clear();
 
+}
+
+void Levels::GameOverDraw(RenderWindow* window) {
+
+	Event e;
+
+		while (!NameCompelete) {
+			while (window->pollEvent(e)) {
+				if (e.type == Event::TextEntered) {
+
+					if (e.text.unicode == '\b') { // Case Of BackSpace Remove Char
+						if (CurrentIndex > 0) {
+							CurrentIndex--;
+						}
+					}
+					else if (e.text.unicode >= 'A' && e.text.unicode <= 'Z' && CurrentIndex < MaxChars) {
+						NameArray[CurrentIndex] = static_cast<char>(e.text.unicode);
+						CurrentIndex++;
+					}
+					else if (e.text.unicode >= 'a' && e.text.unicode <= 'z' && CurrentIndex < MaxChars) {
+						NameArray[CurrentIndex] = static_cast<char>((e.text.unicode - 32));
+						CurrentIndex++;
+					}
+					else if (e.text.unicode == '_' && CurrentIndex < MaxChars) {
+						NameArray[CurrentIndex] = '_';
+						CurrentIndex++;
+					}
+
+					Name = "";
+
+					for (int i = 0; i < CurrentIndex;i++) {
+						Name = Name + NameArray[i];
+					}
+					DisplayName.setString("(A-Z And UnderScore) \n      Enter Your Name :   " + Name);
+				}
+				if (e.type == sf::Event::KeyPressed && Keyboard::isKeyPressed(Keyboard::Enter) && CurrentIndex != 0) {
+					NameCompelete = true;
+				}
+			}
+
+
+			window->draw(DisplayName);
+			window->draw(GameOver);
+			window->draw(ScoreBoard);
+			window->display();
+			window->clear();
+		}
+
+		if (DataStore == false) {
+
+			string FileDataArray[10][2]; // To Store File Data
+
+			string CurrentLine;
+
+			ifstream HighScoreFile("HighScoreFile/HighScore.txt");
+
+			for (int i = 0; i < 10; i++) {
+				HighScoreFile >> CurrentLine;
+				int Count = 0;
+				bool isName = true;
+				while (CurrentLine[Count] != '\0') {
+					if (CurrentLine[Count] == ',') {
+						isName = false;
+						Count++;
+					}
+					if (isName) {
+						FileDataArray[i][0] += CurrentLine[Count];
+						Count++;
+					}
+					else {
+						FileDataArray[i][1] += CurrentLine[Count];
+						Count++;
+					}
+				}
+			}
+
+			HighScoreFile.close();
+
+			ofstream HighScoreFileInput("HighScoreFile/HighScore.txt");
+
+			for (int i = 0; i < 10; i++) {
+				if (stoi(FileDataArray[i][1]) <= Characters[0]->getScore() && isScoreStored == false) {
+					HighScoreFileInput << Name << ',' << Characters[0]->getScore() << '\n';
+					isScoreStored == true;
+				}
+				else {
+					HighScoreFileInput << FileDataArray[i][0] << ',' << FileDataArray[i][1] << '\n';
+				}
+			}
+
+			HighScoreFileInput.close();
+
+			DataStore = true;
+
+		}
+
+		DisplayName.setString("(A-Z And UnderScore) \n      Enter Your Name :   ");
+		window->draw(DisplayName);
+		window->draw(GameOver);
+		window->draw(ScoreBoard);
+		window->display();
+		window->clear();
+	
 }
