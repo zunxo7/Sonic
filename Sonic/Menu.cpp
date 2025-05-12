@@ -7,6 +7,10 @@ Menu::Menu(){
 	font2.load();
 	font3.load();
 	font4.load();
+
+	MenuBuffer.loadFromFile("Data/Sounds/MenuButton.wav");
+	MenuSound.setBuffer(MenuBuffer);
+
 	MenuBackGroundTexture.loadFromFile("Data/Menu/Background.png");
 	MenuBackGroundSprite.setTexture(MenuBackGroundTexture);
 
@@ -28,6 +32,7 @@ void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 			MenuClock.restart();
 			CurrentChoice -= 1; // Upper Option
 			if (CurrentChoice < 1) CurrentChoice = 4;
+			MenuSound.play();
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Down)) {
@@ -35,10 +40,12 @@ void Menu::Update(RenderWindow* window, int& GameState, Event event) {
 			MenuClock.restart();
 			CurrentChoice += 1; // Lower Option
 			if (CurrentChoice > 4) CurrentChoice = 1;
+			MenuSound.play();
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Enter)) {
 		GameState = CurrentChoice;
+		MenuSound.play();
 	}
 
 	Draw(window);

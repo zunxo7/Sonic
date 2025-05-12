@@ -9,6 +9,9 @@ CharacterFactory::CharacterFactory(int MSpeed): Moveable() {
 	ringBuffer.loadFromFile("Data/Sounds/Ring.wav");
 	ringSound.setBuffer(ringBuffer);
 
+	HurtBuffer.loadFromFile("Data/Sounds/Hurt.wav");
+	HurtSound.setBuffer(HurtBuffer);
+
 	int Actions[7] = { 1, 12, 10, 8, 16, 10, 8 };
 	ObjectAnimation.setActions(Actions);
 
@@ -615,16 +618,19 @@ void CharacterFactory::SpikeCollisions(char** lvl, const int cell_size, Clock& I
 	if (XSpeed > 0) {
 		if (RightD == 's' || RightM == 's' || RightU == 's') {
 			UpdatedHP(InvincilibityClock, -1);
+			HurtSound.play();
 		}
 	}
 	else if (XSpeed < 0) {
 		if (LeftD == 's' || LeftM == 's' || LeftU == 's') {
 			UpdatedHP(InvincilibityClock, -1);
+			HurtSound.play();
 		}
 	}
 
 	if (MidD == 's') {
 		UpdatedHP(InvincilibityClock, -1);
+		HurtSound.play();
 		YSpeed = -20;
 	}
 }
